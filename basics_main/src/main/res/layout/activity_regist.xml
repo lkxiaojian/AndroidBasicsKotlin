@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.zky.basics.api.config.API"/>
+        <import type="android.view.View"/>
+        <variable
+                name="viewModel"
+                type="com.zky.basics.main.mvvm.viewmodel.SplashViewModel"/>
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+
+    >
+
+        <android.support.constraint.ConstraintLayout
+                android:paddingBottom="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/register_name"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="40dp"
+                    android:textColorHint="@color/color_b0b0b0"
+                    android:textColor="@color/color_4a4a4a"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:hint="请输入姓名"
+                    android:text="@={viewModel.data.rgName}"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+            />
+
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_name"
+            />
+
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/register_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_name"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/color_b0b0b0"
+                    android:textColor="@color/color_4a4a4a"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:hint="请输入手机号"
+                    android:text="@={viewModel.data.rgPhone}"
+                    android:maxLength="11"
+                    android:inputType="number"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+            />
+
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_phone"
+            />
+
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/register_image_code"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_phone"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/color_b0b0b0"
+                    android:textColor="@color/color_4a4a4a"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:hint="图片验证码"
+                    android:inputType="number"
+                    android:text="@={viewModel.data.rgImageCode}"
+
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+            />
+
+            <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/register_get_image"
+                    android:layout_width="80dp"
+                    android:layout_height="34dp"
+                    app:layout_constraintRight_toRightOf="@+id/register_image_code"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_image_code"
+                    app:Bitmap="@{viewModel.data.rgImageUrl}"
+                    app:placeDrawableId="@{safeUnbox(viewModel.data.rgErrorImageUrl)}"
+                    app:errorDrawableId="@{safeUnbox(viewModel.data.rgErrorImageUrl)}"
+                    android:onClick="@{(view)->viewModel.startClick(view)}"
+            />
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_image_code"
+            />
+
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/register_message_code"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_image_code"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/color_b0b0b0"
+                    android:textColor="@color/color_4a4a4a"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:hint="短信验证码"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:text="@={viewModel.data.rgCode}"
+
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+            />
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/register_get_message"
+                    android:layout_width="80dp"
+                    android:layout_height="34dp"
+                    app:layout_constraintRight_toRightOf="@+id/register_message_code"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_message_code"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:text="@{viewModel.data.timeMeesage}"
+                    android:onClick="@{(view)->viewModel.startClick(view)}"
+                    android:background="@drawable/button_4a90e2_selector"
+            />
+
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_message_code"
+            />
+
+            <RelativeLayout
+                    android:id="@+id/register_account_level"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_message_code"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+
+                    android:onClick="@{(view)->viewModel.startClick(view)}"
+
+            >
+
+                <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/register_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:gravity="center_vertical"
+                        android:layout_centerVertical="true"
+                        android:textColor="@{viewModel.data.writeLevel?@color/color_4a4a4a:@color/color_b0b0b0}"
+                        android:text="@={viewModel.data.rgLevel}"
+
+                />
+
+                <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/register_account"
+                        android:src="@drawable/question_mark"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/register_mark"
+                        android:visibility="@{safeUnbox(viewModel.data.levelIndel)&lt;=-1? View.VISIBLE : View.GONE}"
+                        android:onClick="@{(view)->viewModel.startClick(view)}"
+
+                />
+
+                <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/down_9b9b9b"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                />
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_account_level"
+            />
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/register_province"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_account_level"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:text="@={viewModel.data.rgProvince}"
+                    android:visibility="@{safeUnbox(viewModel.rgProvinceV)?View.VISIBLE:View.GONE}"
+                    android:textColor="@{viewModel.data.writeProvince?@color/color_4a4a4a:@color/color_b0b0b0}"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:drawableRight="@drawable/down_9b9b9b"
+                    android:onClick="@{(view)->viewModel.startClick(view)}"
+
+            />
+
+            <View
+                    android:id="@+id/register_province_line"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    android:visibility="@{safeUnbox(viewModel.rgProvinceV)?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_province"
+            />
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/register_city"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_province_line"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:text="@={viewModel.data.rgCity}"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:textColor="@{viewModel.data.writeCity?@color/color_4a4a4a:@color/color_b0b0b0}"
+                    android:visibility="@{safeUnbox(viewModel.rgCityV)?View.VISIBLE:View.GONE}"
+                    android:onClick="@{(view)->viewModel.startClick(view)}"
+
+                    android:drawableRight="@drawable/down_9b9b9b"
+            />
+
+            <View
+                    android:id="@+id/register_city_line"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    android:visibility="@{safeUnbox(viewModel.rgCityV)?View.VISIBLE:View.GONE}"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/register_city"
+            />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/register_town"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_city_line"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:text="@={viewModel.data.rgTwon}"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:textColor="@{viewModel.data.writeTwon?@color/color_4a4a4a:@color/color_b0b0b0}"
+                    android:visibility="@{safeUnbox(viewModel.rgTwonV)?View.VISIBLE:View.GONE}"
+                    android:onClick="@{(view)->viewModel.startClick(view)}"
+                    android:drawableRight="@drawable/down_9b9b9b"
+            />
+
+            <View
+                    android:id="@+id/register_town_line"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    android:visibility="@{safeUnbox(viewModel.rgTwonV)?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_town"
+            />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/register_school"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_town_line"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:text="@={viewModel.data.rgSchool}"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+                    android:visibility="@{safeUnbox(viewModel.rgSchoolV)?View.VISIBLE:View.GONE}"
+                    android:textColor="@{viewModel.data.writeSchool?@color/color_4a4a4a:@color/color_b0b0b0}"
+                    android:onClick="@{(view)->viewModel.startClick(view)}"
+                    android:drawableRight="@drawable/down_9b9b9b"
+            />
+
+
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    android:visibility="@{safeUnbox(viewModel.rgSchoolV)?View.VISIBLE:View.GONE}"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/register_school"
+            />
+
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/register_password"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_school"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/color_b0b0b0"
+                    android:textColor="@color/color_4a4a4a"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:hint="密码"
+                    android:text="@={viewModel.data.rgPaw}"
+                    android:maxLength="20"
+                    android:inputType="textPassword"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+            />
+
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_password"
+            />
+
+            <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/register_confirm_password"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_password"
+                    android:layout_marginTop="10dp"
+                    android:textColorHint="@color/color_b0b0b0"
+                    android:textColor="@color/color_4a4a4a"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical"
+                    android:hint="确认密码"
+                    android:maxLength="20"
+                    android:text="@={viewModel.data.rgqrPaw}"
+                    android:inputType="textPassword"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@null"
+            />
+
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintLeft_toLeftOf="@+id/register_name"
+                    app:layout_constraintRight_toRightOf="@+id/register_name"
+                    android:background="@color/color_2e000"
+                    app:layout_constraintBottom_toBottomOf="@+id/register_confirm_password"
+            />
+
+            <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/start_register"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/register_confirm_password"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:text="注     册"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:onClick="@{(view)->viewModel.startClick(view)}"
+                    android:background="@drawable/button_4a90e2_selector"
+            />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</layout>

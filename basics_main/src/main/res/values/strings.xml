@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">资金监管</string>
+    <string name="title_home">查询与采集</string>
+    <string name="title_my">我的</string>
+</resources>

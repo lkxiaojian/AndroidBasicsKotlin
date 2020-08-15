@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+                name="forgetViewModel"
+                type="com.zky.basics.main.mvvm.viewmodel.SplashViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/forget_phone"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="30dp"
+                android:textColorHint="@color/color_b0b0b0"
+                android:textColor="@color/color_4a4a4a"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:hint="请输入手机号"
+                android:maxLength="11"
+                android:text="@={forgetViewModel.data.rgPhone}"
+                android:inputType="number"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@null"
+        />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                app:layout_constraintLeft_toLeftOf="@+id/forget_phone"
+                app:layout_constraintRight_toRightOf="@+id/forget_phone"
+                android:background="@color/color_2e000"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_phone"
+        />
+
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/forget_image_code"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forget_phone"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/color_b0b0b0"
+                android:textColor="@color/color_4a4a4a"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:hint="图片验证码"
+                android:text="@={forgetViewModel.data.rgImageCode}"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@null"
+                android:inputType="number"
+        />
+
+        <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/forget_get_image"
+                android:layout_width="80dp"
+                android:layout_height="34dp"
+                app:layout_constraintRight_toRightOf="@+id/forget_image_code"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_image_code"
+                app:Bitmap="@{forgetViewModel.data.rgImageUrl}"
+                app:placeDrawableId="@{safeUnbox(forgetViewModel.data.rgErrorImageUrl)}"
+                app:errorDrawableId="@{safeUnbox(forgetViewModel.data.rgErrorImageUrl)}"
+                android:onClick="@{(view)->forgetViewModel.startClick(view)}"
+        />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                app:layout_constraintLeft_toLeftOf="@+id/forget_phone"
+                app:layout_constraintRight_toRightOf="@+id/forget_phone"
+                android:background="@color/color_2e000"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_image_code"
+        />
+
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/forget_message_code"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forget_image_code"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/color_b0b0b0"
+                android:textColor="@color/color_4a4a4a"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:hint="短信验证码"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@null"
+                android:inputType="number"
+                android:maxLength="6"
+                android:text="@={forgetViewModel.data.rgCode}"
+
+        />
+
+        <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/forget_get_message"
+                android:layout_width="80dp"
+                android:layout_height="34dp"
+                app:layout_constraintRight_toRightOf="@+id/forget_message_code"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_message_code"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:text="@{forgetViewModel.data.timeMeesage}"
+                android:onClick="@{(view)->forgetViewModel.startClick(view)}"
+                android:background="@drawable/button_4a90e2_selector"
+        />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                app:layout_constraintLeft_toLeftOf="@+id/forget_phone"
+                app:layout_constraintRight_toRightOf="@+id/forget_phone"
+                android:background="@color/color_2e000"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_message_code"
+        />
+
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/forget_password"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forget_message_code"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/color_b0b0b0"
+                android:textColor="@color/color_4a4a4a"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:hint="新密码"
+                android:maxLength="20"
+                android:inputType="textPassword"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@null"
+                android:text="@={forgetViewModel.data.rgPaw}"
+
+        />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                app:layout_constraintLeft_toLeftOf="@+id/forget_phone"
+                app:layout_constraintRight_toRightOf="@+id/forget_phone"
+                android:background="@color/color_2e000"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_password"
+        />
+
+        <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/forget_confirm_password"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forget_password"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/color_b0b0b0"
+                android:textColor="@color/color_4a4a4a"
+                android:textSize="16sp"
+                android:gravity="center_vertical"
+                android:hint="确认新密码"
+                android:maxLength="20"
+                android:inputType="textPassword"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@null"
+                android:text="@={forgetViewModel.data.rgqrPaw}"
+
+        />
+
+        <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                app:layout_constraintLeft_toLeftOf="@+id/forget_phone"
+                app:layout_constraintRight_toRightOf="@+id/forget_phone"
+                android:background="@color/color_2e000"
+                app:layout_constraintBottom_toBottomOf="@+id/forget_confirm_password"
+        />
+
+        <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/forget"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forget_confirm_password"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="确     定"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/button_4a90e2_selector"
+                android:onClick="@{(view)->forgetViewModel.startClick(view)}"
+        />
+    </android.support.constraint.ConstraintLayout>
+</layout>
