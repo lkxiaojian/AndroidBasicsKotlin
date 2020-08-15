@@ -1,0 +1,120 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_4a90e2</item>
+        <item name="colorPrimaryDark">@color/color_4a90e2</item>
+        <item name="colorAccent">@color/color_4a90e2</item>
+    </style>
+    <style name="Launcher" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/welcome</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+
+    <style name="APPFullTHeme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>//无标题
+        <item name="android:windowActionBar">false</item>//无ActionBar
+        <item name="android:windowFullscreen">true</item>//全屏即无通知栏
+        <item name="android:windowContentOverlay">@null</item>//是否有遮盖
+    </style>
+
+
+
+    <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_4a90e2</item>
+        <item name="colorPrimaryDark">@color/color_4a90e2</item>
+        <item name="colorAccent">@color/color_4a90e2</item>
+    </style>
+
+
+
+
+    <!-- ToolBar菜单样式 -->
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AppTheme.BlackBackBar" parent="AppTheme">
+        <item name="colorPrimary">@color/color_black</item>
+        <item name="colorPrimaryDark">@color/color_white</item>
+        <item name="navigationIcon">@drawable/callback_white_icon</item>
+        <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
+    </style>
+    <style name="AppTheme.BackBar" parent="AppTheme">
+        <item name="navigationIcon">@drawable/navbar_icon_return</item>
+        <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
+    </style>
+
+
+    <style name="TransparentActivity" parent="AppTheme">
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+
+
+
+    <style name="Theme.Toolbar" parent="ThemeOverlay.AppCompat.ActionBar"></style>
+    <!--Toolbar 副标题的字体和颜色-->
+    <style name="Theme.Toolbar.SubTitle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="android:textSize">14sp</item>
+        <item name="android:radius">20dp</item>
+        <item name="overlapAnchor">true</item>  <!--把该属性改为false即可使menu位置位于toolbar之下-->
+    </style>
+
+    <style name="Theme.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+
+
+
+    <style name="Theme.Toolbar.BlueSubTitle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_4a90e2</item>
+    </style>
+    <style name="Theme.Toolbar.BlueTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/color_4a90e2</item>
+    </style>
+
+
+
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+
+    <style name="bottom_menu_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/scale_menu_enter</item>
+        <item name="android:windowExitAnimation">@anim/scale_menu_exit</item>
+    </style>
+</resources>

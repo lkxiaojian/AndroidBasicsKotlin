@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">lib_common</string>
+
+
+    <string name="count_level">账号级别:%s</string>
+    <string name="count_state">账号状态 ：%s</string>
+    <string name="count">账号 ：%s</string>
+    <string name="info_province">省：%s</string>
+    <string name="info_city">市：%s</string>
+    <string name="into_town">县：%s</string>
+    <string name="info_school">学校：%s</string>
+    <string name="info_phone">电话：%s</string>
+    <string name="project_count">%s 项</string>
+
+
+    <string name="download">下载</string>
+    <string name="update">更新</string>
+    <string name="download_yes">已下载</string>
+    <string name="download_no">未下载</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="202dp"
+              android:layout_height="wrap_content"
+              android:background="@drawable/dialog_center_background"
+              android:layout_gravity="center"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#FF4A90E2"
+            android:textSize="18sp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/dialog_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FF9B9B9B"
+            android:textSize="12sp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:scrollbars="vertical"
+            android:textColor="#FF9B9B9B"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+    />
+
+
+    <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cecece"/>
+
+        <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/dialog_sure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:tag="1"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:textColor="#FF9B9B9B"
+                android:textSize="18sp"/>
+    </RelativeLayout>
+
+</LinearLayout>
