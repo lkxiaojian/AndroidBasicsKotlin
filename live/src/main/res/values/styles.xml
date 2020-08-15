@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TabLayoutTextStyle" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">15sp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="textSchool">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textColor">@color/color_4a4a4a</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginLeft">11dp</item>
+    </style>
+
+    <!--<item name="android:layout_marginTop">10dp</item>-->
+    <style name="textff6300">
+        <item name="android:textColor">@color/color_ff6300</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginRight">11dp</item>
+    </style>
+</resources>

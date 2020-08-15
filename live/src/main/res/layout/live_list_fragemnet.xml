@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        >
+    <data>
+        <variable
+                name="liveListViewModel"
+                type="com.zky.live.mvvm.viewmodle.LiveListViewModle"/>
+    </data>
+
+    <com.refresh.lib.DaisyRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/drl_live"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:onRefreshCommand="@{liveListViewModel.onRefreshCommand}"
+            app:onLoadMoreCommand="@{liveListViewModel.onLoadMoreCommand}"
+            app:onAutoRefreshCommand="@{liveListViewModel.onAutoRefreshCommand}"
+            app:enableRefresh="@{safeUnbox(liveListViewModel.enableRefresh)}"
+            app:enableLoadMore="@{safeUnbox(liveListViewModel.enableLoadMore)}"
+
+
+            >
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/recview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:linearLayoutManager="@{safeUnbox(liveListViewModel.orientation)}"
+                android:background="@color/color_f5f5f5"
+                />
+    </com.refresh.lib.DaisyRefreshLayout>
+</layout>
