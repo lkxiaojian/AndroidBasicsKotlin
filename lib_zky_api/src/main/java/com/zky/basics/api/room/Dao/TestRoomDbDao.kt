@@ -12,7 +12,7 @@ import com.zky.basics.api.room.bean.TestRoomDb
 @Dao
 interface TestRoomDbDao {
     @get:Query("SELECT * FROM test")
-    val all: List<TestRoomDb?>?
+    val all: List<TestRoomDb>
 
     @Query("SELECT * FROM test WHERE u_id IN (:userIds)")
     fun loadAllByIds(userIds: IntArray?): List<TestRoomDb?>?
