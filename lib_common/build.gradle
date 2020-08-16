@@ -112,6 +112,12 @@ android {
         ignore 'TypographyQuotes'
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
 }
 
 
@@ -125,58 +131,42 @@ dependencies {
     api rootProject.ext.support["kotlin"]
     api rootProject.ext.support["kotlin-coroutines-core"]
     api rootProject.ext.support["kotlin-coroutines-android"]
-
-    api project(":lib_refresh_layout")
+    api project(':lib_refresh_layout')
     api project(':lib_zky_api')
-
     api rootProject.ext.dependencies.rxjava
     api rootProject.ext.dependencies.rxandroid
     api rootProject.ext.dependencies.eventbus
-
     api rootProject.ext.dependencies.autosize
     api rootProject.ext.dependencies["oss"]
     api rootProject.ext.dependencies["arcgis"]
     api rootProject.ext.dependencies["multidex"]
-
     api(rootProject.ext.dependencies.rxbinding) {
         exclude group: 'com.android.support'
     }
     api(rootProject.ext.dependencies.rxpermissions) {
         exclude group: 'com.android.support'
     }
-
     api(rootProject.ext.dependencies.glide) {
         exclude group: 'com.android.support'
     }
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
-
     api rootProject.ext.dependencies["lifecycle-extensions"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
-
     api rootProject.ext.dependencies["dagger"]
     kapt rootProject.ext.dependencies["dagger-compiler"]
     api rootProject.ext.dependencies["dagger-android"]
     api rootProject.ext.dependencies["dagger-android-support"]
     kapt rootProject.ext.dependencies["dagger-android-processor"]
-
-
     api rootProject.ext.dependencies["stetho"]
     api rootProject.ext.dependencies.MultiImageSelector
-
     api rootProject.ext.dependencies.PickerView
-
-
     api rootProject.ext.dependencies["Luban"]
     api rootProject.ext.dependencies["SmartMediaPicker"]
     api rootProject.ext.dependencies["Mp4Composer"]
     api rootProject.ext.dependencies["updateApp"]
     api rootProject.ext.dependencies["okhttputils"]
-
     api rootProject.ext.dependencies["gsyVideoPlayer-java"]
     api rootProject.ext.dependencies["Player-exo"]
-
-
-
     //根据你的需求ijk模式的so
     implementation 'com.shuyu:gsyVideoPlayer-armv5:6.0.2'
     implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.2'

@@ -19,9 +19,12 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.zky.basics.api.config.API
 import com.zky.basics.api.dto.RespDTO
-import com.zky.basics.common.constant.Contants
-import com.zky.basics.common.util.*
+import com.zky.basics.common.constant.Constants
+import com.zky.basics.common.util.NetUtil
+import com.zky.basics.common.util.UpLoadingFileListener
+import com.zky.basics.common.util.otherwise
 import com.zky.basics.common.util.uploadFile.*
+import com.zky.basics.common.util.yes
 import top.zibin.luban.OnCompressListener
 import java.io.File
 import java.io.FileInputStream
@@ -71,7 +74,7 @@ class OssUploadingFileUtil(
             conf.socketTimeout = 15 * 1000 // socket超时，默认15秒
             conf.maxConcurrentRequest = 5 // 最大并发请求书，默认5个
             conf.maxErrorRetry = 2 // 失败后最大重试次数，默认2次
-            oss = OSSClient(mApplication, API.ImageAliFolderPath, Contants.ossStsTokenCredentialProvider, conf)
+            oss = OSSClient(mApplication, API.ImageAliFolderPath, Constants.ossStsTokenCredentialProvider, conf)
             OSSLog.enableLog()
             val file = File("${mApplication.cacheDir}${File.separator}TempImage")
             if (!file.exists()) {

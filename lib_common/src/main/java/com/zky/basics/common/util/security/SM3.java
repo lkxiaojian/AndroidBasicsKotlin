@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 
 /**
- * 代码来自
+ * SM3 加密
  */
 public class SM3 {
 
