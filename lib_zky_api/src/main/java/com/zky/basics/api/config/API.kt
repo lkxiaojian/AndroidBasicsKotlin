@@ -12,4 +12,6 @@ object API {
     //
     const val uploadProjectFile = "uploadProjectFile.do"
     const val URL_APP_UPDATE = "http://47.104.93.173:8080/edu_zxzjjg/getAppInfo.do"
+
+    const val PAGE_SIZE=10
 }

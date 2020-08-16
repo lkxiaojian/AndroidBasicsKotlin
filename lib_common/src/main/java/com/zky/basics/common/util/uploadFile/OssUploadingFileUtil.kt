@@ -19,6 +19,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.zky.basics.api.config.API
 import com.zky.basics.api.dto.RespDTO
+import com.zky.basics.common.constant.Contants
 import com.zky.basics.common.util.*
 import com.zky.basics.common.util.uploadFile.*
 import top.zibin.luban.OnCompressListener

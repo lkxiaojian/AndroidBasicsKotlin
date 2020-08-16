@@ -10,7 +10,6 @@ import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.launcher.ARouter
 import com.zky.basics.ArouterPath.ARouterPath
-import com.zky.basics.api.room.Dao.TestRoomDbDao
 import com.zky.basics.common.mvvm.BaseMvvmActivity
 import com.zky.basics.main.R
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory
@@ -24,7 +23,7 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>(), Cor
     override fun onBindLayout() = R.layout.activity_splash
     private var handler: CustomHandler? = null
     var job: Job = Job()
-    lateinit var testRoomDbDao: TestRoomDbDao
+//    lateinit var testRoomDbDao: TestRoomDbDao
     @SuppressLint("CheckResult")
     override fun initView() {
         handler = WeakReference(CustomHandler()).get()

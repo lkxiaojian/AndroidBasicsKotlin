@@ -1,4 +1,4 @@
-package com.zky.basics.common.util;
+package com.zky.basics.common.constant;
 
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 
@@ -8,9 +8,7 @@ import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
  * Time 18:00
  * Detail:
  */
-public class Contants {
+public class Constants {
     public static OSSStsTokenCredentialProvider ossStsTokenCredentialProvider;
-
-    public final static int pageSize=10;
-    public static boolean isNet=true;
+    public static boolean isNet = true;
 }

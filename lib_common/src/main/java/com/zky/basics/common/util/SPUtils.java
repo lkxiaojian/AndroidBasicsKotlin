@@ -1,12 +1,6 @@
 package com.zky.basics.common.util;
 
-/**
- * <li>1.缓存数据</li>
- * <li>2.获取数据</li>
- * <li>3.删除数据</li>
- * <li>4.清空数据</li>
- * </ul>
- */
+
 
 import android.content.Context;
 import android.content.SharedPreferences;

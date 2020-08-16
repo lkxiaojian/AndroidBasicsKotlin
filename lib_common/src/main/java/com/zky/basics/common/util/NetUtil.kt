@@ -5,9 +5,7 @@ import android.net.ConnectivityManager
 import com.zky.basics.common.BaseApplication
 import com.zky.basics.common.util.ToastUtil.showToast
 
-/**
- * Description: <ToastUtil><br></br>
-</ToastUtil> */
+
 object NetUtil {
     @JvmStatic
     fun checkNet(): Boolean {

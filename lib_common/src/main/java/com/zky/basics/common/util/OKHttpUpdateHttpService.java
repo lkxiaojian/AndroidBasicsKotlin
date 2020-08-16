@@ -17,29 +17,24 @@
 package com.zky.basics.common.util;
 
 import android.support.annotation.NonNull;
+
 import com.xuexiang.xupdate.proxy.IUpdateHttpService;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
-import okhttp3.Call;
-import okhttp3.Request;
 
 import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * 使用okhttp
- *
- * @author
- * @since 2018/7/10 下午4:04
- */
+import okhttp3.Call;
+import okhttp3.Request;
+
 public class OKHttpUpdateHttpService implements IUpdateHttpService {
 
     public OKHttpUpdateHttpService() {
 
     }
-
     @Override
     public void asyncGet(@NonNull String url, @NonNull Map<String, Object> params, final @NonNull Callback callBack) {
         OkHttpUtils.get()

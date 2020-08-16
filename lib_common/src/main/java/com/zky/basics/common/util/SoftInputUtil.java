@@ -4,12 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-/**
- * Description: <软键盘的显示与隐藏><br>
- * <li>1.显示软键盘</li>
- * <li>2.隐藏软键盘</li>
- * </ul>
- */
 public class SoftInputUtil {
 
     /**

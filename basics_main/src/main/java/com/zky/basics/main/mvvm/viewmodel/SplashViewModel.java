@@ -28,6 +28,7 @@ import com.zky.basics.common.util.MD5UtlisKt;
 import com.zky.basics.common.util.NetUtil;
 import com.zky.basics.common.util.SPUtils;
 import com.zky.basics.common.util.ToastUtil;
+import com.zky.basics.common.util.reflec.ReflecInstaceJava;
 import com.zky.basics.common.view.PopupWindowUtilKt;
 import com.zky.basics.main.R;
 import com.zky.basics.main.activity.FrogetActivity;
@@ -93,7 +94,7 @@ public class SplashViewModel extends BaseViewModel<SplashModel> {
 
 //        getCaptcha();
         try {
-            splashViewBean = SplashViewBean.class.newInstance();
+            splashViewBean = ReflecInstaceJava.instaceOf(splashViewBean.getClass());
             splashViewBean.setTimeMeesage("获取");
             splashViewBean.setRgLevel("账号级别");
             splashViewBean.setRgProvince("省");
@@ -103,21 +104,9 @@ public class SplashViewModel extends BaseViewModel<SplashModel> {
             splashViewBean.setLevelIndel(-1);
             splashViewBean.setRgErrorImageUrl(R.drawable.image_code_error);
             data.set(splashViewBean);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        splashViewBean = new SplashViewBean();
-//        splashViewBean.setTimeMeesage("获取");
-//        splashViewBean.setRgLevel("账号级别");
-//        splashViewBean.setRgProvince("省");
-//        splashViewBean.setRgTwon("县");
-//        splashViewBean.setRgCity("市");
-//        splashViewBean.setRgSchool("学校");
-//        splashViewBean.setLevelIndel(-1);
-//        splashViewBean.setRgErrorImageUrl(R.drawable.image_code_error);
-//        data.set(splashViewBean);
-
     }
 
     private void initPicker(Context application) {

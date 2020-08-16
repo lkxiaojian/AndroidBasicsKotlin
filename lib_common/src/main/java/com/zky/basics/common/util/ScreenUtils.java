@@ -8,9 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 
-/**
- * Created by sendtion on 2016/5/25.
- */
+
 public class ScreenUtils {
 
     /**

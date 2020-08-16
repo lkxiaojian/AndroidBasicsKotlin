@@ -73,4 +73,20 @@ public class FileUtil {
         return null;
     }
 
+
+    /**
+     * 根据文件路径获取文件的名称
+     *
+     * @param path
+     * @return
+     */
+    public static String getNameByPath(String path) {
+        if (InfoVerify.isEmpty(path)) {
+            return "";
+        }
+        String[] list = path.split("/");
+        return list[list.length-1];
+
+    }
+
 }
