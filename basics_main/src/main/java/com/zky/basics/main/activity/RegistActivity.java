@@ -3,10 +3,13 @@ package com.zky.basics.main.activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.Nullable;
+
 import com.zky.basics.common.BR;
 import com.zky.basics.common.mvvm.BaseMvvmActivity;
+import com.zky.basics.common.util.reflec.ReflecInstaceJava;
 import com.zky.basics.main.R;
 import com.zky.basics.main.databinding.ActivityRegistBinding;
+import com.zky.basics.main.entity.TestB;
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory;
 import com.zky.basics.main.mvvm.viewmodel.SplashViewModel;
 

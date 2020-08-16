@@ -20,34 +20,30 @@ class MainActivity : BaseActivity() {
     private var mMeFragment: Fragment? = null
     private var mCurrFragment: Fragment? = null
     private var mBackPressed: Long = 0
-    override fun onBindLayout(): Int {
-        return R.layout.commot_activity_main
-    }
-
+    override fun onBindLayout() = R.layout.commot_activity_main
     override fun initView() {
         val navigation =
             findViewById<BottomNavigationView>(R.id.common_navigation)
-        navigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
-            val i = menuItem.itemId
-            if (i == R.id.navigation_trip) {
-                switchContent(mCurrFragment, mFlayFragment, MainChannel.NEWS.name)
-                mCurrFragment = mFlayFragment
-                return@OnNavigationItemSelectedListener true
-            } else if (i == R.id.navigation_me) {
-                switchContent(mCurrFragment, mMeFragment, MainChannel.ME.name)
-                mCurrFragment = mMeFragment
-                return@OnNavigationItemSelectedListener true
+            navigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.navigation_trip -> {
+                    switchContent(mCurrFragment, mFlayFragment, MainChannel.NEWS.name)
+                    mCurrFragment = mFlayFragment
+                    true
+                }
+                R.id.navigation_me -> {
+                    switchContent(mCurrFragment, mMeFragment, MainChannel.ME.name)
+                    mCurrFragment = mMeFragment
+                    true
+                }
             }
             false
-        })
-        if (iLiveProvider != null) {
-            mFlayFragment = iLiveProvider!!.mainLiveFragment
         }
-        if (mMineProvider != null) {
-            mMeFragment = mMineProvider!!.mainMineFragment
-        }
+        mFlayFragment = iLiveProvider?.mainLiveFragment
+        mMeFragment = mMineProvider?.mainMineFragment
+
         mCurrFragment = mFlayFragment
-        if (iLiveProvider != null) {
+        iLiveProvider.let {
             supportFragmentManager.beginTransaction().replace(
                 R.id.frame_content,
                 mFlayFragment!!,
@@ -57,11 +53,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {}
-    fun switchContent(
-        from: Fragment?,
-        to: Fragment?,
-        tag: String?
-    ) {
+    fun switchContent(from: Fragment?, to: Fragment?, tag: String?) {
         if (from == null || to == null) {
             return
         }
@@ -74,13 +66,8 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun enableToolbar(): Boolean {
-        return false
-    }
-
-    override val isFullScreen: Boolean
-        get() = false
-
+    override fun enableToolbar() = false
+    override val isFullScreen = false
     override fun onBackPressed() {
         mBackPressed = if (mBackPressed + TIME_EXIT > System.currentTimeMillis()) {
             super.onBackPressed()
@@ -90,7 +77,6 @@ class MainActivity : BaseActivity() {
             System.currentTimeMillis()
         }
     }
-
     companion object {
         private const val TIME_EXIT = 2000
     }

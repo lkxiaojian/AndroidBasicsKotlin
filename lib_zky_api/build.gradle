@@ -2,6 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-allopen'
+apply plugin: 'kotlin-noarg'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-kapt'
 
 
 android {
@@ -47,9 +52,17 @@ android {
     }
 
 
-//    dataBinding {
-//        enabled true
-//    }
+    dataBinding {
+        enabled true
+    }
+
+    noArg{
+        annotation("com.zky.basics.annotation.AllowNoArg")
+    }
+
+    allOpen{
+        annotation("com.zky.basics.annotation.AllowNoArg")
+    }
 }
 
 
@@ -66,8 +79,6 @@ dependencies {
 
     api rootProject.ext.dependencies["arouter-api"]
     kapt rootProject.ext.dependencies["arouter-compiler"]
-
-
 
     api rootProject.ext.dependencies["room-runtime"]
     kapt rootProject.ext.dependencies["room-compiler"]

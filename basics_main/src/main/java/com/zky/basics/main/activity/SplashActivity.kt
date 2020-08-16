@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.launcher.ARouter
 import com.zky.basics.common.mvvm.BaseMvvmActivity
+import com.zky.basics.common.util.reflec.instanceOf
 import com.zky.basics.common.view.ARouterPath
 import com.zky.basics.main.R
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory
@@ -21,6 +22,11 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
     private var handler: CustomHandler? = null
     @SuppressLint("CheckResult")
     override fun initView() {
+       val indsta= instanceOf<TestB>()
+        indsta.let {
+            indsta.dd="33"
+        }
+
         handler = WeakReference(CustomHandler()).get()
         handler?.sendEmptyMessageDelayed(1, 800)
 //        RxPermissions(this).request(
@@ -42,6 +48,8 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
 //                    ToastUtil.showToast("读取sd卡权限被拒绝")
 //                }
 //            }
+
+
     }
 
     override fun enableToolbar(): Boolean {

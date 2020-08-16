@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
+@Suppress("DEPRECATION")
 class RetrofitManager private constructor() {
     private val mRetrofit: Retrofit
     var okHttpBuilder: OkHttpClient.Builder?
@@ -85,9 +86,8 @@ class RetrofitManager private constructor() {
             okHttpBuilder!!.interceptors().add(logging)
         }
         val sslContext = SSLContextUtil.getDefaultSLLContext()
-        if (sslContext != null) {
-            val socketFactory = sslContext.socketFactory
-            okHttpBuilder!!.sslSocketFactory(socketFactory)
+        sslContext.let {
+            okHttpBuilder?.sslSocketFactory(it.socketFactory)
         }
         okHttpBuilder!!.hostnameVerifier(SSLContextUtil.HOSTNAME_VERIFIER)
         mRetrofit = Retrofit.Builder()
