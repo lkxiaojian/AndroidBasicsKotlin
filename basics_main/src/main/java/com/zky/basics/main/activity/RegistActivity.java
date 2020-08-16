@@ -6,10 +6,8 @@ import android.support.annotation.Nullable;
 
 import com.zky.basics.common.BR;
 import com.zky.basics.common.mvvm.BaseMvvmActivity;
-import com.zky.basics.common.util.reflec.ReflecInstaceJava;
 import com.zky.basics.main.R;
 import com.zky.basics.main.databinding.ActivityRegistBinding;
-import com.zky.basics.main.entity.TestB;
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory;
 import com.zky.basics.main.mvvm.viewmodel.SplashViewModel;
 
@@ -27,12 +25,7 @@ public class RegistActivity extends BaseMvvmActivity<ActivityRegistBinding, Spla
     @Override
     public void initViewObservable() {
         mViewModel.getCaptcha();
-        mViewModel.getmVoidSingleLiveEvent().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String aVoid) {
-                finishActivity();
-            }
-        });
+        mViewModel.getmVoidSingleLiveEvent().observe(this, aVoid -> finishActivity());
     }
 
     @Override
@@ -54,6 +47,7 @@ public class RegistActivity extends BaseMvvmActivity<ActivityRegistBinding, Spla
     public String getTootBarTitle() {
         return "账号注册";
     }
+
     @Override
     public boolean isFullScreen() {
         return true;

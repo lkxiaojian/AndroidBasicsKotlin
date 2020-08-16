@@ -6,8 +6,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zky.basics.common.provider.ILiveProvider;
 import com.zky.zky_mine.fragment.LiveMainFragment;
 
+import static com.zky.basics.ArouterPath.ARouterPath.LIVE_MAIN;
 
-@Route(path = "/live/main", name = "直播")
+
+@Route(path = LIVE_MAIN, name = "直播")
 public class LiveProvider implements ILiveProvider {
 
     @Override

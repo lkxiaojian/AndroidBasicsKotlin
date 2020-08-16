@@ -1,8 +1,6 @@
 package com.zky.basics.main.activity;
 
 import android.arch.lifecycle.ViewModelProvider;
-
-import com.zky.basics.api.splash.entity.TestE;
 import com.zky.basics.common.BR;
 import com.zky.basics.common.mvvm.BaseMvvmActivity;
 import com.zky.basics.main.R;

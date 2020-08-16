@@ -10,14 +10,14 @@ import com.zky.basics.api.config.API;
 import com.zky.basics.common.BR;
 import com.zky.basics.common.mvvm.BaseMvvmActivity;
 import com.zky.basics.common.util.Contants;
-import com.zky.basics.common.view.ARouterPath;
+import com.zky.basics.ArouterPath.ARouterPath;
 import com.zky.basics.main.MainActivity;
 import com.zky.basics.main.R;
 import com.zky.basics.main.databinding.ActivityLoginBinding;
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory;
 import com.zky.basics.main.mvvm.viewmodel.SplashViewModel;
 
-@Route(path = ARouterPath.LOGIN, group = "app")
+@Route(path = ARouterPath.LOGIN, group = ARouterPath.GROUP_APP)
 public class LoginActivity extends BaseMvvmActivity<ActivityLoginBinding, SplashViewModel> {
 
     @Override

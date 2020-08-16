@@ -1,4 +1,4 @@
-package com.zky.basics.common.view;
+package com.zky.basics.ArouterPath;
 
 /**
  * Created by lk
@@ -8,12 +8,23 @@ package com.zky.basics.common.view;
  */
 public class ARouterPath {
     /**
+     * 分组
+     * app
+     */
+    public static final String GROUP_APP="app";
+
+    /**
      * com.zky.basics.main.activity.LoginActivity
      * 登入界面
      */
     public static final String LOGIN = "/app/login";
     /**
-     *
+     * 我的界面
      */
     public static final String MINE_MAIN = "/app/mine";
+
+
+    public static final String LIVE_MAIN = "/live/main";
+
+
 }

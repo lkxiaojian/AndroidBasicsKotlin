@@ -75,7 +75,6 @@ ext {
             "room-compiler"           : "android.arch.persistence.room:compiler:1.1.1",
             "debug-db"                : "com.amitshekhar.android:debug-db-encrypt:1.0.6",
             "room-rxjava2"            : "android.arch.persistence.room:rxjava2:1.1.1",
-
             //自动适配
             "autosize"                : "me.jessyan:autosize:1.1.2",
             //PickerView
@@ -93,9 +92,7 @@ ext {
             "Mp4Composer"             : "com.github.MasayukiSuda:Mp4Composer-android:v0.3.2",
             //app 更新
             "updateApp"               : "com.github.lkxiaojian:updateApp:1.1",
-
             "okhttputils"             : "com.zhy:okhttputils:2.6.2",
-
             //视频
             "gsyVideoPlayer-java"     : "com.shuyu:gsyVideoPlayer-java:6.0.2",
             //是否需要ExoPlayer模式

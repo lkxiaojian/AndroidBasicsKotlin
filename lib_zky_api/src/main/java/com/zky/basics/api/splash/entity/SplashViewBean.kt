@@ -39,42 +39,6 @@ class SplashViewBean : BaseObservable {
     var _writeSchool: Boolean = false
 
     constructor()
-
-    constructor(
-        name: String?,
-        paw: String?,
-        timeMeesage: String?,
-        rgPhone: String?,
-        rgName: String?,
-        rgImageCode: String?,
-        rgCode: String?,
-        _rgLevel: String?,
-        rgProvince: String?,
-        rgCity: String?,
-        rgTwon: String?,
-        rgSchool: String?,
-        rgPaw: String?,
-        rgqrPaw: String?,
-        rgImageUrl: Bitmap?,
-        rgErrorImageUrl: Int,
-        levelIndel: Int,
-        _writeLevel: Boolean,
-        _writeProvince: Boolean,
-        writeCity: Boolean,
-        writeTwon: Boolean,
-        writeSchool: Boolean
-    ) {
-        this.name = name
-        this.paw = paw
-        this._rgImageUrl = rgImageUrl
-        this._writeCity = writeCity
-        this._writeTwon = writeTwon
-        this._writeSchool = writeSchool
-        this._rgProvince = rgProvince
-
-    }
-
-
     var timeMeesage: String?
         @Bindable get() = _timeMeesage
         set(value) {

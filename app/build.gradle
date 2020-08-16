@@ -36,7 +36,6 @@ dependencies {
     if (!isModule.toBoolean()) {
         implementation project(':basics_main')
         implementation project(':live')
-
     }
 }
 repositories {

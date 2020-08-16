@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.zky.basics.api.http
 
 import android.net.ParseException

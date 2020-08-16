@@ -24,8 +24,7 @@ class RxAdapter {
      * @param lifecycle Activity
      */
     fun <T> bindUntilEvent(lifecycle: LifecycleProvider<Any>): LifecycleTransformer<T> {
-        return lifecycle?.bindUntilEvent(ActivityEvent.DESTROY)
-            ?: throw IllegalArgumentException("context not the LifecycleProvider type")
+        return lifecycle.bindUntilEvent(ActivityEvent.DESTROY)
     }
 
     companion object {

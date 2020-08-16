@@ -9,9 +9,8 @@ import android.os.Message
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.launcher.ARouter
+import com.zky.basics.ArouterPath.ARouterPath
 import com.zky.basics.common.mvvm.BaseMvvmActivity
-import com.zky.basics.common.util.reflec.instanceOf
-import com.zky.basics.common.view.ARouterPath
 import com.zky.basics.main.R
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory
 import com.zky.basics.main.mvvm.viewmodel.SplashViewModel
@@ -22,11 +21,6 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
     private var handler: CustomHandler? = null
     @SuppressLint("CheckResult")
     override fun initView() {
-       val indsta= instanceOf<TestB>()
-        indsta.let {
-            indsta.dd="33"
-        }
-
         handler = WeakReference(CustomHandler()).get()
         handler?.sendEmptyMessageDelayed(1, 800)
 //        RxPermissions(this).request(
@@ -64,8 +58,6 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
             .navigation(this, object : NavigationCallback {
                 override fun onLost(postcard: Postcard?) {
                     //没有找到
-
-
                 }
 
                 override fun onFound(postcard: Postcard?) {
@@ -91,8 +83,8 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
         MainViewModelFactory.getInstance(application)
 
     override fun initViewObservable() {
-        mViewModel!!.getmVoidSingleLiveEvent()
-            .observe(this, Observer { startMainActivity() })
+        mViewModel?.getmVoidSingleLiveEvent()
+            ?.observe(this, Observer { startMainActivity() })
     }
 
     override fun onBindVariableId() = 0

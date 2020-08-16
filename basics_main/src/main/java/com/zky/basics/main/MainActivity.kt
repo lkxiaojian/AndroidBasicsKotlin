@@ -4,6 +4,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.widget.Toast
 import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.zky.basics.ArouterPath.ARouterPath
 import com.zky.basics.common.mvvm.BaseActivity
 import com.zky.basics.common.provider.ILiveProvider
 import com.zky.basics.common.provider.IMineProvider
@@ -11,10 +12,10 @@ import com.zky.basics.main.entity.MainChannel
 
 class MainActivity : BaseActivity() {
     @JvmField
-    @Autowired(name = "/live/main")
+    @Autowired(name = ARouterPath.LIVE_MAIN)
     var iLiveProvider: ILiveProvider? = null
     @JvmField
-    @Autowired(name = "/me/main")
+    @Autowired(name = ARouterPath.MINE_MAIN)
     var mMineProvider: IMineProvider? = null
     private var mFlayFragment: Fragment? = null
     private var mMeFragment: Fragment? = null
@@ -29,12 +30,12 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_trip -> {
                     switchContent(mCurrFragment, mFlayFragment, MainChannel.NEWS.name)
                     mCurrFragment = mFlayFragment
-                    true
+                    return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_me -> {
                     switchContent(mCurrFragment, mMeFragment, MainChannel.ME.name)
                     mCurrFragment = mMeFragment
-                    true
+                    return@setOnNavigationItemSelectedListener true
                 }
             }
             false
