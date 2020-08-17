@@ -140,8 +140,8 @@ class OssUploadingFileUtil(
             }
             uploadingFile.file = file
         }
-        callBackParam.put("callbackUrl", servicePath)
-        callBackParam.put("callbackBodyType", "application/json")
+        callBackParam["callbackUrl"] = servicePath
+        callBackParam["callbackBodyType"] = "application/json"
         initOSS(mApplication)
     }
 
@@ -156,31 +156,31 @@ class OssUploadingFileUtil(
                     index++
                     if (index >= uploadingFiles.size) {
                         index = 0
-                        upLoadingFile(uploadingFiles.get(index))
+                        upLoadingFile(uploadingFiles[index])
                     } else {
-                        getImageCompress(uploadingFiles.get(index), targetDir)
+                        getImageCompress(uploadingFiles[index], targetDir)
                     }
                 }
 
                 override fun onError(e: Throwable) {
-                    fileTotal += uploadingFiles.get(index).file?.length() ?: 0
+                    fileTotal += uploadingFiles[index].file?.length() ?: 0
                     index++
                     if (index >= uploadingFiles.size) {
                         index = 0
-                        upLoadingFile(uploadingFiles.get(index))
+                        upLoadingFile(uploadingFiles[index])
                     } else {
-                        getImageCompress(uploadingFiles.get(index), targetDir)
+                        getImageCompress(uploadingFiles[index], targetDir)
                     }
                 }
             })
         } else {
-            fileTotal += uploadingFiles.get(index).file?.length() ?: 0
+            fileTotal += uploadingFiles[index].file?.length() ?: 0
             index++
             if (index >= uploadingFiles.size) {
                 index = 0
-                upLoadingFile(uploadingFiles.get(index))
+                upLoadingFile(uploadingFiles[index])
             } else {
-                getImageCompress(uploadingFiles.get(index), targetDir)
+                getImageCompress(uploadingFiles[index], targetDir)
             }
         }
     }

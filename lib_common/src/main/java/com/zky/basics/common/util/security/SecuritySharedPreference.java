@@ -37,7 +37,6 @@ public class SecuritySharedPreference implements SharedPreferences {
         } else {
             mSharedPreferences =  context.getSharedPreferences(name, mode);
         }
-
     }
 
     @Override

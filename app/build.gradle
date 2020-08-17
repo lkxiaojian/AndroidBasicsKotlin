@@ -33,10 +33,13 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':lib_common')
+
     if (!isModule.toBoolean()) {
         implementation project(':basics_main')
         implementation project(':live')
     }
+//
+
 }
 repositories {
     mavenCentral()
