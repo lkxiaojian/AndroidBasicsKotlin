@@ -1,7 +1,7 @@
 package com.zky.basics.common.util.log;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.zky.basics.common.util.log.klog.BaseLog;

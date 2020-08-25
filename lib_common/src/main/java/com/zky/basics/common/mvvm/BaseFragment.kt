@@ -1,16 +1,16 @@
 package com.zky.basics.common.mvvm
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import com.zky.basics.common.R
 import com.zky.basics.common.event.common.BaseFragmentEvent
 import com.zky.basics.common.mvvm.view.IBaseView

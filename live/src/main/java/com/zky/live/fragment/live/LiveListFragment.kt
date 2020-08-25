@@ -1,7 +1,7 @@
 package com.zky.live.fragment.live
 
-import android.arch.lifecycle.ViewModelProvider
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import com.refresh.lib.DaisyRefreshLayout
 import com.zky.basics.common.mvvm.BaseMvvmRefreshFragment
 import com.zky.live.BR

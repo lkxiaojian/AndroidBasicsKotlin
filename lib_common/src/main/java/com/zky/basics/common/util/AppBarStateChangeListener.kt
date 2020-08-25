@@ -1,10 +1,9 @@
 package com.zky.basics.common.util
 
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.AppBarLayout.OnOffsetChangedListener
+import com.google.android.material.appbar.AppBarLayout
 import kotlin.math.abs
 
-abstract class AppBarStateChangeListener : OnOffsetChangedListener {
+abstract class AppBarStateChangeListener : AppBarLayout.OnOffsetChangedListener {
     enum class State {
         EXPANDED, COLLAPSED, IDLE
     }

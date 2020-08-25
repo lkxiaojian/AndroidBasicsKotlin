@@ -1,8 +1,8 @@
 package com.zky.basics.common.mvvm.viewmodel
 
 import android.app.Application
-import android.databinding.ObservableArrayList
-import android.databinding.ObservableField
+import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableField
 import com.zky.basics.common.binding.command.BindingAction
 import com.zky.basics.common.binding.command.BindingCommand
 import com.zky.basics.common.event.SingleLiveEvent

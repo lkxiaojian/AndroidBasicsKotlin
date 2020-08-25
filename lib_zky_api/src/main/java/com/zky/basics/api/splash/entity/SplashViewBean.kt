@@ -1,7 +1,7 @@
 package com.zky.basics.api.splash.entity
 
-import android.databinding.BaseObservable
-import android.databinding.Bindable
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import android.graphics.Bitmap
 import com.zky.basics.api.BR
 

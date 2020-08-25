@@ -1,8 +1,8 @@
 package com.zky.basics.main.activity;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.content.Intent;
 
+import androidx.lifecycle.ViewModelProvider;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.xuexiang.xupdate.XUpdate;
@@ -16,7 +16,6 @@ import com.zky.basics.main.R;
 import com.zky.basics.main.databinding.ActivityLoginBinding;
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory;
 import com.zky.basics.main.mvvm.viewmodel.SplashViewModel;
-
 @Route(path = ARouterPath.LOGIN, group = ARouterPath.GROUP_APP)
 public class LoginActivity extends BaseMvvmActivity<ActivityLoginBinding, SplashViewModel> {
 

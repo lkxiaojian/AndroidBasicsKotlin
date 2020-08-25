@@ -8,13 +8,13 @@
                 type="com.zky.basics.main.mvvm.viewmodel.SplashViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/forget_phone"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -44,7 +44,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/forget_phone"
         />
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/forget_image_code"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -64,7 +64,7 @@
                 android:inputType="number"
         />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/forget_get_image"
                 android:layout_width="80dp"
                 android:layout_height="34dp"
@@ -85,7 +85,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/forget_image_code"
         />
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/forget_message_code"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -107,7 +107,7 @@
 
         />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/forget_get_message"
                 android:layout_width="80dp"
                 android:layout_height="34dp"
@@ -130,7 +130,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/forget_message_code"
         />
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/forget_password"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -161,7 +161,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/forget_password"
         />
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/forget_confirm_password"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -192,7 +192,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/forget_confirm_password"
         />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/forget"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -209,5 +209,5 @@
                 android:background="@drawable/button_4a90e2_selector"
                 android:onClick="@{(view)->forgetViewModel.startClick(view)}"
         />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,20 +1,14 @@
 package com.zky.basics.common.mvvm
 
-import android.arch.lifecycle.Observer
-import android.databinding.ViewDataBinding
+import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import com.refresh.lib.DaisyRefreshLayout
 import com.zky.basics.common.mvvm.viewmodel.BaseRefreshViewModel
 
-/**
- * Description: <下拉刷新></下拉刷新>、上拉加载更多的Activity><br></br>
- *
- * Date:        2019/07/02<br></br>
- * Version:     V1.0.0<br></br>
- * Update:     <br></br>
- */
+
 abstract class BaseMvvmRefreshActivity<V : ViewDataBinding?, VM : BaseRefreshViewModel<*, *>?> :
     BaseMvvmActivity<V, VM>() {
-    protected var mRefreshLayout: DaisyRefreshLayout? = null
+    private var mRefreshLayout: DaisyRefreshLayout? = null
     override fun initContentView() {
         super.initContentView()
         initRefreshView()
@@ -40,14 +34,14 @@ abstract class BaseMvvmRefreshActivity<V : ViewDataBinding?, VM : BaseRefreshVie
     }
 
     fun stopRefresh() {
-        mRefreshLayout!!.isRefreshing = false
+        mRefreshLayout?.isRefreshing = false
     }
 
     fun stopLoadMore() {
-        mRefreshLayout!!.setLoadMore(false)
+        mRefreshLayout?.setLoadMore(false)
     }
 
     fun autoLoadData() {
-        mRefreshLayout!!.autoRefresh()
+        mRefreshLayout?.autoRefresh()
     }
 }

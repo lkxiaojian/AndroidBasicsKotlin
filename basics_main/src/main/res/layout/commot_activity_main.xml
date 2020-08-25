@@ -11,7 +11,9 @@
             android:layout_marginBottom="0dp"
             android:layout_above="@id/common_navigation"
     />
-    <android.support.design.widget.BottomNavigationView
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/common_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,4 +26,5 @@
             app:itemIconTint="@color/color_state_menu_navi"
             android:layout_alignParentBottom="true"
     />
+
 </RelativeLayout>

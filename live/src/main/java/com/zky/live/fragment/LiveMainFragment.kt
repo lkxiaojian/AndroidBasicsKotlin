@@ -1,11 +1,10 @@
 package com.zky.zky_mine.fragment
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.databinding.ViewDataBinding
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.view.View
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.tabs.TabLayout
 import com.zky.basics.common.BR
 import com.zky.basics.common.adapter.TitleFragmentAdapter
 import com.zky.basics.common.mvvm.BaseMvvmFragment
@@ -67,16 +66,17 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
     override fun initViewObservable() {
 
 
-        mViewModel?.getmVoidSingleLiveEvent()?.observe(this, Observer<String?> { t ->
-            when (t) {
-                "show" -> {
-                    showTransLoadingView(true)
+        mViewModel?.getmVoidSingleLiveEvent()
+            ?.observe(this, androidx.lifecycle.Observer<String?> { t ->
+                when (t) {
+                    "show" -> {
+                        showTransLoadingView(true)
 
+                    }
+                    "dismiss" -> showTransLoadingView(false)
+                    "exit" -> finishActivity()
                 }
-                "dismiss" -> showTransLoadingView(false)
-                "exit" -> finishActivity()
-            }
-        })
+            })
     }
 
     override fun onBindVariableId(): Int {
@@ -100,9 +100,6 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
 
 
     override fun getToolbarTitle() = ""
-
-
-
 
 
     override fun enableToolbar(): Boolean {

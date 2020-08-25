@@ -11,11 +11,11 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Suppress("DEPRECATION")
-class RetrofitManager private constructor() {
+class RetrofitManager  {
     private val mRetrofit: Retrofit
     var okHttpBuilder: OkHttpClient.Builder?
     /**
@@ -49,32 +49,7 @@ class RetrofitManager private constructor() {
         }
     }
 
-    companion object {
-        var retrofitManager: RetrofitManager? = null
-        var mContext: Context? = null
-        @JvmField
-        var TOKEN = ""
-        var is_debug = true
-        @JvmStatic
-        fun init(application: Application?) {
-            mContext = application
-        }
-
-        @JvmStatic
-        val instance: RetrofitManager?
-            get() {
-                if (retrofitManager == null) {
-                    synchronized(RetrofitManager::class.java) {
-                        if (retrofitManager == null) {
-                            retrofitManager = RetrofitManager()
-                        }
-                    }
-                }
-                return retrofitManager
-            }
-    }
-
-    init {
+    private constructor(){
         val logging =
             HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message: String? ->
                 Log.e("OKHttp----->", message)
@@ -93,8 +68,23 @@ class RetrofitManager private constructor() {
         mRetrofit = Retrofit.Builder()
             .client(okHttpBuilder!!.build())
             .baseUrl(API.URL_HOST)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+    }
+    private object SingletonHolder {
+        val instance by lazy { RetrofitManager() }
+    }
+    companion object {
+        var mContext: Context? = null
+        @JvmField
+        var TOKEN = ""
+        var is_debug = true
+        val instance = SingletonHolder.instance
+        @JvmStatic
+        fun init(application: Application?) {
+            mContext = application
+        }
     }
 }

@@ -8,14 +8,14 @@
                 type="com.zky.basics.main.mvvm.viewmodel.SplashViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
 
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 android:textSize="32sp"
                 android:textColor="@color/color_0e64a2"
         />
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:textColor="@color/color_0e64a2"
         />
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/phone"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
@@ -62,7 +62,7 @@
                 android:inputType="number"
         />
 
-        <android.support.v7.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -84,7 +84,7 @@
                 android:inputType="textPassword"
         />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -103,7 +103,7 @@
                 android:onClick="@{loginViewModel::startClick}"
         />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@+id/login"
@@ -116,7 +116,7 @@
                 android:onClick="@{loginViewModel::startClick}"
         />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="@+id/login"
@@ -129,5 +129,5 @@
                 android:onClick="@{loginViewModel::startClick}"
         />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

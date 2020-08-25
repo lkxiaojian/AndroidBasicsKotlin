@@ -10,8 +10,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
-            tools:replace="android:roundIcon"
+            tools:replace="android:roundIcon,appComponentFactory"
             android:name=".Application"
+            android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
     >
 
         <meta-data

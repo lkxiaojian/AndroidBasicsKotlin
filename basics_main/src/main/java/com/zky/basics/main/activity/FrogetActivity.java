@@ -1,6 +1,8 @@
 package com.zky.basics.main.activity;
 
-import android.arch.lifecycle.ViewModelProvider;
+
+import androidx.lifecycle.ViewModelProvider;
+
 import com.zky.basics.common.BR;
 import com.zky.basics.common.mvvm.BaseMvvmActivity;
 import com.zky.basics.main.R;
@@ -35,7 +37,6 @@ public class FrogetActivity extends BaseMvvmActivity<ActivityLoginBinding, Splas
         return R.layout.activity_froget;
     }
 
-
     @Override
     public int onBindToolbarLayout() {
         return R.layout.white_common_toolbar;
@@ -45,6 +46,7 @@ public class FrogetActivity extends BaseMvvmActivity<ActivityLoginBinding, Splas
     public String getTootBarTitle() {
         return "重置密码";
     }
+
     @Override
     public boolean isFullScreen() {
         return true;

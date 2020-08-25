@@ -129,8 +129,8 @@ dependencies {
     api rootProject.ext.support["recyclerview-v7"]
     api rootProject.ext.support["constraint-layout"]
     api rootProject.ext.support["kotlin"]
-    api rootProject.ext.support["kotlin-coroutines-core"]
-    api rootProject.ext.support["kotlin-coroutines-android"]
+//    api rootProject.ext.support["kotlin-coroutines-core"]
+//    api rootProject.ext.support["kotlin-coroutines-android"]
     api project(':lib_refresh_layout')
     api project(':lib_zky_api')
     api rootProject.ext.dependencies.rxjava

@@ -1,9 +1,9 @@
 package com.zky.basics.main
 
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.zky.basics.ArouterPath.ARouterPath
 import com.zky.basics.common.mvvm.BaseActivity
 import com.zky.basics.common.provider.ILiveProvider
@@ -12,7 +12,7 @@ import com.zky.basics.main.entity.MainChannel
 
 class MainActivity : BaseActivity() {
     @JvmField
-    @Autowired(name = ARouterPath.LIVE_MAIN)
+    @Autowired(name =ARouterPath.LIVE_MAIN)
     var iLiveProvider: ILiveProvider? = null
     @JvmField
     @Autowired(name = ARouterPath.MINE_MAIN)

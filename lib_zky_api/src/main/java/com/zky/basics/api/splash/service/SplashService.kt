@@ -2,7 +2,7 @@ package com.zky.basics.api.splash.service
 
 import com.zky.basics.api.dto.RespDTO
 import com.zky.basics.api.splash.entity.ImageUrl
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 

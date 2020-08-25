@@ -1,14 +1,15 @@
 package com.zky.basics.common.mvvm
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+
 import android.content.Intent
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.zky.basics.common.mvvm.viewmodel.BaseViewModel
 import com.zky.basics.common.mvvm.viewmodel.BaseViewModel.ParameterField
 import com.zky.basics.common.util.log.KLog

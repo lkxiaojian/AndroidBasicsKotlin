@@ -16,7 +16,7 @@
 
 package com.zky.basics.common.util;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.xuexiang.xupdate.proxy.IUpdateHttpService;
 import com.zhy.http.okhttp.OkHttpUtils;

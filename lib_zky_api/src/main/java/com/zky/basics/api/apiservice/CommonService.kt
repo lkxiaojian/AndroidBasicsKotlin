@@ -5,7 +5,7 @@ import com.zky.basics.api.common.entity.UpdataBean
 import com.zky.basics.api.dto.RespDTO
 import com.zky.basics.api.splash.entity.RegionOrSchoolBean
 import com.zky.basics.api.splash.entity.Userinfo
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -34,17 +34,15 @@ interface CommonService {
     //获取app token
     @GET("getAppToken.do")
     fun getAppToken(
-        @Query("phone") phone: String?, @Query(
-            "password"
-        ) password: String?
+        @Query("phone") phone: String?
+        , @Query("password") password: String?
     ): Observable<RespDTO<OssToken>>
 
     //等级列表省市 县学校
     @GET("getRegionOrSchool.do")
     fun getRegionOrSchool(
-        @Query("regLevel") regLevel: String?, @Query(
-            "regCode"
-        ) regCode: String?
+        @Query("regLevel") regLevel: String?
+        , @Query( "regCode") regCode: String?
     ): Observable<RespDTO<List<RegionOrSchoolBean>>>
 
     @GET("getSchoolDownload.do")

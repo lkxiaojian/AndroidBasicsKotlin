@@ -4,14 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.*
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.annotation.LayoutRes
+import androidx.appcompat.widget.Toolbar
 import com.alibaba.android.arouter.launcher.ARouter
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity
 import com.zky.basics.common.R
 import com.zky.basics.common.event.common.BaseActivityEvent
 import com.zky.basics.common.manager.ActivityManager.Companion.instance

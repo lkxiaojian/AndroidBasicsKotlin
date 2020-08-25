@@ -1,8 +1,8 @@
 package com.zky.basics.common.mvvm
 
-import android.arch.lifecycle.Observer
-import android.databinding.ViewDataBinding
+import androidx.databinding.ViewDataBinding
 import android.view.View
+import androidx.lifecycle.Observer
 import com.refresh.lib.DaisyRefreshLayout
 import com.zky.basics.common.adapter.BaseAdapter
 import com.zky.basics.common.mvvm.viewmodel.BaseRefreshViewModel
@@ -38,18 +38,18 @@ abstract class BaseMvvmRefreshFragment<T, V : ViewDataBinding?, VM : BaseRefresh
     }
 
     fun stopRefresh() {
-        mRefreshLayout!!.isRefreshing = false
+        mRefreshLayout?.isRefreshing = false
     }
 
     fun stopLoadMore() {
-        mRefreshLayout!!.setLoadMore(false)
+        mRefreshLayout?.setLoadMore(false)
     }
 
     fun autoLoadData() {
         KLog.v("MYTAG", "autoLoadData start...")
         if (mRefreshLayout != null) {
             KLog.v("MYTAG", "autoLoadData1 start...")
-            mRefreshLayout!!.autoRefresh()
+            mRefreshLayout?.autoRefresh()
         }
     }
 

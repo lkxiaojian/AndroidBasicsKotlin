@@ -1,6 +1,6 @@
 package com.zky.basics.common.util;
 
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;

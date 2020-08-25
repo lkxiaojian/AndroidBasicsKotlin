@@ -1,7 +1,7 @@
 package debug;
 
 
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 import com.zky.basics.api.RetrofitManager;
 import com.zky.basics.common.BaseApplication;
 

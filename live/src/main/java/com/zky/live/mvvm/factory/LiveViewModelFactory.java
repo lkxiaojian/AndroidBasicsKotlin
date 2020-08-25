@@ -2,10 +2,12 @@ package com.zky.live.mvvm.factory;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
+
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.zky.live.mvvm.model.LiveModel;
 import com.zky.live.mvvm.viewmodle.LiveListViewModle;
 import com.zky.live.mvvm.viewmodle.LiveViewModle;

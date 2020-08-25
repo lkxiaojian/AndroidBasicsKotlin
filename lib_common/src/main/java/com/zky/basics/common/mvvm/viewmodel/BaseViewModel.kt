@@ -1,14 +1,16 @@
 package com.zky.basics.common.mvvm.viewmodel
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleOwner
 import android.os.Bundle
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+
 import com.zky.basics.common.event.SingleLiveEvent
 import com.zky.basics.common.mvvm.model.BaseModel
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.Consumer
+
 import java.util.*
 
 
@@ -18,7 +20,7 @@ open class BaseViewModel<M : BaseModel?>(
 ) : AndroidViewModel(application), IBaseViewModel,
     Consumer<Disposable?> {
     @JvmField
-    protected var mModel: M?
+    protected var mModel: M? = model
 
     private var mUIChangeLiveData: UIChangeLiveData? = null
 
@@ -28,6 +30,24 @@ open class BaseViewModel<M : BaseModel?>(
         }
         return mUIChangeLiveData!!
     }
+
+    private  var err: NetError?=null
+    //运行在UI线程的协程
+//    fun  launchUI(block: suspend CoroutineScope.() -> Unit) = viewModelScope.launch {
+//        try {
+//            block()
+//        } catch (e: Exception) {
+//            Log.e("tag","cha -${e.message}")
+//            err?.let { it.getError(e) }
+//        } finally {
+//
+//        }
+//    }
+
+    interface NetError {
+        fun getError(e: Exception)
+    }
+
 
 
     inner class UIChangeLiveData : SingleLiveEvent<Any?>() {
@@ -70,20 +90,15 @@ open class BaseViewModel<M : BaseModel?>(
     }
 
     fun postShowInitLoadViewEvent(show: Boolean) {
-
         mUIChangeLiveData?.showInitLoadViewEvent?.postValue(show)
-
     }
 
     fun postShowNoDataViewEvent(show: Boolean) {
-
         mUIChangeLiveData?.showNoDataViewEvent?.postValue(show)
-
     }
 
     fun postShowTransLoadingViewEvent(show: Boolean) {
         mUIChangeLiveData?.showTransLoadingViewEvent?.postValue(show)
-
     }
 
     fun postShowNetWorkErrViewEvent(show: Boolean) {
@@ -97,22 +112,24 @@ open class BaseViewModel<M : BaseModel?>(
         if (bundle != null) {
             params[ParameterField.BUNDLE] = bundle
         }
-        mUIChangeLiveData!!.startActivityEvent!!.postValue(params)
+        mUIChangeLiveData?.startActivityEvent?.postValue(params)
     }
 
     fun postFinishActivityEvent() {
-        mUIChangeLiveData!!.finishActivityEvent!!.call()
+        mUIChangeLiveData?.finishActivityEvent?.call()
     }
 
     fun postOnBackPressedEvent() {
-        mUIChangeLiveData!!.onBackPressedEvent!!.call()
+        mUIChangeLiveData?.onBackPressedEvent?.call()
     }
 
     override fun onAny(
         owner: LifecycleOwner?,
         event: Lifecycle.Event?
     ) {
+
     }
+
 
     override fun onCreate() {}
     override fun onDestroy() {}
@@ -133,7 +150,4 @@ open class BaseViewModel<M : BaseModel?>(
 
     }
 
-    init {
-        mModel = model
-    }
 }

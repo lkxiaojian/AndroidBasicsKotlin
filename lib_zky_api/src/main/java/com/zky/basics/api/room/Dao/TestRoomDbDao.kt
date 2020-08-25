@@ -1,6 +1,6 @@
 package com.zky.basics.api.room.Dao
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.zky.basics.api.room.bean.TestRoomDb
 
 /**

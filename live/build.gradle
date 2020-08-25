@@ -22,10 +22,9 @@ android {
         generateStubs = true
         arguments {
             arg("AROUTER_MODULE_NAME", project.getName())
+            arg("AROUTER_GENERATE_DOC", "enable")
         }
     }
-
-
 }
 
 
@@ -35,7 +34,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':lib_common')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     kapt rootProject.ext.dependencies["arouter-compiler"]
     kapt rootProject.ext.dependencies["dagger-compiler"]

@@ -2,7 +2,7 @@ package com.zky.basics.common.util
 
 import android.content.Context
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 
 
 @RequiresApi(Build.VERSION_CODES.P)

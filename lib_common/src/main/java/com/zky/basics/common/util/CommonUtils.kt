@@ -1,7 +1,7 @@
 package com.zky.basics.common.util
 
 import android.os.Build
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import android.view.View
 
 
@@ -14,7 +14,7 @@ import android.view.View
  */
 
 fun ViewToActivity(view: View): FragmentActivity {
-    var activity:FragmentActivity
+    var activity: FragmentActivity
     if (Build.VERSION.SDK_INT > 21) {
         activity = view.context as FragmentActivity
     } else {

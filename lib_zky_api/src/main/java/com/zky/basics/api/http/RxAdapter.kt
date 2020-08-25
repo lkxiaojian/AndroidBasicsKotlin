@@ -2,18 +2,20 @@ package com.zky.basics.api.http
 
 import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
-import com.trello.rxlifecycle2.LifecycleProvider
-import com.trello.rxlifecycle2.LifecycleTransformer
-import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle4.LifecycleProvider
+import com.trello.rxlifecycle4.LifecycleTransformer
+import com.trello.rxlifecycle4.android.ActivityEvent
+
 import com.zky.basics.api.RetrofitManager
 import com.zky.basics.api.dto.RespDTO
 import com.zky.basics.api.http.ExceptionHandler.APP_ERROR
 import com.zky.basics.api.http.ExceptionHandler.SYSTEM_ERROR
-import io.reactivex.Observable
-import io.reactivex.ObservableTransformer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Function
-import io.reactivex.schedulers.Schedulers
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableTransformer
+import io.reactivex.rxjava3.functions.Function
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 class RxAdapter {
@@ -61,8 +63,7 @@ class RxAdapter {
         }
     }
 
-    private class HandleFuc<T> :
-        Function<T, T> {
+    private class HandleFuc<T> : Function<T, T> {
         @Throws(Exception::class)
         override fun apply(o: T): T {
             if (o is RespDTO<*>) {

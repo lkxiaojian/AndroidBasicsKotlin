@@ -6,7 +6,7 @@ import android.os.Environment
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import android.text.TextUtils
 import android.util.Log
 import com.alibaba.sdk.android.oss.*

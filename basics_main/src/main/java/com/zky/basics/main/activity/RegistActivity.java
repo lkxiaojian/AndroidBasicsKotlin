@@ -1,8 +1,7 @@
 package com.zky.basics.main.activity;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.Nullable;
+
+import androidx.lifecycle.ViewModelProvider;
 
 import com.zky.basics.common.BR;
 import com.zky.basics.common.mvvm.BaseMvvmActivity;
