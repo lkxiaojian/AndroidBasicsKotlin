@@ -13,58 +13,12 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
-        <item name="contentInsetStart">0dp</item>
-        <item name="contentInsetStartWithNavigation">0dp</item>
-    </style>
-
-
-    <style name="APPFullTHeme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowNoTitle">true</item>//无标题
-        <item name="android:windowActionBar">false</item>//无ActionBar
-        <item name="android:windowFullscreen">true</item>//全屏即无通知栏
-        <item name="android:windowContentOverlay">@null</item>//是否有遮盖
-    </style>
-
-
-
-    <style name="BlueTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/color_4a90e2</item>
-        <item name="colorPrimaryDark">@color/color_4a90e2</item>
-        <item name="colorAccent">@color/color_4a90e2</item>
-    </style>
-
-
-
 
     <!-- ToolBar菜单样式 -->
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <item name="actionMenuTextColor">@color/white</item>
         <item name="android:textSize">20sp</item>
     </style>
-
-    <style name="AppTheme.BlackBackBar" parent="AppTheme">
-        <item name="colorPrimary">@color/color_black</item>
-        <item name="colorPrimaryDark">@color/color_white</item>
-        <item name="navigationIcon">@drawable/callback_white_icon</item>
-        <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
-    </style>
-    <style name="AppTheme.BackBar" parent="AppTheme">
-        <item name="navigationIcon">@drawable/navbar_icon_return</item>
-        <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
-    </style>
-
-
-    <style name="TransparentActivity" parent="AppTheme">
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowDisablePreview">true</item>
-    </style>
-
-
 
 
     <style name="Theme.Toolbar" parent="ThemeOverlay.AppCompat.ActionBar"></style>

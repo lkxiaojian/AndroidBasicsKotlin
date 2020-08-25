@@ -16,39 +16,40 @@ import io.reactivex.rxjava3.core.Observable
 class SplashModel(application: Application?) : BaseModel(application) {
     private val mCommonService: CommonService = instance.commonService
     private val splashService: SplashService = instance.splashService
-    fun login(username: String?,password: String?): Observable<RespDTO<Userinfo>> {
 
-        return mCommonService.login(username, password)
-            .compose(schedulersTransformer())
-            .compose(exceptionTransformer())
+
+    suspend fun login(username: String?, password: String?): RespDTO<Userinfo> = request {
+        mCommonService.login(username, password)
     }
 
-    val captcha: Observable<RespDTO<ImageUrl?>>?
-        get() = splashService.captcha
-            ?.compose(schedulersTransformer())
-            ?.compose(exceptionTransformer())
 
-    fun getRegionOrSchool(
+    suspend fun captcha(): RespDTO<ImageUrl> = request {
+        splashService.captcha()
+    }
+
+
+    suspend fun getRegionOrSchool(
         regLevel: String?,
         regCode: String?
-    ): Observable<RespDTO<List<RegionOrSchoolBean>>> {
-        return mCommonService.getRegionOrSchool(regLevel, regCode)
-            .compose(schedulersTransformer())
-            .compose(exceptionTransformer())
+    ): RespDTO<List<RegionOrSchoolBean>> = request {
+        mCommonService.getRegionOrSchool(regLevel, regCode)
     }
 
-    fun sendSms(
+
+    suspend fun sendSms(
         token: String?,
         code: String?,
         phone: String?,
         type: String?
-    ): Observable<RespDTO<*>>? {
-        return splashService.sendSms(token, code, phone, type)
-            ?.compose(schedulersTransformer())
-            ?.compose(exceptionTransformer())
+    ): RespDTO<Any> = request {
+        splashService.sendSms(token, code, phone, type)
     }
 
-    fun regist(
+
+
+
+
+    suspend fun regist(
         userName: String?,
         password: String?,
         accountLevel: String?,
@@ -58,8 +59,8 @@ class SplashModel(application: Application?) : BaseModel(application) {
         college: String?,
         smsCode: String?,
         phone: String?
-    ): Observable<RespDTO<*>>? {
-        return splashService.regist(
+    ): RespDTO<Any> = request {
+        splashService.regist(
             userName,
             password,
             accountLevel,
@@ -70,9 +71,8 @@ class SplashModel(application: Application?) : BaseModel(application) {
             smsCode,
             phone
         )
-            ?.compose(schedulersTransformer())
-            ?.compose(exceptionTransformer())
     }
+
 
     fun updateUserPassword(
         oprationType: String?,

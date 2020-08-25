@@ -29,34 +29,6 @@ public class Userinfo {
     private String schoolName;
 
 
-//    private String typeLevel;
-//
-//
-//    public String getTypeLevel() {
-//        // 0-中央、2-省（自治区）、3-市（自治州）、4-县（区）、5-学校
-//        String l = "";
-//        if ("0".equals(accountLevel)) {
-//            l = "中央";
-//
-//        } else if ("2".equals(accountLevel)) {
-//            l = "省（自治区）";
-//        } else if ("3".equals(accountLevel)) {
-//            l = "市（自治州）";
-//        } else if ("4".equals(accountLevel)) {
-//            l = "县（区）";
-//        } else if ("5".equals(accountLevel)) {
-//            l = "学校";
-//        }
-//        return l;
-//    }
-//
-//    public void setTypeLevel(String typeLevel) {
-//        this.typeLevel = typeLevel;
-////        notifyPropertyChanged(BR.writeTwon);
-//
-//
-//    }
-
 
     public String getProvinceName() {
         return provinceName;

@@ -2,7 +2,6 @@ package com.zky.basics.api.splash.service
 
 import com.zky.basics.api.dto.RespDTO
 import com.zky.basics.api.splash.entity.ImageUrl
-import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -14,21 +13,21 @@ import retrofit2.http.Query
  */
 interface SplashService {
     //图形验证
-    @get:GET("getCaptcha.do")
-    val captcha: Observable<RespDTO<ImageUrl?>?>?
+    @GET("getCaptcha.do")
+    suspend fun captcha(): RespDTO<ImageUrl>
 
     // 验证码
     @GET("sendSms.do")
-    fun sendSms(
+   suspend fun sendSms(
         @Query("token") token: String?,
         @Query("verCode") verCode: String?,
         @Query("phone") phone: String?,
         @Query("smsType") smsType: String?
-    ): Observable<RespDTO<*>?>?
+    ): RespDTO<Any>
 
     //组册
     @GET("regist.do")
-    fun regist(
+  suspend  fun regist(
         @Query("userName") userName: String?,
         @Query("password") password: String?,
         @Query("accountLevel") accountLevel: String?,
@@ -38,5 +37,5 @@ interface SplashService {
         @Query("college") college: String?,
         @Query("smsCode") smsCode: String?,
         @Query("phone") phone: String?
-    ): Observable<RespDTO<*>?>?
+    ): RespDTO<Any>
 }

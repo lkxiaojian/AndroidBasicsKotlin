@@ -23,7 +23,7 @@ public class FrogetActivity extends BaseMvvmActivity<ActivityLoginBinding, Splas
 
     @Override
     public void initViewObservable() {
-        mViewModel.getCaptcha();
+        mViewModel.captcha();
         mViewModel.getmVoidSingleLiveEvent().observe(this, aVoid -> finishActivity());
     }
 

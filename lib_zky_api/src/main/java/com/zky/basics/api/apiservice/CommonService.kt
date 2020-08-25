@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 interface CommonService {
     @GET("login.do")
-    fun login(@Query("phone") phone: String?, @Query("password") pwd: String?): Observable<RespDTO<Userinfo>>
+   suspend fun login(@Query("phone") phone: String?, @Query("password") pwd: String?): RespDTO<Userinfo>
 
     //获取最新app信息
     @get:GET("getAppInfo.do")
@@ -40,10 +40,10 @@ interface CommonService {
 
     //等级列表省市 县学校
     @GET("getRegionOrSchool.do")
-    fun getRegionOrSchool(
+   suspend fun getRegionOrSchool(
         @Query("regLevel") regLevel: String?
         , @Query( "regCode") regCode: String?
-    ): Observable<RespDTO<List<RegionOrSchoolBean>>>
+    ): RespDTO<List<RegionOrSchoolBean>>
 
     @GET("getSchoolDownload.do")
     fun getSchoolDownload(@Query("schoolId") schoolId: String?): Observable<RespDTO<Any>>

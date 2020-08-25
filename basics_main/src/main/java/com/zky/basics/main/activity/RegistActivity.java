@@ -23,7 +23,7 @@ public class RegistActivity extends BaseMvvmActivity<ActivityRegistBinding, Spla
 
     @Override
     public void initViewObservable() {
-        mViewModel.getCaptcha();
+        mViewModel.captcha();
         mViewModel.getmVoidSingleLiveEvent().observe(this, aVoid -> finishActivity());
     }
 

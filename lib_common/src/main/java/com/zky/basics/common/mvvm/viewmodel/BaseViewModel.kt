@@ -5,12 +5,13 @@ import android.os.Bundle
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-
+import androidx.lifecycle.viewModelScope
 import com.zky.basics.common.event.SingleLiveEvent
 import com.zky.basics.common.mvvm.model.BaseModel
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.functions.Consumer
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -31,24 +32,22 @@ open class BaseViewModel<M : BaseModel?>(
         return mUIChangeLiveData!!
     }
 
-    private  var err: NetError?=null
+    //    private  var err: NetError?=null
     //运行在UI线程的协程
-//    fun  launchUI(block: suspend CoroutineScope.() -> Unit) = viewModelScope.launch {
-//        try {
-//            block()
-//        } catch (e: Exception) {
-//            Log.e("tag","cha -${e.message}")
-//            err?.let { it.getError(e) }
-//        } finally {
-//
-//        }
-//    }
+    fun launchUI(block: suspend CoroutineScope.() -> Unit, vararg err: NetError?) =
+        viewModelScope.launch {
+            try {
+                block()
+            } catch (e: Exception) {
+                err?.let { it[0]?.getError(e) }
+            } finally {
+            }
+        }
+
 
     interface NetError {
         fun getError(e: Exception)
     }
-
-
 
     inner class UIChangeLiveData : SingleLiveEvent<Any?>() {
         var showInitLoadViewEvent: SingleLiveEvent<Boolean>? = null
