@@ -1,5 +1,6 @@
 package com.zky.basics.main.mvvm.viewmodel
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.Intent
@@ -31,6 +32,7 @@ import com.zky.basics.main.mvvm.model.SplashModel
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import views.ViewOption.OptionsPickerBuilder
+import java.lang.ref.WeakReference
 import java.util.*
 
 class SplashViewModel(application: Application, model: SplashModel?) :
@@ -63,6 +65,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
     private var token: String? = null
     private var subscribe: Disposable? = null
     private var pickerView: OptionsPickerView<Any?>? = null
+    private var handler = WeakReference(CustomHandle()).get()
     //账号级别，可选值【0-中央、2-省（自治区）、3-市（自治州）、4-县（区）、5-学校】
     private val levelList: List<Any?> =
         object : ArrayList<Any?>() {
@@ -220,108 +223,6 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             }
 
         })
-
-//        mModel!!.login(sName, sPaw)
-//            .subscribe(object : Observer<RespDTO<Userinfo>> {
-//                override fun onSubscribe(d: Disposable) {}
-//                //Bearer
-//                override fun onNext(loginDTORespDTO: RespDTO<Userinfo>) {
-//                    if (loginDTORespDTO.code == ExceptionHandler.APP_ERROR.SUCC) {
-//                        if (loginDTORespDTO.code == 200) {
-//                            RetrofitManager.TOKEN = loginDTORespDTO.data.token
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "phone",
-//                                name.get()
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                name.get(),
-//                                paw.get()
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "headImg",
-//                                if (loginDTORespDTO.data.headImg == null) "" else loginDTORespDTO.data.headImg
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "userName",
-//                                if (loginDTORespDTO.data.userName == null) "" else loginDTORespDTO.data.userName
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "code",
-//                                if (loginDTORespDTO.data.code == null) "" else loginDTORespDTO.data.code
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                name.get().toString() + "accountLevel",
-//                                loginDTORespDTO.data.accountLevel
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "province",
-//                                if (loginDTORespDTO.data.province == null) "" else loginDTORespDTO.data.province
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "city",
-//                                if (loginDTORespDTO.data.city == null) "" else loginDTORespDTO.data.city
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "county",
-//                                if (loginDTORespDTO.data.county == null) "" else loginDTORespDTO.data.county
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "provinceName",
-//                                if (loginDTORespDTO.data.provinceName == null) "" else loginDTORespDTO.data.provinceName
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "cityName",
-//                                if (loginDTORespDTO.data.cityName == null) "" else loginDTORespDTO.data.cityName
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "countyName",
-//                                if (loginDTORespDTO.data.countyName == null) "" else loginDTORespDTO.data.countyName
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "schoolName",
-//                                if (loginDTORespDTO.data.schoolName == null) "" else loginDTORespDTO.data.schoolName
-//                            )
-//                            SPUtils.put(
-//                                getApplication(),
-//                                "college",
-//                                if (loginDTORespDTO.data.college == null) "" else loginDTORespDTO.data.college
-//                            )
-//                            getmVoidSingleLiveEvent().value = "login"
-//                            getmVoidSingleLiveEvent().call()
-//                        }
-//                        //                    else {
-////                        ToastUtil.showToast(loginDTORespDTO.msg);
-////                    }
-//                    } else {
-//                        Log.v(
-//                            TAG,
-//                            "error:" + loginDTORespDTO.msg
-//                        )
-//                    }
-//                }
-//
-//                override fun onError(e: Throwable) {
-//                    Log.e(TAG, "error:" + e.message)
-//                }
-//
-//                override fun onComplete() {
-//                    getmVoidSingleLiveEvent().value = "miss"
-//                    getmVoidSingleLiveEvent().call()
-//                }
-//            })
     }
 
     fun startClick(view: View) {
@@ -650,8 +551,6 @@ class SplashViewModel(application: Application, model: SplashModel?) :
         }
         timer!!.schedule(timerTask, 0, 1000)
     }
-//
-
 
     fun captcha() {
         launchUI({
@@ -659,8 +558,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             data.get()!!.rgImageUrl =
                 captcha.data?.getBitmap()
             token = captcha.data?.token
-        }, null)
-
+        })
     }
 
 
@@ -826,10 +724,12 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
     }
 
-    private var handler: Handler? = object : Handler() {
-        override fun handleMessage(msg: Message) {
+
+    @SuppressLint("HandlerLeak")
+    inner class CustomHandle : Handler() {
+        override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
-            if (msg.what == 1) {
+            if (msg?.what == 1) {
                 time -= 1
                 data.get()!!.timeMeesage = time.toString() + "秒"
                 if (time == 1) {
@@ -837,6 +737,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                 }
             }
         }
+
     }
 
     private fun resume() {
