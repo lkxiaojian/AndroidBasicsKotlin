@@ -16,9 +16,6 @@ class LiveViewModle(application: Application, model: LiveModel) : BaseViewModel<
 
     private var mVoidSingleLiveEvent: SingleLiveEvent<String>? = null
 
-    init {
-    }
-
 
     fun startClick(view: View) {
         when (view.id) {

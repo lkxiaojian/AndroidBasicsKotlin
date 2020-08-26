@@ -13,5 +13,4 @@ import com.zky.basics.common.mvvm.model.BaseModel
  */
 class LiveModel(application: Application?) : BaseModel(application) {
     private val mCommonService: CommonService = instance.commonService
-
 }

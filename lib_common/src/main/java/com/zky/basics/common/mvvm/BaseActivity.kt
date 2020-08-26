@@ -61,7 +61,7 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
         initListener()
         initData()
         EventBus.getDefault().register(this)
-        instance!!.addActivity(this)
+        instance?.addActivity(this)
     }
 
     private fun initCommonView() {
@@ -94,10 +94,12 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
     private fun initContentView(@LayoutRes layoutResID: Int) {
         val view =
             LayoutInflater.from(this).inflate(layoutResID, mViewStubContent, false)
-        mViewStubContent!!.id = android.R.id.content
-        mContentView!!.id = View.NO_ID
-        mViewStubContent!!.removeAllViews()
-        mViewStubContent!!.addView(view)
+        mViewStubContent?.let {
+            it.id = android.R.id.content
+            it.removeAllViews()
+            it.addView(view)
+        }
+        mContentView?.id = View.NO_ID
     }
 
     private fun initToolbar(view: View?) {
@@ -105,27 +107,27 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
         mTxtTitle = view?.findViewById(R.id.toolbar_title)
         if (mToolbar != null) {
             setSupportActionBar(mToolbar)
-            supportActionBar!!.setDisplayShowTitleEnabled(false)
-            mToolbar!!.setNavigationOnClickListener { onBackPressed() }
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            mToolbar?.setNavigationOnClickListener { onBackPressed() }
         }
     }
 
     override fun onTitleChanged(title: CharSequence, color: Int) {
         super.onTitleChanged(title, color)
         if (mTxtTitle != null && !TextUtils.isEmpty(title)) {
-            mTxtTitle!!.text = title
+            mTxtTitle?.text = title
         }
         //可以再次覆盖设置title
         val tootBarTitle = tootBarTitle
         if (mTxtTitle != null && !TextUtils.isEmpty(tootBarTitle)) {
-            mTxtTitle!!.text = tootBarTitle
+            mTxtTitle?.text = tootBarTitle
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
-        instance!!.finishActivity(this)
+        instance?.finishActivity(this)
     }
 
     open fun onBindToolbarLayout(): Int {
@@ -152,8 +154,8 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
             val view = mViewStubInitLoading!!.inflate()
             mLoadingInitView = view.findViewById(R.id.view_init_loading)
         }
-        mLoadingInitView!!.visibility = if (show) View.VISIBLE else View.GONE
-        mLoadingInitView!!.loading(show)
+        mLoadingInitView?.visibility = if (show) View.VISIBLE else View.GONE
+        mLoadingInitView?.loading(show)
     }
 
     override fun showNetWorkErrView(show: Boolean) {
@@ -168,15 +170,15 @@ abstract class BaseActivity : RxAppCompatActivity(), IBaseView {
                 initData()
             })
         }
-        mNetErrorView!!.visibility = if (show) View.VISIBLE else View.GONE
+        mNetErrorView?.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun showNoDataView(show: Boolean) {
         if (mNoDataView == null) {
-            val view = mViewStubNoData!!.inflate()
-            mNoDataView = view.findViewById(R.id.view_no_data)
+            val view = mViewStubNoData?.inflate()
+            mNoDataView = view?.findViewById(R.id.view_no_data)
         }
-        mNoDataView!!.visibility = if (show) View.VISIBLE else View.GONE
+        mNoDataView?.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun showTransLoadingView(show: Boolean) {

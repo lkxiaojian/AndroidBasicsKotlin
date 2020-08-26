@@ -48,7 +48,6 @@ abstract class BaseFragment : Fragment(), IBaseView {
         ARouter.getInstance().inject(this)
         EventBus.getDefault().register(this)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,15 +61,15 @@ abstract class BaseFragment : Fragment(), IBaseView {
     }
 
     open fun initCommonView(view: View?) {
-        mViewStubToolbar = view!!.findViewById(R.id.view_stub_toolbar)
+        mViewStubToolbar = view?.findViewById(R.id.view_stub_toolbar)
         mViewStubContent =
-            view.findViewById(R.id.view_stub_content)
+            view?.findViewById(R.id.view_stub_content)
         mViewStubInitLoading =
-            view.findViewById(R.id.view_stub_init_loading)
+            view?.findViewById(R.id.view_stub_init_loading)
         mViewStubTransLoading =
-            view.findViewById(R.id.view_stub_trans_loading)
-        mViewStubNoData = view.findViewById(R.id.view_stub_nodata)
-        mViewStubError = view.findViewById(R.id.view_stub_error)
+            view?.findViewById(R.id.view_stub_trans_loading)
+        mViewStubNoData = view?.findViewById(R.id.view_stub_nodata)
+        mViewStubError = view?.findViewById(R.id.view_stub_error)
         if (enableToolbar()) {
             mViewStubToolbar?.layoutResource = onBindToolbarLayout()
             val viewTooBbar = mViewStubToolbar?.inflate()
@@ -157,30 +156,28 @@ abstract class BaseFragment : Fragment(), IBaseView {
 
     override fun initListener() {}
     override fun finishActivity() {
-        mActivity!!.finish()
+        mActivity?.finish()
     }
 
     open fun enableToolbar(): Boolean {
         return false
     }
 
-    fun onBindToolbarLayout(): Int {
-        return R.layout.common_toolbar
-    }
+    fun onBindToolbarLayout()=R.layout.common_toolbar
 
     override fun showInitLoadView(show: Boolean) {
         if (mLoadingInitView == null) {
-            val view = mViewStubInitLoading!!.inflate()
-            mLoadingInitView = view.findViewById(R.id.view_init_loading)
+            val view = mViewStubInitLoading?.inflate()
+            mLoadingInitView = view?.findViewById(R.id.view_init_loading)
         }
-        mLoadingInitView!!.visibility = if (show) View.VISIBLE else View.GONE
-        mLoadingInitView!!.loading(show)
+        mLoadingInitView?.visibility = if (show) View.VISIBLE else View.GONE
+        mLoadingInitView?.loading(show)
     }
 
     override fun showNetWorkErrView(show: Boolean) {
         if (mNetErrorView == null) {
-            val view = mViewStubError!!.inflate()
-            mNetErrorView = view.findViewById(R.id.view_net_error)
+            val view = mViewStubError?.inflate()
+            mNetErrorView = view?.findViewById(R.id.view_net_error)
             mNetErrorView?.setOnClickListener(View.OnClickListener {
                 if (!checkNetToast()) {
                     return@OnClickListener
@@ -189,31 +186,31 @@ abstract class BaseFragment : Fragment(), IBaseView {
                 initData()
             })
         }
-        mNetErrorView!!.visibility = if (show) View.VISIBLE else View.GONE
+        mNetErrorView?.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun showNoDataView(show: Boolean) {
         if (mNoDataView == null) {
-            val view = mViewStubNoData!!.inflate()
-            mNoDataView = view.findViewById(R.id.view_no_data)
+            val view = mViewStubNoData?.inflate()
+            mNoDataView = view?.findViewById(R.id.view_no_data)
         }
-        mNoDataView!!.visibility = if (show) View.VISIBLE else View.GONE
+        mNoDataView?.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     fun showNoDataView(show: Boolean, resid: Int) {
         showNoDataView(show)
         if (show) {
-            mNoDataView!!.setNoDataView(resid)
+            mNoDataView?.setNoDataView(resid)
         }
     }
 
     override fun showTransLoadingView(show: Boolean) {
         if (mLoadingTransView == null) {
-            val view = mViewStubTransLoading!!.inflate()
-            mLoadingTransView = view.findViewById(R.id.view_trans_loading)
+            val view = mViewStubTransLoading?.inflate()
+            mLoadingTransView = view?.findViewById(R.id.view_trans_loading)
         }
-        mLoadingTransView!!.visibility = if (show) View.VISIBLE else View.GONE
-        mLoadingTransView!!.loading(show)
+        mLoadingTransView?.visibility = if (show) View.VISIBLE else View.GONE
+        mLoadingTransView?.loading(show)
     }
 
     companion object {

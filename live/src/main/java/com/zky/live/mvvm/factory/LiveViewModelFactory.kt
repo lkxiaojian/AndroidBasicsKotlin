@@ -24,7 +24,6 @@ class LiveViewModelFactory private constructor(private val mApplication: Applica
         @SuppressLint("StaticFieldLeak")
         @Volatile
         private var INSTANCE: LiveViewModelFactory? = null
-
         fun getInstance(application: Application): LiveViewModelFactory? {
             if (INSTANCE == null) {
                 synchronized(LiveViewModelFactory::class.java) {
