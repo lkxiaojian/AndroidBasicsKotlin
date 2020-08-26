@@ -1,7 +1,6 @@
 package com.zky.live.fragment.live
 
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import com.refresh.lib.DaisyRefreshLayout
 import com.zky.basics.common.mvvm.BaseMvvmRefreshFragment
 import com.zky.live.BR
@@ -19,10 +18,8 @@ import java.util.*
  */
 class LiveListFragment :
     BaseMvvmRefreshFragment<Objects, LiveListFragemnetBinding, LiveListViewModle>() {
-    override fun onBindViewModelFactory(): ViewModelProvider.Factory =
-        LiveViewModelFactory.getInstance(activity?.application)
-
-    override val refreshLayout: DaisyRefreshLayout?=mBinding?.drlLive
+    override fun onBindViewModelFactory() = LiveViewModelFactory.getInstance(activity!!.application)
+    override val refreshLayout: DaisyRefreshLayout? = mBinding?.drlLive
     override fun onBindViewModel() = LiveListViewModle::class.java
     override fun initView(view: View?) {
     }

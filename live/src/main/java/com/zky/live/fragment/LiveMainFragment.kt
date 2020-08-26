@@ -3,7 +3,6 @@ package com.zky.zky_mine.fragment
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
 import com.zky.basics.common.BR
 import com.zky.basics.common.adapter.TitleFragmentAdapter
@@ -54,14 +53,9 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
         layout_tour.setupWithViewPager(pager_tour)
     }
 
-    override fun onBindViewModel(): Class<LiveViewModle> {
-        return LiveViewModle::class.java
-    }
+    override fun onBindViewModel()=LiveViewModle::class.java
 
-    override fun onBindViewModelFactory(): ViewModelProvider.Factory {
-        return LiveViewModelFactory.getInstance(activity?.application)
-
-    }
+    override fun onBindViewModelFactory() = LiveViewModelFactory.getInstance(activity!!.application)
 
     override fun initViewObservable() {
 
@@ -79,9 +73,7 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
             })
     }
 
-    override fun onBindVariableId(): Int {
-        return BR.liveViewModle
-    }
+    override fun onBindVariableId()= BR.liveViewModle
 
     companion object {
         @JvmStatic
@@ -89,21 +81,8 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
             return LiveMainFragment()
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-
-
-    }
-
     override fun onBindLayout() = R.layout.main_live_fragment
-
-
     override fun getToolbarTitle() = ""
-
-
-    override fun enableToolbar(): Boolean {
-        return false
-    }
+    override fun enableToolbar() = false
 
 }
