@@ -8,16 +8,19 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.core.content.FileProvider;
+
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import io.reactivex.functions.Consumer;
-import me.nereo.multi_image_selector.MultiImageSelector;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import io.reactivex.functions.Consumer;
+import me.nereo.multi_image_selector.MultiImageSelector;
 
 /**
  * Description: <h3>多媒体工具类</h3>
@@ -58,6 +61,7 @@ public class MultiMediaUtil {
         pohotoSelect(null, fragment, count, requestcode);
     }
 
+    @SuppressLint("CheckResult")
     private static void pohotoSelect(final FragmentActivity activity, final Fragment fragment, final int count, final int requestcode) {
         RxPermissions rxPermissions = null;
         if (activity != null) {

@@ -18,9 +18,8 @@
             app:onAutoRefreshCommand="@{liveListViewModel.onAutoRefreshCommand}"
             app:enableRefresh="@{safeUnbox(liveListViewModel.enableRefresh)}"
             app:enableLoadMore="@{safeUnbox(liveListViewModel.enableLoadMore)}"
-
-
             >
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recview"
                 android:layout_width="match_parent"

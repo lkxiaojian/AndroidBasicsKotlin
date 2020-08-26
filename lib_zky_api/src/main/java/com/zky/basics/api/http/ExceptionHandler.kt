@@ -108,42 +108,6 @@ object ExceptionHandler {
             const val PARAMETERS_EMPTY = 3 //	必需的参数为空
             const val AUTHENTICATION_FAILED = 4 //	鉴权失败，用户没有使用该项功能（服务）的权限。
             const val PARAMETERS_ERROR = 5 //	参数错误
-            /**
-             * 企业激活码无效
-             */
-            const val CODE_ACTIVECODE_INVALIDATE = 100201
-            /**
-             * 激活码已被激活
-             */
-            const val CODE_ACTIVECODE_ACTIVED = 100202
-            /**
-             * 用户不存在
-             */
-            const val CODE_USER_NOT_EXIST = 110401
-            /**
-             * 用户被禁用
-             */
-            const val CODE_USER_DISABLE = 110203
-            /**
-             * 盒子号无效
-             */
-            const val INVALIDATE_BOX_CODE = 110907
-            /**
-             * 盒子号已绑定在当前企业下的其他车辆上
-             */
-            const val BOX_BINDED_VEHICLE = 110908
-            /**
-             * 验证码无效
-             */
-            const val AUTH_CODE_INVALIDATE = 110801
-            /**
-             * 企业可绑定盒子已达上限，请联系客服，升级权限
-             */
-            const val BIND_BOX_LIMIT = 110802
-            /**
-             * 授权车辆不允许修改此信息。
-             */
-            const val VHEICLE_NOT_EDIT_CODE = 110904
         }
     }
 }
