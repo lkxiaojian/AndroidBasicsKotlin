@@ -93,6 +93,8 @@ ext {
             "Mp4Composer"           : "com.github.MasayukiSuda:Mp4Composer-android:v0.3.2",
             //app 更新
             "updateApp"             : "com.github.lkxiaojian:updateApp:1.1",
+            "refresh_layout"        : "com.github.lkxiaojian:refresh_layout:1.0.2",
+
             "okhttputils"           : "com.zhy:okhttputils:2.6.2",
             //视频
             "gsyVideoPlayer-java"   : "com.shuyu:gsyVideoPlayer-java:6.0.2",

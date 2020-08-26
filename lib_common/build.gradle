@@ -136,8 +136,9 @@ dependencies {
     api rootProject.ext.support["kotlin"]
 //    api rootProject.ext.support["kotlin-coroutines-core"]
 //    api rootProject.ext.support["kotlin-coroutines-android"]
-    api project(':lib_refresh_layout')
+//    api project(':lib_refresh_layout')
     api project(':lib_zky_api')
+    api rootProject.ext.dependencies.refresh_layout
     api rootProject.ext.dependencies.rxjava
     api rootProject.ext.dependencies.rxandroid
     api rootProject.ext.dependencies.eventbus

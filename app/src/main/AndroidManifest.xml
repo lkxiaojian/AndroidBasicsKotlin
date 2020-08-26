@@ -12,8 +12,7 @@
             android:usesCleartextTraffic="true"
             tools:replace="android:roundIcon,appComponentFactory"
             android:name=".Application"
-            android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
-    >
+            android:appComponentFactory="android.support.v4.app.CoreComponentFactory">
 
         <meta-data
                 android:name="design_width_in_dp"
