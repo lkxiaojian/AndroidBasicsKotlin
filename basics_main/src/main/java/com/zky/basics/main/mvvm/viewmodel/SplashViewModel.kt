@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
@@ -78,19 +79,21 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             }
         }
     private var time = 60
-    private fun initPicker(application: Context) { //        if (pickerBuilder != null) {
+    private fun initPicker(application: Context) {
+        //        if (pickerBuilder != null) {
 //            return;
 //        }
+
         pickerBuilder = OptionsPickerBuilder(application)
             .setCancelText("取消")
-            .setCancelColor(application.resources.getColor(R.color.color_b0b0b0))
+            .setCancelColor(ContextCompat.getColor(application, R.color.color_b0b0b0))
             .setSubCalSize(16)
-            .setSubmitColor(application.resources.getColor(R.color.color_4a90e2))
+            .setSubmitColor(ContextCompat.getColor(application, R.color.color_4a90e2))
             .setSubmitText("确定")
             .setContentTextSize(20) //滚轮文字大小
-            .setTextColorCenter(application.resources.getColor(R.color.color_333)) //设置选中文本的颜色值
+            .setTextColorCenter(ContextCompat.getColor(application,R.color.color_333)) //设置选中文本的颜色值
             .setLineSpacingMultiplier(2f) //行间距
-            .setDividerColor(application.resources.getColor(R.color.color_f5f5f5)) //设置分割线的颜色
+            .setDividerColor(ContextCompat.getColor(application, R.color.color_f5f5f5)) //设置分割线的颜色
         pickerView = pickerBuilder!!.build()
     }
 
@@ -297,7 +300,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             pickerView!!.setSelectOptions(data.get()!!.levelIndel)
             pickerView!!.show()
             pickerBuilder!!.setOnOptionsSelectListener(
-                OnOptionsSelectListener { options1: Int, options2: Int, options3: Int, v: View? ->
+                OnOptionsSelectListener { options1: Int, _: Int, _: Int, _: View? ->
                     if (options1 != data.get()!!.levelIndel) { //清空省市县的选择
                         data.get()!!.rgProvince = "省"
                         data.get()!!.rgTwon = "县"
@@ -316,31 +319,37 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                     data.get()!!.levelIndel = options1
                     data.get()!!.rgLevel = levelList[options1].toString()
                     data.get()!!.writeLevel = true
-                    if (options1 == 0) {
-                        rgProvinceV.set(false)
-                        rgCityV.set(false)
-                        rgTwonV.set(false)
-                        rgSchoolV.set(false)
-                    } else if (options1 == 1) {
-                        rgProvinceV.set(true)
-                        rgCityV.set(false)
-                        rgTwonV.set(false)
-                        rgSchoolV.set(false)
-                    } else if (options1 == 2) {
-                        rgProvinceV.set(true)
-                        rgCityV.set(true)
-                        rgTwonV.set(false)
-                        rgSchoolV.set(false)
-                    } else if (options1 == 3) {
-                        rgProvinceV.set(true)
-                        rgCityV.set(true)
-                        rgTwonV.set(true)
-                        rgSchoolV.set(false)
-                    } else {
-                        rgProvinceV.set(true)
-                        rgCityV.set(true)
-                        rgTwonV.set(true)
-                        rgSchoolV.set(true)
+                    when (options1) {
+                        0 -> {
+                            rgProvinceV.set(false)
+                            rgCityV.set(false)
+                            rgTwonV.set(false)
+                            rgSchoolV.set(false)
+                        }
+                        1 -> {
+                            rgProvinceV.set(true)
+                            rgCityV.set(false)
+                            rgTwonV.set(false)
+                            rgSchoolV.set(false)
+                        }
+                        2 -> {
+                            rgProvinceV.set(true)
+                            rgCityV.set(true)
+                            rgTwonV.set(false)
+                            rgSchoolV.set(false)
+                        }
+                        3 -> {
+                            rgProvinceV.set(true)
+                            rgCityV.set(true)
+                            rgTwonV.set(true)
+                            rgSchoolV.set(false)
+                        }
+                        else -> {
+                            rgProvinceV.set(true)
+                            rgCityV.set(true)
+                            rgTwonV.set(true)
+                            rgSchoolV.set(true)
+                        }
                     }
                 }
             )
@@ -713,11 +722,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             )
             if (respDTO.code == 200) {
                 showToast("注册成功")
-                SPUtils.put(
-                    getApplication(),
-                    "phone",
-                    data.get()!!.rgPhone
-                )
+                SPUtils.put(getApplication(), "phone", data.get()!!.rgPhone)
                 getmVoidSingleLiveEvent().call()
             }
         })

@@ -7,6 +7,7 @@ import com.zky.basics.ArouterPath.ARouterPath
 import com.zky.basics.api.RetrofitManager
 import com.zky.basics.api.dto.RespDTO
 import com.zky.basics.api.http.ExceptionHandler
+import com.zky.basics.common.R
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlinx.coroutines.Dispatchers
@@ -30,23 +31,25 @@ open abstract class BaseModel(protected var mApplication: Application?) : IBaseM
                 ARouter.getInstance().build(ARouterPath.LOGIN).navigation()
                 Toast.makeText(
                     RetrofitManager.mContext,
-                    "长时间未操作，需要重写登入",
+                    R.string.long_time,
                     Toast.LENGTH_SHORT
                 ).show()
-
             } else if (code != ExceptionHandler.APP_ERROR.SUCC) {
                 Toast.makeText(
                     RetrofitManager.mContext,
                     msg + "",
                     Toast.LENGTH_SHORT
                 ).show()
+                throw Exception(msg)
             }
         }
     }
 
+
     override fun onCleared() {
         mCompositeDisposable?.clear()
     }
+
     init {
         mCompositeDisposable = CompositeDisposable()
     }

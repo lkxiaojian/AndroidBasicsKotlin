@@ -4,7 +4,7 @@ package com.zky.basics.common.util.spread
  * Created by lk
  * Date 2020/8/16
  * Time 09:48
- * Detail:
+ * Detail:String 函数的扩展
  */
 
 /**

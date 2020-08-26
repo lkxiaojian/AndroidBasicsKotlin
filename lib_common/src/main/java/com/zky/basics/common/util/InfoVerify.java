@@ -68,12 +68,22 @@ public class InfoVerify {
         return false;
     }
 
+    /**
+     * 检验是否都是数字
+     * @param str
+     * @return
+     */
     public static boolean isNumeric(String str) {
         Pattern pattern = Pattern.compile("^[0-9]+\\.?[0-9]*[0-9]$");
         Matcher isNum = pattern.matcher(str);
         return isNum.matches();
     }
 
+    /**
+     * 是否都是中文
+     * @param strName
+     * @return
+     */
 
     public static boolean isChinese(String strName) {
         char[] ch = strName.toCharArray();
@@ -87,9 +97,7 @@ public class InfoVerify {
     }
 
     /**
-     * 验证手机号
-     * 手机号码格式错误，请输入11位手机号码！
-     *
+     * 验证 11为数字
      * @param phone
      * @return
      */
@@ -97,8 +105,6 @@ public class InfoVerify {
         if (phone == null || phone.length() != 11) {
             return false;
         }
-
-
         String type = "^[1]\\d{10}$";
         Pattern p = Pattern.compile(type);
         Matcher m = p.matcher(phone);
@@ -138,9 +144,6 @@ public class InfoVerify {
         boolean isPwd = m.matches();
         return isPwd;
     }
-
-
-
 
 
     private static boolean isChinese(char c) {
