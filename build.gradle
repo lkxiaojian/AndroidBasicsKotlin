@@ -5,10 +5,11 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.6.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
@@ -22,6 +23,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url ' http://maven.aliyun.com/nexus/content/groups/public'}
         maven { url 'https://jitpack.io' }
         maven {
             url 'https://esri.bintray.com/arcgis'

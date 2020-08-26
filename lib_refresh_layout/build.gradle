@@ -31,6 +31,9 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api rootProject.ext.support["appcompat-v7"]
+    api (rootProject.ext.support["appcompat-v7"]){
+        exclude group: 'androidx.arch.core'
+        exclude group: 'androidx.fragment'
+    }
     api rootProject.ext.support["recyclerview-v7"]
 }

@@ -20,12 +20,12 @@ ext {
     support = [
             "constraint-layout"       : 'androidx.constraintlayout:constraintlayout:1.1.3',
             'support-v4'              : 'androidx.legacy:legacy-support-v4:1.0.0',
-            'appcompat-v7'            : 'androidx.appcompat:appcompat:1.0.0',
-            'recyclerview-v7'         : 'androidx.recyclerview:recyclerview:1.0.0',
-            'support-v13'             : "com.android.support:support-v13:${versions["support-version"]}",
-            'support-fragment'        : "com.android.support:support-fragment:${versions["support-version"]}",
+            'appcompat-v7'            : 'androidx.appcompat:appcompat:1.1.0',
+            'recyclerview-v7'         : 'androidx.recyclerview:recyclerview:1.1.0',
+//            'support-v13'             : "com.android.support:support-v13:${versions["support-version"]}",
+//            'support-fragment'        : "com.android.support:support-fragment:${versions["support-version"]}",
             'design'                  : "com.google.android.material:material:1.2.0",
-            'animated-vector-drawable': "com.android.support:animated-vector-drawable:${versions["support-version"]}",
+//            'animated-vector-drawable': "com.android.support:animated-vector-drawable:${versions["support-version"]}",
             'junit'                   : "junit:junit:${versions["junit-version"]}",
             'kotlin'                  : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions["kotlin_version"]}",
             'kotlin-coroutines-core'  : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions["kotlin_coroutines_version"]}",
@@ -34,28 +34,27 @@ ext {
     //依赖第三方配置
     dependencies = [
             //rxjava
-            "rxjava"                  : "io.reactivex.rxjava3:rxjava:3.0.6",
+            "rxjava"                  : "io.reactivex.rxjava3:rxjava:3.0.4",
             "rxandroid"               : "io.reactivex.rxjava3:rxandroid:3.0.0",
             //rx系列与View生命周期同步
             "rxlifecycle"             : "com.trello.rxlifecycle4:rxlifecycle:4.0.0",
             "rxlifecycle-components"  : "com.trello.rxlifecycle4:rxlifecycle-components:4.0.0",
             //rxbinding
-            "rxbinding"               : "com.jakewharton.rxbinding2:rxbinding:2.1.1",
+            "rxbinding"               : "com.jakewharton.rxbinding4:rxbinding:4.0.0",
             //rx 6.0权限请求
             "rxpermissions"           : "com.github.tbruyelle:rxpermissions:0.10.2",
             //network
             "okhttp"                  : "com.squareup.okhttp3:okhttp:3.10.0",
             "retrofit"                : "com.squareup.retrofit2:retrofit:2.9.0",
-            "converter-gson"          : "com.squareup.retrofit2:converter-gson:2.4.0",
+            "converter-gson"          : "com.squareup.retrofit2:converter-gson:2.6.1",
             "adapter-rxjava"          : "com.squareup.retrofit2:adapter-rxjava3:2.9.0",
             "logging-interceptor"     : "com.squareup.okhttp3:logging-interceptor:3.9.1",
 
             //glide图片加载
-            "glide"                   : "com.github.bumptech.glide:glide:4.8.0",
-            "glide-compiler"          : "com.github.bumptech.glide:compiler:4.8.0",
+            "glide"                   : "com.github.bumptech.glide:glide:4.11.0",
+            "glide-compiler"          : "com.github.bumptech.glide:compiler:4.11.0",
             //json解析
             "gson"                    : "com.google.code.gson:gson:2.8.5",
-
             //Google AAC
             "lifecycle-extensions"    : "androidx.lifecycle:lifecycle-extensions:2.2.0",
             "lifecycle-compiler"      : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0",
@@ -73,11 +72,11 @@ ext {
             "stetho"                  : "com.facebook.stetho:stetho:1.3.1",
             "MultiImageSelector"      : "com.github.lovetuzitong:MultiImageSelector:1.2",
             //room
-            "room-runtime"            : 'androidx.room:room-runtime:2.0.0',
-            "room-testing"            : 'androidx.room:room-testing:2.0.0',
-            "room-compiler"           : 'androidx.room:room-compiler:2.0.0',
+            "room-runtime"            : 'androidx.room:room-runtime:2.2.5',
+            "room-testing"            : 'androidx.room:room-testing:2.2.5',
+            "room-compiler"           : 'androidx.room:room-compiler:2.2.5',
             "debug-db"                : "com.amitshekhar.android:debug-db-encrypt:1.0.6",
-            "room-rxjava2"            : 'androidx.room:room-rxjava2:2.0.0',
+            "room-rxjava2"            : 'androidx.room:room-rxjava2:2.2.5',
             //自动适配
             "autosize"                : "me.jessyan:autosize:1.1.2",
             //PickerView
@@ -89,7 +88,6 @@ ext {
             //arcgis地图
             "arcgis"                : "com.esri.arcgisruntime:arcgis-android:100.5.0",
             "multidex"              : 'androidx.multidex:multidex:2.0.0',
-
             //相册选择
             "SmartMediaPicker"      : "com.github.BzCoder:SmartMediaPicker:1.1.6",
             "Mp4Composer"           : "com.github.MasayukiSuda:Mp4Composer-android:v0.3.2",
@@ -99,7 +97,7 @@ ext {
             //视频
             "gsyVideoPlayer-java"   : "com.shuyu:gsyVideoPlayer-java:6.0.2",
             //是否需要ExoPlayer模式
-            "Player-exo"              : "com.shuyu:GSYVideoPlayer-exo2:6.0.2"
+            "Player-exo"            : "com.shuyu:GSYVideoPlayer-exo2:6.0.2"
 //            "android-recovery"        : "com.zxy.android:recovery:1.0.0"
 
     ]

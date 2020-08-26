@@ -73,13 +73,23 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api rootProject.ext.support["appcompat-v7"]
+    api (rootProject.ext.support["appcompat-v7"]){
+        exclude group: 'androidx.arch.core'
+        exclude group: 'androidx.fragment'
+    }
 
     //network
     api rootProject.ext.dependencies.okhttp
-    api rootProject.ext.dependencies.retrofit
+    api (rootProject.ext.dependencies.retrofit)
+//            {
+//        exclude group: 'io.reactivex.rxjava3'
+//    }
     api rootProject.ext.dependencies["converter-gson"]
-    api rootProject.ext.dependencies["adapter-rxjava"]
+//    api rootProject.ext.dependencies["adapter-rxjava"]
+    api (rootProject.ext.dependencies["adapter-rxjava"])
+//            {
+//        exclude group: 'io.reactivex'
+//    }
     api rootProject.ext.dependencies["logging-interceptor"]
 
     api rootProject.ext.dependencies["arouter-api"]
@@ -88,10 +98,15 @@ dependencies {
     api rootProject.ext.support["kotlin-coroutines-core"]
     api rootProject.ext.support["kotlin-coroutines-android"]
 
-    api rootProject.ext.dependencies["room-runtime"]
+    api (rootProject.ext.dependencies["room-runtime"]) {
+        exclude group: 'androidx.arch'
+    }
     kapt rootProject.ext.dependencies["room-compiler"]
     debugImplementation rootProject.ext.dependencies["debug-db"]
-    api rootProject.ext.dependencies["room-rxjava2"]
+    api(rootProject.ext.dependencies["room-rxjava2"]) {
+        exclude group: 'androidx.arch'
+    }
+
     testImplementation rootProject.ext.dependencies["room-testing"]
 
     //json解析
