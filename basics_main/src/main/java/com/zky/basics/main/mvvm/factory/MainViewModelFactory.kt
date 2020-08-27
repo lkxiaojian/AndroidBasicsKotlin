@@ -10,6 +10,7 @@ import com.zky.basics.main.mvvm.viewmodel.SplashViewModel
 
 class MainViewModelFactory private constructor(private val mApplication: Application) :
     ViewModelProvider.NewInstanceFactory() {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SplashViewModel::class.java)) {
             val splashModel = SplashModel(mApplication)

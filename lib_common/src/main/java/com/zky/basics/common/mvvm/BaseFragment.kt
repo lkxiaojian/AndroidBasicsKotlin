@@ -25,6 +25,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
 
+@Suppress("DEPRECATION")
 abstract class BaseFragment : Fragment(), IBaseView {
     protected var mActivity: RxAppCompatActivity? = null
     private var mView: View? = null

@@ -1,12 +1,11 @@
 package com.zky.basics.common.mvvm
 
 import android.content.Intent
+import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.zky.basics.common.mvvm.viewmodel.BaseViewModel
 import com.zky.basics.common.mvvm.viewmodel.BaseViewModel.ParameterField
 import com.zky.basics.common.util.log.KLog
@@ -25,8 +24,9 @@ abstract class BaseMvvmActivity<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
     }
 
     fun createViewModel(): VM {
+//        ViewModelProviders.of(this, onBindViewModelFactory())[onBindViewModel()]
 
-        return ViewModelProviders.of(this, onBindViewModelFactory())[onBindViewModel()]
+        return    ViewModelProvider(this)[onBindViewModel()]
     }
 
     private fun initViewDataBinding() {

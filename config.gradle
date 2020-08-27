@@ -13,12 +13,13 @@ ext {
     versions = [
             "support-version": "28.0.0",
             "junit-version"  : "4.12",
-            "kotlin_version" : "1.3.61",
-            "kotlin_coroutines_version" : "1.3.9"
+            "kotlin_version" : "1.4.0",
+            "kotlin_coroutines_version" : "1.3.9",
+            "clayout_version": "2.0.1"
     ]
     //support配置
     support = [
-            "constraint-layout"       : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            "constraint-layout"       : "androidx.constraintlayout:constraintlayout:${versions["clayout_version"]}",
             'support-v4'              : 'androidx.legacy:legacy-support-v4:1.0.0',
             'appcompat-v7'            : 'androidx.appcompat:appcompat:1.2.0',
             'recyclerview-v7'         : 'androidx.recyclerview:recyclerview:1.1.0',

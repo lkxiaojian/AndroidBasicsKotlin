@@ -18,9 +18,7 @@ class TitleFragmentAdapter(
     var titles: ArrayList<String>,
     var pages: List<Fragment>,
     var viewPager: ViewPager
-
-
-) : FragmentPagerAdapter(mFragmentManager) {
+) : FragmentPagerAdapter(mFragmentManager,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
 
     override fun getItem(position: Int): Fragment {

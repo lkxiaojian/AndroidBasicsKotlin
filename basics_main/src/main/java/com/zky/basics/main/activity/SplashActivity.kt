@@ -14,15 +14,12 @@ import com.zky.basics.common.mvvm.BaseMvvmActivity
 import com.zky.basics.main.R
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory
 import com.zky.basics.main.mvvm.viewmodel.SplashViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import java.lang.ref.WeakReference
-
-class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>(), CoroutineScope {
+//CoroutineScope
+class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
     override fun onBindLayout() = R.layout.activity_splash
     private var handler: CustomHandler? = null
-    var job: Job = Job()
+//    var job: Job = Job()
 //    lateinit var testRoomDbDao: TestRoomDbDao
     @SuppressLint("CheckResult")
     override fun initView() {
@@ -112,5 +109,5 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>(), Cor
         }
     }
 
-    override val coroutineContext = Dispatchers.Main + job
+//    override val coroutineContext = Dispatchers.Main + job
 }

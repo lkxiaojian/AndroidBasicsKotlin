@@ -37,6 +37,12 @@ android {
         generateStubs = true
     }
 
+    kotlin {
+        experimental {
+            coroutines "enable"
+        }
+    }
+
     //jdk1.8
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -121,9 +127,9 @@ android {
         api fileTree(include: ['*.jar'], dir: 'libs')
         api(rootProject.ext.support["design"]) {
             exclude group: 'androidx.annotation'
-            exclude group: 'androidx.core'
+            exclude group: 'androidx.arch.core'
         }
-        api(rootProject.ext.support["support-v4"])
+        api(rootProject.ext.support["support-v4"]) 
 //        api(rootProject.ext.support["appcompat-v7"])
         api(rootProject.ext.support["recyclerview-v7"])
         api(rootProject.ext.support["constraint-layout"])
@@ -148,27 +154,30 @@ android {
         api(rootProject.ext.dependencies.glide) {
             exclude group: 'com.android.support'
         }
-        annotationProcessor(rootProject.ext.dependencies["glide-compiler"])
+        annotationProcessor(rootProject.ext.dependencies["glide-compiler"]) {
+        }
         api(rootProject.ext.dependencies["lifecycle-extensions"])
         api(rootProject.ext.dependencies["lifecycle-compiler"]) {
             exclude group: 'androidx.lifecycle'
         }
-        api(rootProject.ext.dependencies["dagger"]) 
+        api(rootProject.ext.dependencies["dagger"])
         kapt(rootProject.ext.dependencies["dagger-compiler"])
 
-        api (rootProject.ext.dependencies["dagger-android"])
-        api (rootProject.ext.dependencies["dagger-android-support"])
-        kapt (rootProject.ext.dependencies["dagger-android-processor"])
-        api (rootProject.ext.dependencies["stetho"])
-        api (rootProject.ext.dependencies.MultiImageSelector)
-        api (rootProject.ext.dependencies.PickerView)
-        api (rootProject.ext.dependencies["Luban"])
-        api (rootProject.ext.dependencies["SmartMediaPicker"])
-        api (rootProject.ext.dependencies["Mp4Composer"])
-        api (rootProject.ext.dependencies["updateApp"])
-        api (rootProject.ext.dependencies["okhttputils"])
-        api (rootProject.ext.dependencies["gsyVideoPlayer-java"])
-        api (rootProject.ext.dependencies["Player-exo"])
+        api(rootProject.ext.dependencies["dagger-android"])
+        api(rootProject.ext.dependencies["dagger-android-support"])
+        kapt(rootProject.ext.dependencies["dagger-android-processor"])
+
+
+        api(rootProject.ext.dependencies["stetho"])
+        api(rootProject.ext.dependencies.MultiImageSelector)
+        api(rootProject.ext.dependencies.PickerView)
+        api(rootProject.ext.dependencies["Luban"])
+        api(rootProject.ext.dependencies["SmartMediaPicker"])
+        api(rootProject.ext.dependencies["Mp4Composer"])
+        api(rootProject.ext.dependencies["updateApp"])
+        api(rootProject.ext.dependencies["okhttputils"])
+        api(rootProject.ext.dependencies["gsyVideoPlayer-java"])
+        api(rootProject.ext.dependencies["Player-exo"])
         //根据你的需求ijk模式的so
         implementation 'com.shuyu:gsyVideoPlayer-armv5:6.0.2'
         implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.2'

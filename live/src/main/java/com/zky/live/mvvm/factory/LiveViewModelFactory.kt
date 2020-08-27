@@ -11,7 +11,8 @@ import com.zky.live.mvvm.viewmodle.LiveViewModle
 
 class LiveViewModelFactory private constructor(private val mApplication: Application) :
     ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    @Suppress("UNCHECKED_CAST")
+    override fun < T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LiveViewModle::class.java)) {
             return LiveViewModle(mApplication, LiveModel(mApplication)) as T
         } else if (modelClass.isAssignableFrom(LiveListViewModle::class.java)) {

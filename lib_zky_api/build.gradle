@@ -19,11 +19,18 @@ android {
         versionName rootProject.ext.android.versionName
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName(),
-                             "room.schemaLocation": "$projectDir/schemas".toString()]
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
 
+
+    }
+    kapt {
+        generateStubs = true
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+            arg("AROUTER_GENERATE_DOC", "enable")
+        }
     }
     sourceSets {
         main {
@@ -74,6 +81,8 @@ dependencies {
         exclude group: 'androidx.fragment'
         exclude group: 'androidx.activity'
         exclude group: 'androidx.arch.core:core-common'
+        exclude group: 'androidx.core'
+        exclude group: 'androidx.arch.core'
     }
 
     //network
@@ -99,11 +108,13 @@ dependencies {
     api(rootProject.ext.dependencies["room-rxjava2"]){
         exclude group: 'androidx.arch.core'
         exclude group: 'androidx.lifecycle'
+        exclude group: 'androidx.core'
     }
 
     testImplementation (rootProject.ext.dependencies["room-testing"]){
         exclude group: 'androidx.arch.core'
         exclude group: 'androidx.lifecycle'
+        exclude group: 'androidx.core'
     }
 
     //json解析
@@ -116,5 +127,7 @@ dependencies {
         exclude group: 'com.android.support'
         exclude group: 'androidx.fragment'
         exclude group: 'androidx.activity'
+        exclude group: 'androidx.core'
+        exclude group: 'androidx.arch.core'
     }
 }
