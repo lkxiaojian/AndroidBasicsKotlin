@@ -555,16 +555,16 @@ class SplashViewModel(application: Application, model: SplashModel?) :
         timer = Timer()
         timerTask = object : TimerTask() {
             override fun run() {
-                handler!!.sendEmptyMessage(1)
+                handler?.sendEmptyMessage(1)
             }
         }
-        timer!!.schedule(timerTask, 0, 1000)
+        timer?.schedule(timerTask, 0, 1000)
     }
 
     fun captcha() {
         launchUI({
             val captcha = mModel!!.captcha()
-            data.get()!!.rgImageUrl =
+            data.get()?.rgImageUrl =
                 captcha.data?.getBitmap()
             token = captcha.data?.token
         })

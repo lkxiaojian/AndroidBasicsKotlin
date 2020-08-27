@@ -74,49 +74,50 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api (rootProject.ext.support["appcompat-v7"]){
-        exclude group: 'androidx.arch.core'
         exclude group: 'androidx.fragment'
+        exclude group: 'androidx.activity'
+        exclude group: 'androidx.arch.core:core-common'
     }
 
     //network
-    api rootProject.ext.dependencies.okhttp
+    api (rootProject.ext.dependencies.okhttp)
     api (rootProject.ext.dependencies.retrofit)
-//            {
-//        exclude group: 'io.reactivex.rxjava3'
-//    }
-    api rootProject.ext.dependencies["converter-gson"]
-//    api rootProject.ext.dependencies["adapter-rxjava"]
+
+    api (rootProject.ext.dependencies["converter-gson"])
     api (rootProject.ext.dependencies["adapter-rxjava"])
-//            {
-//        exclude group: 'io.reactivex'
-//    }
-    api rootProject.ext.dependencies["logging-interceptor"]
 
-    api rootProject.ext.dependencies["arouter-api"]
-    kapt rootProject.ext.dependencies["arouter-compiler"]
+    api (rootProject.ext.dependencies["logging-interceptor"])
+    api (rootProject.ext.dependencies["arouter-api"])
+    kapt (rootProject.ext.dependencies["arouter-compiler"])
 
-    api rootProject.ext.support["kotlin-coroutines-core"]
-    api rootProject.ext.support["kotlin-coroutines-android"]
+    api (rootProject.ext.support["kotlin-coroutines-core"])
+    api (rootProject.ext.support["kotlin-coroutines-android"])
 
     api (rootProject.ext.dependencies["room-runtime"]) {
-        exclude group: 'androidx.arch'
+        exclude group: 'androidx.arch.core'
     }
-    kapt rootProject.ext.dependencies["room-compiler"]
-    debugImplementation rootProject.ext.dependencies["debug-db"]
-    api(rootProject.ext.dependencies["room-rxjava2"]) {
-        exclude group: 'androidx.arch'
+    kapt (rootProject.ext.dependencies["room-compiler"])
+
+    debugImplementation (rootProject.ext.dependencies["debug-db"])
+    api(rootProject.ext.dependencies["room-rxjava2"]){
+        exclude group: 'androidx.arch.core'
+        exclude group: 'androidx.lifecycle'
     }
 
-    testImplementation rootProject.ext.dependencies["room-testing"]
+    testImplementation (rootProject.ext.dependencies["room-testing"]){
+        exclude group: 'androidx.arch.core'
+        exclude group: 'androidx.lifecycle'
+    }
 
     //json解析
-    api rootProject.ext.dependencies.gson
-
+    api (rootProject.ext.dependencies.gson)
     //rx管理View的生命周期
     api(rootProject.ext.dependencies.rxlifecycle) {
         exclude group: 'com.android.support'
     }
     api(rootProject.ext.dependencies["rxlifecycle-components"]) {
         exclude group: 'com.android.support'
+        exclude group: 'androidx.fragment'
+        exclude group: 'androidx.activity'
     }
 }

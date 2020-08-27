@@ -14,9 +14,8 @@ class FrogetActivity :
     override fun onBindViewModelFactory() = getInstance(application)
 
     override fun initViewObservable() {
-        mViewModel!!.captcha()
-        mViewModel!!.getmVoidSingleLiveEvent().observe(
-            this,
+        mViewModel?.captcha()
+        mViewModel?.getmVoidSingleLiveEvent()?.observe(this,
             Observer { finishActivity() }
         )
     }

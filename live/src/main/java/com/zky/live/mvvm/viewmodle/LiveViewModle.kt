@@ -21,7 +21,6 @@ class LiveViewModle(application: Application, model: LiveModel) : BaseViewModel<
         when (view.id) {
 
         }
-
     }
 
     fun getmVoidSingleLiveEvent(): SingleLiveEvent<String>? {
