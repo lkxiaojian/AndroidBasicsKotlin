@@ -36,7 +36,7 @@ import views.ViewOption.OptionsPickerBuilder
 import java.lang.ref.WeakReference
 import java.util.*
 
-class SplashViewModel(application: Application, model: SplashModel?) :
+class SplashViewModel(application: Application , model: SplashModel?) :
     BaseViewModel<SplashModel?>(application, model) {
     private var mVoidSingleLiveEvent: SingleLiveEvent<String>? = null
     private var pickerBuilder: OptionsPickerBuilder? = null

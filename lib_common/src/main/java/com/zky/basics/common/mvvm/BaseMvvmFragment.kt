@@ -35,11 +35,14 @@ abstract class BaseMvvmFragment<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
         lifecycle.addObserver(mViewModel!!)
     }
 
-    fun createViewModel(): VM {
+    fun createViewModel(): VM? {
 
 //        ViewModelProviders.of(this, onBindViewModelFactory())[onBindViewModel()!!]
-
-        return  ViewModelProvider(this)[onBindViewModel()!!]
+        val onBindViewModelFactory = onBindViewModelFactory()
+        if (onBindViewModelFactory != null) {
+            return ViewModelProvider(this, onBindViewModelFactory)[onBindViewModel()!!]
+        }
+        return null
     }
 
     abstract fun onBindViewModel(): Class<VM>?

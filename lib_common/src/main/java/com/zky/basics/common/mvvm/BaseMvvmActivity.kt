@@ -23,10 +23,12 @@ abstract class BaseMvvmActivity<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
         initViewObservable()
     }
 
-    fun createViewModel(): VM {
-//        ViewModelProviders.of(this, onBindViewModelFactory())[onBindViewModel()]
-
-        return    ViewModelProvider(this)[onBindViewModel()]
+    fun createViewModel(): VM ?{
+        val onBindViewModelFactory = onBindViewModelFactory()
+        if(onBindViewModelFactory!=null){
+            return ViewModelProvider(this,onBindViewModelFactory)[onBindViewModel()]
+        }
+        return null
     }
 
     private fun initViewDataBinding() {
