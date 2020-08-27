@@ -137,12 +137,6 @@
 -keep enum org.greenrobot.eventbus.ThreadMode { *; }
 
 
-#greendao
--keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
-public static java.lang.String TABLENAME;
-}
--keep class **$Properties {*;}
--keep class org.greenrobot.greendao.** { *;}
 
 # If you do not use SQLCipher:
 -dontwarn net.sqlcipher.database.**
@@ -223,6 +217,11 @@ public static java.lang.String TABLENAME;
 -dontwarn com.trello.rxlifecycle.**
 -keep class com.trello.rxlifecycle.** { *; }
 -keep interface com.trello.rxlifecycle.** { *; }
+
+
+-dontwarn androidx.lifecycle
+-keep class androidx.lifecycle.** { *; }
+-keep interface androidx.lifecycle.** { *; }
 
 ##Arouter
 -keep  class * implements com.alibaba.*
