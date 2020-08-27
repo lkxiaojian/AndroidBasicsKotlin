@@ -91,7 +91,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             .setSubmitColor(ContextCompat.getColor(application, R.color.color_4a90e2))
             .setSubmitText("确定")
             .setContentTextSize(20) //滚轮文字大小
-            .setTextColorCenter(ContextCompat.getColor(application,R.color.color_333)) //设置选中文本的颜色值
+            .setTextColorCenter(ContextCompat.getColor(application, R.color.color_333)) //设置选中文本的颜色值
             .setLineSpacingMultiplier(2f) //行间距
             .setDividerColor(ContextCompat.getColor(application, R.color.color_f5f5f5)) //设置分割线的颜色
         pickerView = pickerBuilder!!.build()
@@ -599,7 +599,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
         launchUI({
             val re = mModel!!.getRegionOrSchool(regLevel, regCode)
             val result = re.data
-            if (result == null || result.size == 0) {
+            if (result == null || result.isEmpty()) {
                 return@launchUI
             }
             val dalist: MutableList<Any?> =
@@ -617,52 +617,61 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             pickerView!!.setPicker(dalist)
             pickerView!!.show()
             pickerBuilder!!.setOnOptionsSelectListener(
-                OnOptionsSelectListener { options1: Int, options2: Int, options3: Int, v: View? ->
+                OnOptionsSelectListener { options1: Int, _: Int, _: Int, _: View? ->
                     when (type) {
                         "0" -> {
-                            data.get()!!.rgProvince = dalist[options1].toString()
-                            data.get()!!.rgTwon = "县"
-                            data.get()!!.rgCity = "市"
-                            data.get()!!.rgSchool = "学校"
+                            data.get()?.let {
+                                it.rgProvince = dalist[options1].toString()
+                                it.rgTwon = "县"
+                                it.rgCity = "市"
+                                it.rgSchool = "学校"
+                                it.writeProvince = true
+                                it.writeCity = false
+                                it.writeTwon = false
+                                it.writeSchool = false
+                            }
+
                             provinceIndexl = options1
                             provinceCode = result[options1].code
-                            data.get()!!.writeProvince = true
-                            data.get()!!.writeCity = false
-                            data.get()!!.writeTwon = false
-                            data.get()!!.writeSchool = false
                             cityCode = ""
                             twonCode = ""
                             schoolCode = ""
                         }
                         "1" -> {
-                            data.get()!!.rgCity = dalist[options1].toString()
-                            data.get()!!.rgTwon = "县"
-                            data.get()!!.rgSchool = "学校"
+                            data.get()?.let {
+                                it.rgCity = dalist[options1].toString()
+                                it.rgTwon = "县"
+                                it.rgSchool = "学校"
+                                it.writeProvince = true
+                                it.writeCity = true
+                                it.writeTwon = false
+                                it.writeSchool = false
+                            }
                             cityCode = result[options1].code
                             twonCode = ""
                             schoolCode = ""
-                            data.get()!!.writeProvince = true
-                            data.get()!!.writeCity = true
-                            data.get()!!.writeTwon = false
-                            data.get()!!.writeSchool = false
                         }
                         "2" -> {
-                            data.get()!!.rgTwon = dalist[options1].toString()
-                            data.get()!!.rgSchool = "学校"
+                            data.get()?.let {
+                                it.rgTwon = dalist[options1].toString()
+                                it.rgSchool = "学校"
+                                it.writeProvince = true
+                                it.writeCity = true
+                                it.writeTwon = true
+                                it.writeSchool = false
+                            }
                             twonCode = result[options1].code
                             schoolCode = ""
-                            data.get()!!.writeProvince = true
-                            data.get()!!.writeCity = true
-                            data.get()!!.writeTwon = true
-                            data.get()!!.writeSchool = false
                         }
                         "3" -> {
-                            data.get()!!.rgSchool = dalist[options1].toString()
+                            data.get()?.let {
+                                it.rgSchool = dalist[options1].toString()
+                                it.writeProvince = true
+                                it.writeCity = true
+                                it.writeTwon = true
+                                it.writeSchool = true
+                            }
                             schoolCode = result[options1].SCHOOL_ID
-                            data.get()!!.writeProvince = true
-                            data.get()!!.writeCity = true
-                            data.get()!!.writeTwon = true
-                            data.get()!!.writeSchool = true
                         }
                     }
                 }
@@ -682,7 +691,6 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                 data.get()!!.rgPhone,
                 type
             )
-
             if (sendSms.code == 200) {
                 startTimer()
                 showToast("发送成功")

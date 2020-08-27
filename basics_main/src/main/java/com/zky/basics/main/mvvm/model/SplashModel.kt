@@ -45,10 +45,6 @@ class SplashModel(application: Application?) : BaseModel(application) {
         splashService.sendSms(token, code, phone, type)
     }
 
-
-
-
-
     suspend fun regist(
         userName: String?,
         password: String?,

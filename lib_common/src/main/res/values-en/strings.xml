@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">lib_common</string>
     <string name="long_time">Long time no operation, need to login again</string>
+    <string name="server_error">Server internal exception</string>
 </resources>

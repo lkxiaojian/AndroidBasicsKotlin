@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-open abstract class BaseModel(protected var mApplication: Application?) : IBaseModel {
+abstract class BaseModel(protected var mApplication: Application?) : IBaseModel {
     private var mCompositeDisposable: CompositeDisposable?
     fun addSubscribe(disposable: Disposable?) {
         if (mCompositeDisposable == null) {
@@ -27,20 +27,33 @@ open abstract class BaseModel(protected var mApplication: Application?) : IBaseM
 
     suspend fun <T : Any> request(call: suspend () -> RespDTO<T>): RespDTO<T> {
         return withContext(Dispatchers.IO) { call.invoke() }.apply {
-            if (code == 408) {
-                ARouter.getInstance().build(ARouterPath.LOGIN).navigation()
-                Toast.makeText(
-                    RetrofitManager.mContext,
-                    R.string.long_time,
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else if (code != ExceptionHandler.APP_ERROR.SUCC) {
-                Toast.makeText(
-                    RetrofitManager.mContext,
-                    msg + "",
-                    Toast.LENGTH_SHORT
-                ).show()
-                throw Exception(msg)
+            when {
+                code == 408 -> {
+                    ARouter.getInstance().build(ARouterPath.LOGIN).navigation()
+                    Toast.makeText(
+                        RetrofitManager.mContext,
+                        R.string.long_time,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                ExceptionHandler.SYSTEM_ERROR.INTERNAL_SERVER_ERROR == code -> {
+                    Toast.makeText(
+                        RetrofitManager.mContext,
+                        R.string.server_error,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    throw Exception(msg)
+                }
+                code != ExceptionHandler.APP_ERROR.SUCC -> {
+                    if (msg.isNullOrEmpty()) {
+                        Toast.makeText(
+                            RetrofitManager.mContext,
+                            msg,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    throw Exception(msg)
+                }
             }
         }
     }
