@@ -35,8 +35,11 @@ abstract class BaseMvvmActivity<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
         mBinding = DataBindingUtil.setContentView<V>(this, onBindLayout())
         viewModelId = onBindVariableId()
         mViewModel = createViewModel()
-        mBinding?.setVariable(viewModelId, mViewModel)
-        lifecycle.addObserver(mViewModel!!)
+        if(mBinding!=null&&mViewModel!=null){
+            mBinding?.setVariable(viewModelId, mViewModel)
+            lifecycle.addObserver(mViewModel!!)
+        }
+
     }
 
      abstract fun onBindViewModel(): Class<VM>
@@ -96,8 +99,8 @@ abstract class BaseMvvmActivity<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
 
     fun startActivity(clz: Class<*>?, bundle: Bundle?) {
         val intent = Intent(this, clz)
-        if (bundle != null) {
-            intent.putExtras(bundle)
+        bundle?.let {
+            intent.putExtras(it)
         }
         startActivity(intent)
     }

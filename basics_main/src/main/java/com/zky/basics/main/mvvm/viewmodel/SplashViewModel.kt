@@ -36,7 +36,7 @@ import views.ViewOption.OptionsPickerBuilder
 import java.lang.ref.WeakReference
 import java.util.*
 
-class SplashViewModel(application: Application , model: SplashModel?) :
+class SplashViewModel(application: Application, model: SplashModel?) :
     BaseViewModel<SplashModel?>(application, model) {
     private var mVoidSingleLiveEvent: SingleLiveEvent<String>? = null
     private var pickerBuilder: OptionsPickerBuilder? = null
@@ -384,11 +384,6 @@ class SplashViewModel(application: Application , model: SplashModel?) :
                 showToast("短信验证码为空")
                 return
             }
-            //            splashViewBean.setRgLevel();
-//            splashViewBean.setRgProvince("省");
-//            splashViewBean.setRgTwon("县");
-//            splashViewBean.setRgCity("市");
-//            splashViewBean.setRgSchool("学校");
             val rgLevel = data.get()!!.rgLevel
             if (InfoVerify.isEmpty(rgLevel) || "账号级别" == rgLevel) {
                 showToast("账号级别为空")
@@ -719,7 +714,7 @@ class SplashViewModel(application: Application , model: SplashModel?) :
         password = MD5(password!!)
         val phone = data.get()!!.rgPhone
         launchUI({
-            val respDTO = mModel!!.regist(
+            mModel?.regist(
                 userName,
                 password,
                 accountLevel,
@@ -728,11 +723,15 @@ class SplashViewModel(application: Application , model: SplashModel?) :
                 county,
                 college, smsCode, phone
             )
-            if (respDTO.code == 200) {
-                showToast("注册成功")
-                SPUtils.put(getApplication(), "phone", data.get()!!.rgPhone)
+            showToast(R.string.register_success)
+            SPUtils.put(getApplication(), "phone", data.get()!!.rgPhone)
+            getmVoidSingleLiveEvent().call()
+        }, object : NetError {
+            override fun getError(e: Exception) {
+                showToast(R.string.register_fail)
                 getmVoidSingleLiveEvent().call()
             }
+
         })
 
     }

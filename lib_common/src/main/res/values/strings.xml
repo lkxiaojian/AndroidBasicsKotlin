@@ -2,6 +2,7 @@
     <string name="app_name">lib_common</string>
     <string name="long_time">长时间未操作，需要重新登入</string>
     <string name="server_error">服务器内部异常</string>
-
+    <string name="register_success">注册成功</string>
+    <string name="register_fail">注册失败</string>
 
 </resources>

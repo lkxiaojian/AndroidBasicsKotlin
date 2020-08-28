@@ -29,10 +29,10 @@ abstract class BaseMvvmFragment<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
     private fun initViewModel() {
         mViewModel = createViewModel()
         viewModelId = onBindVariableId()
-        if (mBinding != null) {
+        if (mBinding != null&&mViewModel!=null) {
             mBinding?.setVariable(viewModelId, mViewModel)
+            lifecycle.addObserver(mViewModel!!)
         }
-        lifecycle.addObserver(mViewModel!!)
     }
 
     fun createViewModel(): VM? {
@@ -71,22 +71,18 @@ abstract class BaseMvvmFragment<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
             })
         mViewModel?.uc()?.finishActivityEvent
             ?.observe(this, Observer {
-                if (mActivity != null) {
-                    mActivity!!.finish()
-                }
+                mActivity?.finish()
             })
         mViewModel?.uc()?.onBackPressedEvent
             ?.observe(this, Observer {
-                if (mActivity != null) {
-                    mActivity!!.onBackPressed()
-                }
+                mActivity?.onBackPressed()
             })
     }
 
     fun startActivity(clz: Class<*>?, bundle: Bundle?) {
         val intent = Intent(mActivity, clz)
-        if (bundle != null) {
-            intent.putExtras(bundle)
+        bundle?.let {
+            intent.putExtras(it)
         }
         startActivity(intent)
     }
