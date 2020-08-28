@@ -72,6 +72,7 @@ object ExceptionHandler {
         const val FORBIDDEN = 403
         const val NOT_FOUND = 404
         const val REQUEST_TIMEOUT = 409
+        const val LONG_TIME_ACTION = 408
         const val INTERNAL_SERVER_ERROR = 500
         const val SERVICE_UNAVAILABLE = 503
         /**

@@ -80,9 +80,6 @@ class SplashViewModel(application: Application, model: SplashModel?) :
         }
     private var time = 60
     private fun initPicker(application: Context) {
-        //        if (pickerBuilder != null) {
-//            return;
-//        }
 
         pickerBuilder = OptionsPickerBuilder(application)
             .setCancelText("取消")
@@ -141,9 +138,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
 
         launchUI({
-
             val loginDTORespDTO = mModel!!.login(sName, sPaw)
-            if (loginDTORespDTO.code == 200) {
                 RetrofitManager.TOKEN = loginDTORespDTO.data.token
                 SPUtils.put(
                     getApplication(),
@@ -217,7 +212,6 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                 )
                 getmVoidSingleLiveEvent().value = "login"
                 getmVoidSingleLiveEvent().call()
-            }
 
         }, object : NetError {
             override fun getError(e: Exception) {
