@@ -33,23 +33,22 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
         mListFragments.add(LiveListFragment())
         val fragmentPager2Adapter = FragmentPager2Adapter(activity!!, mListFragments)
 
-        pager_tour?.adapter=fragmentPager2Adapter
+        pager_tour?.adapter = fragmentPager2Adapter
         pager_tour.currentItem = 0
         //添加动画
         pager_tour.setPageTransformer(ZoomOutPageTransformer())
+        //切换tab页
         TabLayoutMediator(layout_tour, pager_tour,
             TabLayoutMediator.TabConfigurationStrategy { tab, position ->
-                tab.text =titles[position]
+                tab.text = titles[position]
             }).attach()
     }
 
-    override fun onBindViewModel()=LiveViewModle::class.java
+    override fun onBindViewModel() = LiveViewModle::class.java
 
     override fun onBindViewModelFactory() = LiveViewModelFactory.getInstance(activity!!.application)
 
     override fun initViewObservable() {
-
-
         mViewModel?.getmVoidSingleLiveEvent()
             ?.observe(this, androidx.lifecycle.Observer { t ->
                 when (t) {
@@ -62,7 +61,7 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
             })
     }
 
-    override fun onBindVariableId()= BR.liveViewModle
+    override fun onBindVariableId() = BR.liveViewModle
 
     companion object {
         @JvmStatic
@@ -70,6 +69,7 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
             return LiveMainFragment()
         }
     }
+
     override fun onBindLayout() = R.layout.main_live_fragment
     override fun getToolbarTitle() = ""
     override fun enableToolbar() = false
