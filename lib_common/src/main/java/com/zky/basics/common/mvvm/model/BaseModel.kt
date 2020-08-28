@@ -21,12 +21,13 @@ abstract class BaseModel(protected var mApplication: Application?) : IBaseModel 
         }
     }
 
-    suspend fun <T : Any> request(call: suspend () -> RespDTO<T>): RespDTO<T> {
-        return withContext(Dispatchers.IO) { call.invoke() }.apply {
+    suspend fun <T : Any> request(call: suspend () -> RespDTO<T>): T? {
+        return withContext(Dispatchers.IO) { call.invoke() }.run {
             when {
                 ExceptionHandler.SYSTEM_ERROR.LONG_TIME_ACTION == code -> {
                     ARouter.getInstance().build(ARouterPath.LOGIN).navigation()
                     ToastUtil.showToast(R.string.long_time)
+                    null
                 }
                 ExceptionHandler.SYSTEM_ERROR.INTERNAL_SERVER_ERROR == code -> {
                     ToastUtil.showToast(R.string.server_error)
@@ -37,6 +38,9 @@ abstract class BaseModel(protected var mApplication: Application?) : IBaseModel 
                         ToastUtil.showToast(msg)
                     }
                     throw Exception(msg)
+                }
+                else -> {
+                    data
                 }
             }
         }

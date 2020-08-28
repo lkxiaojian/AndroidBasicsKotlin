@@ -3,27 +3,23 @@ package com.zky.basics.main.mvvm.model
 import android.app.Application
 import com.zky.basics.api.RetrofitManager.Companion.instance
 import com.zky.basics.api.apiservice.CommonService
-import com.zky.basics.api.dto.RespDTO
-import com.zky.basics.api.http.RxAdapter.Companion.exceptionTransformer
-import com.zky.basics.api.http.RxAdapter.Companion.schedulersTransformer
 import com.zky.basics.api.splash.entity.ImageUrl
 import com.zky.basics.api.splash.entity.RegionOrSchoolBean
 import com.zky.basics.api.splash.entity.Userinfo
 import com.zky.basics.api.splash.service.SplashService
 import com.zky.basics.common.mvvm.model.BaseModel
-import io.reactivex.rxjava3.core.Observable
 
 class SplashModel(application: Application?) : BaseModel(application) {
     private val mCommonService: CommonService = instance.commonService
     private val splashService: SplashService = instance.splashService
 
 
-    suspend fun login(username: String?, password: String?): RespDTO<Userinfo> = request {
+    suspend fun login(username: String?, password: String?): Userinfo? = request {
         mCommonService.login(username, password)
     }
 
 
-    suspend fun captcha(): RespDTO<ImageUrl> = request {
+    suspend fun captcha(): ImageUrl? = request {
         splashService.captcha()
     }
 
@@ -31,7 +27,7 @@ class SplashModel(application: Application?) : BaseModel(application) {
     suspend fun getRegionOrSchool(
         regLevel: String?,
         regCode: String?
-    ): RespDTO<List<RegionOrSchoolBean>> = request {
+    ): List<RegionOrSchoolBean>? = request {
         mCommonService.getRegionOrSchool(regLevel, regCode)
     }
 
@@ -41,7 +37,7 @@ class SplashModel(application: Application?) : BaseModel(application) {
         code: String?,
         phone: String?,
         type: String?
-    ): RespDTO<Any> = request {
+    ): Any? = request {
         splashService.sendSms(token, code, phone, type)
     }
 
@@ -55,7 +51,7 @@ class SplashModel(application: Application?) : BaseModel(application) {
         college: String?,
         smsCode: String?,
         phone: String?
-    ): RespDTO<Any> = request {
+    ): Any? = request {
         splashService.regist(
             userName,
             password,
@@ -70,20 +66,20 @@ class SplashModel(application: Application?) : BaseModel(application) {
     }
 
 
-    fun updateUserPassword(
+    suspend fun updateUserPassword(
         oprationType: String?,
         phone: String?,
         oldPassword: String?,
         password: String?,
         smsCode: String?
-    ): Observable<RespDTO<*>>? {
-        return mCommonService.updateUserPassword(
+    ): Any? = request {
+        mCommonService.updateUserPassword(
             oprationType,
             phone,
             oldPassword,
             password,
             smsCode
-        )?.compose(schedulersTransformer())?.compose(exceptionTransformer())
+        )
     }
 
 }

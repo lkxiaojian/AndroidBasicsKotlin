@@ -15,7 +15,6 @@ import androidx.databinding.ObservableField
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.zky.basics.api.RetrofitManager
-import com.zky.basics.api.dto.RespDTO
 import com.zky.basics.api.splash.entity.SplashViewBean
 import com.zky.basics.common.event.SingleLiveEvent
 import com.zky.basics.common.mvvm.viewmodel.BaseViewModel
@@ -30,7 +29,6 @@ import com.zky.basics.main.R
 import com.zky.basics.main.activity.FrogetActivity
 import com.zky.basics.main.activity.RegistActivity
 import com.zky.basics.main.mvvm.model.SplashModel
-import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import views.ViewOption.OptionsPickerBuilder
 import java.lang.ref.WeakReference
@@ -139,7 +137,8 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
         launchUI({
             val loginDTORespDTO = mModel!!.login(sName, sPaw)
-                RetrofitManager.TOKEN = loginDTORespDTO.data.token
+            loginDTORespDTO?.let {
+                RetrofitManager.TOKEN = it.token
                 SPUtils.put(
                     getApplication(),
                     "phone",
@@ -153,65 +152,66 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                 SPUtils.put(
                     getApplication(),
                     "headImg",
-                    if (loginDTORespDTO.data.headImg == null) "" else loginDTORespDTO.data.headImg
+                    if (it.headImg == null) "" else it.headImg
                 )
                 SPUtils.put(
                     getApplication(),
                     "userName",
-                    if (loginDTORespDTO.data.userName == null) "" else loginDTORespDTO.data.userName
+                    if (it.userName == null) "" else it.userName
                 )
                 SPUtils.put(
                     getApplication(),
                     "code",
-                    if (loginDTORespDTO.data.code == null) "" else loginDTORespDTO.data.code
+                    if (it.code == null) "" else it.code
                 )
                 SPUtils.put(
                     getApplication(),
                     name.get().toString() + "accountLevel",
-                    loginDTORespDTO.data.accountLevel
+                    it.accountLevel
                 )
                 SPUtils.put(
                     getApplication(),
                     "province",
-                    if (loginDTORespDTO.data.province == null) "" else loginDTORespDTO.data.province
+                    if (it.province == null) "" else it.province
                 )
                 SPUtils.put(
                     getApplication(),
                     "city",
-                    if (loginDTORespDTO.data.city == null) "" else loginDTORespDTO.data.city
+                    if (it.city == null) "" else it.city
                 )
                 SPUtils.put(
                     getApplication(),
                     "county",
-                    if (loginDTORespDTO.data.county == null) "" else loginDTORespDTO.data.county
+                    if (it.county == null) "" else it.county
                 )
                 SPUtils.put(
                     getApplication(),
                     "provinceName",
-                    if (loginDTORespDTO.data.provinceName == null) "" else loginDTORespDTO.data.provinceName
+                    if (it.provinceName == null) "" else it.provinceName
                 )
                 SPUtils.put(
                     getApplication(),
                     "cityName",
-                    if (loginDTORespDTO.data.cityName == null) "" else loginDTORespDTO.data.cityName
+                    if (it.cityName == null) "" else it.cityName
                 )
                 SPUtils.put(
                     getApplication(),
                     "countyName",
-                    if (loginDTORespDTO.data.countyName == null) "" else loginDTORespDTO.data.countyName
+                    if (it.countyName == null) "" else it.countyName
                 )
                 SPUtils.put(
                     getApplication(),
                     "schoolName",
-                    if (loginDTORespDTO.data.schoolName == null) "" else loginDTORespDTO.data.schoolName
+                    if (it.schoolName == null) "" else it.schoolName
                 )
                 SPUtils.put(
                     getApplication(),
                     "college",
-                    if (loginDTORespDTO.data.college == null) "" else loginDTORespDTO.data.college
+                    if (it.college == null) "" else it.college
                 )
                 getmVoidSingleLiveEvent().value = "login"
                 getmVoidSingleLiveEvent().call()
+            }
 
         }, object : NetError {
             override fun getError(e: Exception) {
@@ -513,23 +513,16 @@ class SplashViewModel(application: Application, model: SplashModel?) :
      * 忘记密码
      */
     private fun foggerPas() {
-        mModel!!.updateUserPassword(
-            "forget",
-            data.get()!!.rgPhone,
-            "",
-            MD5(data.get()!!.rgPaw!!),
-            data.get()!!.rgCode
-        )!!.subscribe(object : Observer<RespDTO<*>> {
-            override fun onSubscribe(d: Disposable) {}
-            override fun onNext(respDTO: RespDTO<*>) {
-                if (respDTO.code == 200) {
-                    showToast(respDTO.msg)
-                    getmVoidSingleLiveEvent().call()
-                }
-            }
-
-            override fun onError(e: Throwable) {}
-            override fun onComplete() {}
+        launchUI({
+            val updateUserPassword = mModel?.updateUserPassword(
+                "forget",
+                data.get()!!.rgPhone,
+                "",
+                MD5(data.get()!!.rgPaw!!),
+                data.get()!!.rgCode
+            )
+            showToast(updateUserPassword.toString())
+            getmVoidSingleLiveEvent().call()
         })
     }
 
@@ -553,9 +546,12 @@ class SplashViewModel(application: Application, model: SplashModel?) :
     fun captcha() {
         launchUI({
             val captcha = mModel!!.captcha()
-            data.get()?.rgImageUrl =
-                captcha.data?.getBitmap()
-            token = captcha.data?.token
+            captcha?.let {
+                data.get()?.rgImageUrl =
+                    it.getBitmap()
+                token = it.token
+            }
+
         })
     }
 
@@ -586,8 +582,8 @@ class SplashViewModel(application: Application, model: SplashModel?) :
         }
 
         launchUI({
-            val re = mModel!!.getRegionOrSchool(regLevel, regCode)
-            val result = re.data
+
+            val result = mModel!!.getRegionOrSchool(regLevel, regCode)
             if (result == null || result.isEmpty()) {
                 return@launchUI
             }
@@ -674,18 +670,14 @@ class SplashViewModel(application: Application, model: SplashModel?) :
     private fun sendSms(type: String) {
 
         launchUI({
-            val sendSms = mModel!!.sendSms(
+            mModel?.sendSms(
                 token,
                 data.get()!!.rgImageCode,
                 data.get()!!.rgPhone,
                 type
             )
-            if (sendSms.code == 200) {
-                startTimer()
-                showToast("发送成功")
-            } else {
-                resume()
-            }
+            startTimer()
+            showToast("发送成功")
         }, object : NetError {
             override fun getError(e: Exception) {
                 resume()
