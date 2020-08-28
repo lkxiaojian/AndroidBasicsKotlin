@@ -1,12 +1,13 @@
-package com.zky.zky_mine.fragment
+package com.zky.live.fragment
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.zky.basics.common.BR
-import com.zky.basics.common.adapter.TitleFragmentAdapter
+import com.zky.basics.common.adapter.FragmentPager2Adapter
 import com.zky.basics.common.mvvm.BaseMvvmFragment
+import com.zky.basics.common.view.animotion.ZoomOutPageTransformer
 import com.zky.live.R
 import com.zky.live.fragment.live.LiveListFragment
 import com.zky.live.mvvm.factory.LiveViewModelFactory
@@ -24,33 +25,22 @@ import java.util.*
 class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
     private val titles = arrayListOf("无人机直播", "手机直播")
     private val mListFragments = ArrayList<Fragment>()
-    private var titleFragmentAdapter: TitleFragmentAdapter? = null
-
-
     override fun initView(view: View?) {
     }
 
     override fun initData() {
         mListFragments.add(LiveListFragment())
         mListFragments.add(LiveListFragment())
-        titleFragmentAdapter =
-            TitleFragmentAdapter(childFragmentManager, titles, mListFragments, pager_tour)
-        pager_tour?.adapter = titleFragmentAdapter
-        titleFragmentAdapter?.refreshViewPager(mListFragments)
-        layout_tour.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-//                mListFragments[tab.position].autoLoadData()
-            }
+        val fragmentPager2Adapter = FragmentPager2Adapter(activity!!, mListFragments)
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-        })
-        layout_tour.setupWithViewPager(pager_tour)
+        pager_tour?.adapter=fragmentPager2Adapter
+        pager_tour.currentItem = 0
+        //添加动画
+        pager_tour.setPageTransformer(ZoomOutPageTransformer())
+        TabLayoutMediator(layout_tour, pager_tour,
+            TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+                tab.text =titles[position]
+            }).attach()
     }
 
     override fun onBindViewModel()=LiveViewModle::class.java
@@ -61,11 +51,10 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
 
 
         mViewModel?.getmVoidSingleLiveEvent()
-            ?.observe(this, androidx.lifecycle.Observer<String?> { t ->
+            ?.observe(this, androidx.lifecycle.Observer { t ->
                 when (t) {
                     "show" -> {
                         showTransLoadingView(true)
-
                     }
                     "dismiss" -> showTransLoadingView(false)
                     "exit" -> finishActivity()
@@ -84,5 +73,4 @@ class LiveMainFragment : BaseMvvmFragment<ViewDataBinding, LiveViewModle>() {
     override fun onBindLayout() = R.layout.main_live_fragment
     override fun getToolbarTitle() = ""
     override fun enableToolbar() = false
-
 }
