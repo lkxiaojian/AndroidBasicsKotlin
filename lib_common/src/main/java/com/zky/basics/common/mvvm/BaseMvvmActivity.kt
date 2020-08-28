@@ -23,10 +23,10 @@ abstract class BaseMvvmActivity<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
         initViewObservable()
     }
 
-    fun createViewModel(): VM ?{
+    private fun createViewModel(): VM? {
         val onBindViewModelFactory = onBindViewModelFactory()
-        if(onBindViewModelFactory!=null){
-            return ViewModelProvider(this,onBindViewModelFactory)[onBindViewModel()]
+        if (onBindViewModelFactory != null) {
+            return ViewModelProvider(this, onBindViewModelFactory)[onBindViewModel()]
         }
         return null
     }
@@ -35,14 +35,14 @@ abstract class BaseMvvmActivity<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
         mBinding = DataBindingUtil.setContentView<V>(this, onBindLayout())
         viewModelId = onBindVariableId()
         mViewModel = createViewModel()
-        if(mBinding!=null&&mViewModel!=null){
+        if (mBinding != null && mViewModel != null) {
             mBinding?.setVariable(viewModelId, mViewModel)
             lifecycle.addObserver(mViewModel!!)
         }
 
     }
 
-     abstract fun onBindViewModel(): Class<VM>
+    abstract fun onBindViewModel(): Class<VM>
     abstract fun onBindViewModelFactory(): ViewModelProvider.Factory?
     abstract fun initViewObservable()
     abstract fun onBindVariableId(): Int
@@ -97,7 +97,7 @@ abstract class BaseMvvmActivity<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
         )
     }
 
-    fun startActivity(clz: Class<*>?, bundle: Bundle?) {
+    open fun startActivity(clz: Class<*>?, bundle: Bundle?) {
         val intent = Intent(this, clz)
         bundle?.let {
             intent.putExtras(it)
@@ -107,7 +107,7 @@ abstract class BaseMvvmActivity<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
 
     override fun onDestroy() {
         super.onDestroy()
-            mBinding?.unbind()
+        mBinding?.unbind()
     }
 
     override fun initView() {}

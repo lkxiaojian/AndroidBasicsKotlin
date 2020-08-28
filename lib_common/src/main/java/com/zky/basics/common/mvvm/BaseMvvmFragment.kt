@@ -29,13 +29,13 @@ abstract class BaseMvvmFragment<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
     private fun initViewModel() {
         mViewModel = createViewModel()
         viewModelId = onBindVariableId()
-        if (mBinding != null&&mViewModel!=null) {
+        if (mBinding != null && mViewModel != null) {
             mBinding?.setVariable(viewModelId, mViewModel)
             lifecycle.addObserver(mViewModel!!)
         }
     }
 
-    fun createViewModel(): VM? {
+    private fun createViewModel(): VM? {
 
 //        ViewModelProviders.of(this, onBindViewModelFactory())[onBindViewModel()!!]
         val onBindViewModelFactory = onBindViewModelFactory()
@@ -79,7 +79,7 @@ abstract class BaseMvvmFragment<V : ViewDataBinding?, VM : BaseViewModel<*>?> :
             })
     }
 
-    fun startActivity(clz: Class<*>?, bundle: Bundle?) {
+    open fun startActivity(clz: Class<*>?, bundle: Bundle?) {
         val intent = Intent(mActivity, clz)
         bundle?.let {
             intent.putExtras(it)
