@@ -739,13 +739,13 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
     private fun resume() {
         if (timer != null) {
-            timer!!.cancel()
-            timerTask!!.cancel()
+            timer?.cancel()
+            timerTask?.cancel()
         }
-        data.get()!!.timeMeesage = "获取"
+        data.get()?.timeMeesage = "获取"
         data.set(splashViewBean)
         time = 60
-        rgitstView!!.isEnabled = true
+        rgitstView?.isEnabled = true
     }
 
     override fun onDestroy() {
