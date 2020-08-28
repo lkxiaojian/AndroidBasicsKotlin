@@ -24,7 +24,7 @@ abstract class BaseModel(protected var mApplication: Application?) : IBaseModel 
     suspend fun <T : Any> request(call: suspend () -> RespDTO<T>): T? {
         return withContext(Dispatchers.IO) { call.invoke() }.run {
             when {
-                ExceptionHandler.SYSTEM_ERROR.LONG_TIME_ACTION == code -> {
+                ExceptionHandler.SYSTEM_ERROR.LONG_TIME_NO_ACTION == code -> {
                     ARouter.getInstance().build(ARouterPath.LOGIN).navigation()
                     ToastUtil.showToast(R.string.long_time)
                     null

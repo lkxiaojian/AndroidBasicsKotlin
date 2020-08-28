@@ -696,13 +696,12 @@ class SplashViewModel(application: Application, model: SplashModel?) :
         college: String?,
         smsCode: String?
     ) {
-        var password = password
-        password = MD5(password!!)
+       val passwordMD = MD5(password!!)
         val phone = data.get()!!.rgPhone
         launchUI({
             mModel?.regist(
                 userName,
-                password,
+                passwordMD,
                 accountLevel,
                 province,
                 city,
