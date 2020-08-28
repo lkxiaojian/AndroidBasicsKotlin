@@ -96,8 +96,8 @@ dependencies {
     api (rootProject.ext.dependencies["arouter-api"])
     kapt (rootProject.ext.dependencies["arouter-compiler"])
 
-    api (rootProject.ext.support["kotlin-coroutines-core"])
-    api (rootProject.ext.support["kotlin-coroutines-android"])
+//    api (rootProject.ext.support["kotlin-coroutines-core"])
+//    api (rootProject.ext.support["kotlin-coroutines-android"])
 
     api (rootProject.ext.dependencies["room-runtime"]) {
         exclude group: 'androidx.arch.core'
