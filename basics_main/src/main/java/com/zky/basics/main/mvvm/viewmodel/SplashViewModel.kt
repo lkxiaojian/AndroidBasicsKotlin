@@ -583,7 +583,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
         launchUI({
 
-            val result = mModel!!.getRegionOrSchool(regLevel, regCode)
+            val result = mModel?.getRegionOrSchool(regLevel, regCode)
             if (result == null || result.isEmpty()) {
                 return@launchUI
             }
@@ -661,7 +661,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                     }
                 }
             )
-        }, null)
+        })
     }
 
     /**

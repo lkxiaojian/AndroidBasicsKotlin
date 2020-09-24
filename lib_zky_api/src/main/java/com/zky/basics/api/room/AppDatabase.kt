@@ -1,11 +1,11 @@
 package com.zky.basics.api.room
 
-import androidx.sqlite.db.SupportSQLiteDatabase
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
-import android.content.Context
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.zky.basics.api.room.Dao.TestRoomDbDao
 import com.zky.basics.api.room.bean.TestRoomDb
 import java.io.File
@@ -29,7 +29,6 @@ abstract class AppDatabase : RoomDatabase() {
                     if (INSTANCE == null) {
                         val path = (
                                 "${File.separator}mnt${File.separator}sdcard${File.separator}db${File.separator}test.db")
-
                         INSTANCE = Room.databaseBuilder(context!!, AppDatabase::class.java, path)
                             .addCallback(sOnOpenCallback)
                             .addMigrations(MIGRATION_1_2)

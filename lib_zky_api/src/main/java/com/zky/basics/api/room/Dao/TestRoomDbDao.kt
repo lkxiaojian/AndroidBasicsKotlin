@@ -11,8 +11,8 @@ import com.zky.basics.api.room.bean.TestRoomDb
  */
 @Dao
 interface TestRoomDbDao {
-    @get:Query("SELECT * FROM test")
-    val all: List<TestRoomDb>
+    @Query("SELECT * FROM test")
+    suspend fun all(): List<TestRoomDb>
 
     @Query("SELECT * FROM test WHERE u_id IN (:userIds)")
     fun loadAllByIds(userIds: IntArray?): List<TestRoomDb?>?
@@ -24,17 +24,20 @@ interface TestRoomDbDao {
         "SELECT * FROM test WHERE user_name LIKE :first AND " +
                 "user_name LIKE :last LIMIT 1"
     )
-    fun findByName(first: String?, last: String?): TestRoomDb?
+    suspend fun findByName(first: String?, last: String?): TestRoomDb?
 
     @Insert
-    fun insertAll(vararg users: TestRoomDb?)
+    suspend fun insertAll(vararg users: TestRoomDb?)
 
     @Delete
-    fun delete(user: TestRoomDb?)
+    suspend fun delete(user: TestRoomDb?)
+
+    @Query("delete from test where u_id = :userID")
+    suspend fun deleteById(userID: String)
 
     @Update
-    fun updateUsers(vararg users: TestRoomDb?): Int
+    suspend fun updateUsers(vararg users: TestRoomDb?): Int
 
-    @get:Query("select * from test")
-    val users: List<TestRoomDb?>?
+    @Query("select * from test")
+    suspend fun users(): List<TestRoomDb?>?
 }

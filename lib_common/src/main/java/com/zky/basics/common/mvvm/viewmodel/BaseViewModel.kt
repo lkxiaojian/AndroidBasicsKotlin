@@ -11,6 +11,7 @@ import com.zky.basics.common.mvvm.model.BaseModel
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.functions.Consumer
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -21,7 +22,7 @@ open class BaseViewModel<M : BaseModel?>(
 ) : AndroidViewModel(application), IBaseViewModel,
     Consumer<Disposable?> {
     @JvmField
-    protected var mModel: M? = model
+    protected var mModel: M = model
 
     private var mUIChangeLiveData: UIChangeLiveData? = null
 
@@ -33,7 +34,7 @@ open class BaseViewModel<M : BaseModel?>(
     }
 
     //运行在UI线程的协程  block 请求网络的方法体  err 请求异常的对象 可以不传递
-    fun launchUI(block: suspend CoroutineScope.() -> Unit, vararg  err: NetError?) =
+    fun launchUI(block: suspend CoroutineScope.() -> Unit, vararg err: NetError?) =
         viewModelScope.launch {
             try {
                 block()
@@ -130,12 +131,19 @@ open class BaseViewModel<M : BaseModel?>(
 
 
     override fun onCreate() {}
-    override fun onDestroy() {}
+    override fun onDestroy() {
+        try {
+            viewModelScope.cancel()
+        } catch (e: Exception) {
+        }
+
+    }
+
     override fun onStart() {}
     override fun onStop() {}
     override fun onResume() {}
     override fun onPause() {}
-//    @Throws(Exception::class)
+    //    @Throws(Exception::class)
     override fun accept(disposable: Disposable?) {
         mModel?.addSubscribe(disposable)
 

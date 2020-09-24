@@ -104,6 +104,9 @@ dependencies {
     }
     kapt (rootProject.ext.dependencies["room-compiler"])
 
+    api (rootProject.ext.dependencies["room-ktx"])
+
+
     debugImplementation (rootProject.ext.dependencies["debug-db"])
     api(rootProject.ext.dependencies["room-rxjava2"]){
         exclude group: 'androidx.arch.core'

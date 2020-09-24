@@ -59,6 +59,8 @@ ext {
             //Google AAC
             "lifecycle-extensions"    : "androidx.lifecycle:lifecycle-extensions:2.2.0",
             "lifecycle-compiler"      : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0",
+            "lifecycle-runtime"   :"androidx.lifecycle:lifecycle-runtime-ktx:2.2.0",
+
             //阿里路由框架
             "arouter-api"             : "com.alibaba:arouter-api:1.5.0",
             "arouter-compiler"        : "com.alibaba:arouter-compiler:1.2.2",
@@ -78,6 +80,7 @@ ext {
             "room-compiler"           : 'androidx.room:room-compiler:2.2.5',
             "debug-db"                : "com.amitshekhar.android:debug-db-encrypt:1.0.6",
             "room-rxjava2"            : 'androidx.room:room-rxjava2:2.2.5',
+            "room-ktx"                : 'androidx.room:room-ktx:2.2.5',
             //自动适配
             "autosize"                : "me.jessyan:autosize:1.1.2",
             //PickerView

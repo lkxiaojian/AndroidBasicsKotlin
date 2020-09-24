@@ -157,6 +157,7 @@ android {
         annotationProcessor(rootProject.ext.dependencies["glide-compiler"]) {
         }
         api(rootProject.ext.dependencies["lifecycle-extensions"])
+        api(rootProject.ext.dependencies["lifecycle-runtime"])
         api(rootProject.ext.dependencies["lifecycle-compiler"]) {
             exclude group: 'androidx.lifecycle'
         }

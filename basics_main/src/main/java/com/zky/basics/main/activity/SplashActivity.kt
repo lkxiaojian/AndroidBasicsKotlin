@@ -15,12 +15,12 @@ import com.zky.basics.main.R
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory
 import com.zky.basics.main.mvvm.viewmodel.SplashViewModel
 import java.lang.ref.WeakReference
-//CoroutineScope
+
 class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
     override fun onBindLayout() = R.layout.activity_splash
     private var handler: CustomHandler? = null
-//    var job: Job = Job()
 //    lateinit var testRoomDbDao: TestRoomDbDao
+
     @SuppressLint("CheckResult")
     override fun initView() {
         handler = WeakReference(CustomHandler()).get()
@@ -34,7 +34,7 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
 //                //同意sd 权限后创建room 数据库
 //                testRoomDbDao =
 //                    AppDatabase.getDatabase(this)?.testRoomDbDao()!!
-//                val roomData = getRoomData<List<TestRoomDb>>()
+//                val roomData = getRoomData()
 //                Log.e("tag", "roomData--->$roomData")
 //            } else {
 //                ToastUtil.showToast("读取sd卡权限被拒绝")
@@ -44,13 +44,13 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
 
 
 //    fun getRoomData() {
-//        val coroutineScope = CoroutineScope(coroutineContext)
-//        coroutineScope.launch(Dispatchers.Main) {
-//            val withContext = withContext(Dispatchers.IO) {
-//                // val testRoomDb = TestRoomDb(223, "name", 3, "1", "3")
-//                // testRoomDbDao?.insertAll(testRoomDb)
-//                testRoomDbDao.all
-//            }
+//        lifecycleScope.launch {
+//            val testRoomDb = TestRoomDb(2231, "name", 3, "1", "3")
+//            testRoomDbDao?.insertAll(testRoomDb)
+//            val all = testRoomDbDao.all()
+//            testRoomDbDao?.deleteById("223")
+//            val all2 = testRoomDbDao.all()
+//            Log.e("","")
 //        }
 //    }
 
@@ -109,5 +109,4 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
         }
     }
 
-//    override val coroutineContext = Dispatchers.Main + job
 }
