@@ -45,12 +45,16 @@ class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
 
 //    fun getRoomData() {
 //        lifecycleScope.launch {
-//            val testRoomDb = TestRoomDb(2231, "name", 3, "1", "3")
-//            testRoomDbDao?.insertAll(testRoomDb)
-//            val all = testRoomDbDao.all()
-//            testRoomDbDao?.deleteById("223")
-//            val all2 = testRoomDbDao.all()
-//            Log.e("","")
+//            try {
+//                val all = testRoomDbDao.all()
+//                val testRoomDb = TestRoomDb(2231, "name", 3, "1", "3")
+//                testRoomDbDao?.insertOrUpdate(testRoomDb)
+//                val all1 = testRoomDbDao.all()
+//
+//                Log.e("", "")
+//            } catch (e: Exception) {
+//                Log.e("", "")
+//            }
 //        }
 //    }
 

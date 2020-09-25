@@ -26,11 +26,22 @@ interface TestRoomDbDao {
     )
     suspend fun findByName(first: String?, last: String?): TestRoomDb?
 
+    suspend fun insertOrUpdate(vararg users: TestRoomDb?) {
+        deleteNoSuspend(*users)
+        insertNoSuspend(*users)
+    }
+
+
     @Insert
-    suspend fun insertAll(vararg users: TestRoomDb?)
+    suspend fun insertNoSuspend(vararg users: TestRoomDb?)
+
 
     @Delete
     suspend fun delete(user: TestRoomDb?)
+
+    @Delete
+    suspend fun deleteNoSuspend(vararg users: TestRoomDb?)
+
 
     @Query("delete from test where u_id = :userID")
     suspend fun deleteById(userID: String)

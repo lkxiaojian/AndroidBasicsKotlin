@@ -18,5 +18,8 @@ data class TestRoomDb(
     var name: String?,
     var age: Int?,
     var sex: String?,
-    var type: String?
+    var type: String?,
+    var pub_year: Int = 0,
+    var pub_year1: Int = 0,
+    var pub_year2: Int = 0
 )
