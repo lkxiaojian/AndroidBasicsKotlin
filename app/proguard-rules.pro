@@ -244,6 +244,12 @@
 -keep class me.jessyan.** { *; }
 
 
+##xxpermission
+-dontwarn com.hjq.permissions.*
+-keep  class * implements com.hjq.permissions.*
+-keep com.hjq.permissions.** { *; }
+
+
 ###PickerView
 -dontwarn com.bigkoo.*
 -keep  class * implements com.bigkoo.*
