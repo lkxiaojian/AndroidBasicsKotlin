@@ -1,9 +1,10 @@
 package com.zky.basics.common.util
 
 import android.os.Build
-import androidx.fragment.app.FragmentActivity
 import android.view.View
-
+import androidx.fragment.app.FragmentActivity
+import com.hjq.permissions.XXPermissions
+import com.zky.basics.common.util.ToastUtil.showToast
 
 
 /**
@@ -21,4 +22,20 @@ fun ViewToActivity(view: View): FragmentActivity {
         activity = view.rootView.context as FragmentActivity
     }
     return activity
+}
+
+
+fun PermissionToSetting(
+    activity: FragmentActivity,
+    denied: List<String>,
+    never: Boolean,
+    message: String
+) {
+    showToast(message)
+    if (never) {
+        // 如果是被永久拒绝就跳转到应用权限系统设置页面
+        XXPermissions.startPermissionActivity(activity, denied)
+    }
+
+
 }

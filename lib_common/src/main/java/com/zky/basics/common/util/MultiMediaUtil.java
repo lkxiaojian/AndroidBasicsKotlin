@@ -13,14 +13,17 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.hjq.permissions.OnPermission;
+import com.hjq.permissions.XXPermissions;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-import io.reactivex.functions.Consumer;
 import me.nereo.multi_image_selector.MultiImageSelector;
+
+import static com.zky.basics.common.util.CommonUtilsKt.PermissionToSetting;
 
 /**
  * Description: <h3>多媒体工具类</h3>
@@ -63,16 +66,20 @@ public class MultiMediaUtil {
 
     @SuppressLint("CheckResult")
     private static void pohotoSelect(final FragmentActivity activity, final Fragment fragment, final int count, final int requestcode) {
-        RxPermissions rxPermissions = null;
-        if (activity != null) {
-            rxPermissions = new RxPermissions(activity);
-        } else if (fragment != null) {
-            rxPermissions = new RxPermissions(fragment);
+
+        if (activity == null && fragment == null) {
+            return;
         }
-        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+
+        Activity activity1 = activity;
+        if (activity1 == null) {
+            activity1 = fragment.getActivity();
+        }
+        Activity finalActivity = activity1;
+        XXPermissions.with(activity1).permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).request(new OnPermission() {
             @Override
-            public void accept(Boolean aBoolean) throws Exception {
-                if (aBoolean) {
+            public void hasPermission(List<String> granted, boolean all) {
+                if (all) {
                     if (activity != null) {
                         MultiImageSelector.create().showCamera(false).count(count).single().multi()
                                 //.origin(ArrayList<String>)
@@ -82,11 +89,49 @@ public class MultiMediaUtil {
                                 //.origin(ArrayList<String>)
                                 .start(fragment, requestcode);
                     }
-                } else {
-                    ToastUtil.showToast("无读写外部存储设备权限");
                 }
             }
+
+            @Override
+            public void noPermission(List<String> denied, boolean never) {
+                if (never) {
+
+                    ToastUtil.showToast("被永久拒绝授权，请手动授予存储和拍照权限");
+                    // 如果是被永久拒绝就跳转到应用权限系统设置页面
+                    XXPermissions.startPermissionActivity(finalActivity, denied);
+                } else {
+                    ToastUtil.showToast("获取存储权限失败");
+                }
+
+            }
         });
+
+
+//        RxPermissions rxPermissions = null;
+//        if (activity != null) {
+//            rxPermissions = new RxPermissions(activity);
+//        } else if (fragment != null) {
+//            rxPermissions = new RxPermissions(fragment);
+//        }
+//
+//        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+//            @Override
+//            public void accept(Boolean aBoolean) throws Exception {
+//                if (aBoolean) {
+//                    if (activity != null) {
+//                        MultiImageSelector.create().showCamera(false).count(count).single().multi()
+//                                //.origin(ArrayList<String>)
+//                                .start(activity, requestcode);
+//                    } else if (fragment != null) {
+//                        MultiImageSelector.create().showCamera(false).count(count).single().multi()
+//                                //.origin(ArrayList<String>)
+//                                .start(fragment, requestcode);
+//                    }
+//                } else {
+//                    ToastUtil.showToast("无读写外部存储设备权限");
+//                }
+//            }
+//        });
 
 
     }
@@ -107,28 +152,27 @@ public class MultiMediaUtil {
     }
 
     @SuppressLint("CheckResult")
-    private static void takePhoto(final FragmentActivity activity, final Fragment fragment, final String path, final int requestcode) {
+    private static void takePhoto(FragmentActivity activity, final Fragment fragment, final String path, final int requestcode) {
         if (activity == null && fragment == null) {
             return;
         }
-        RxPermissions rxPermissions = null;
-        if (activity != null) {
-            rxPermissions = new RxPermissions(activity);
-        } else if (fragment != null) {
-            rxPermissions = new RxPermissions(fragment);
-        }
 
-        rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+        if (activity == null) {
+            activity = fragment.getActivity();
+        }
+        FragmentActivity finalActivity = activity;
+        XXPermissions.with(activity).permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).request(new OnPermission() {
             @Override
-            public void accept(Boolean aBoolean) throws Exception {
-                if (aBoolean) {
+            public void hasPermission(List<String> granted, boolean all) {
+                if (all) {
+
                     File file = new File(path);
                     try {
                         if (file.createNewFile()) {
                             Intent intent = new Intent();
                             intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
                             intent.addCategory(Intent.CATEGORY_DEFAULT);
-                            if (activity != null) {
+                            if (finalActivity != null) {
 
 
                                 Uri uri = null;
@@ -140,7 +184,7 @@ public class MultiMediaUtil {
                                 }
                                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
-                                activity.startActivityForResult(intent, requestcode);
+                                finalActivity.startActivityForResult(intent, requestcode);
                             } else if (fragment != null) {
                                 Uri uri = null;
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -157,11 +201,77 @@ public class MultiMediaUtil {
                         e.printStackTrace();
                         ToastUtil.showToast("无法启动拍照程序");
                     }
-                } else {
-                    ToastUtil.showToast("无摄像头权限,无法进行拍照!");
+
                 }
+
+            }
+
+            @Override
+            public void noPermission(List<String> denied, boolean never) {
+//                if (never) {
+//                    ToastUtil.showToast("被永久拒绝授权，请手动授予存储和拍照权限");
+//                    // 如果是被永久拒绝就跳转到应用权限系统设置页面
+//                    XXPermissions.startPermissionActivity(finalActivity, denied);
+//                } else {
+//                    ToastUtil.showToast("获取存储权限失败");
+//                }
+
+                PermissionToSetting(finalActivity,denied,never,"获取存储权限失败");
             }
         });
+
+
+//        RxPermissions rxPermissions = null;
+//        if (activity != null) {
+//            rxPermissions = new RxPermissions(activity);
+//        } else if (fragment != null) {
+//            rxPermissions = new RxPermissions(fragment);
+//        }
+//
+//        rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+//            @Override
+//            public void accept(Boolean aBoolean) throws Exception {
+//                if (aBoolean) {
+//                    File file = new File(path);
+//                    try {
+//                        if (file.createNewFile()) {
+//                            Intent intent = new Intent();
+//                            intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+//                            intent.addCategory(Intent.CATEGORY_DEFAULT);
+//                            if (activity != null) {
+//
+//
+//                                Uri uri = null;
+//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                                    uri = FileProvider.getUriForFile(fragment.getContext(), "com.zky.jyb.fileprovider", file);
+//                                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                                } else {
+//                                    uri = Uri.fromFile(file);
+//                                }
+//                                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//
+//                                activity.startActivityForResult(intent, requestcode);
+//                            } else if (fragment != null) {
+//                                Uri uri = null;
+//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                                    uri = FileProvider.getUriForFile(fragment.getContext(), "com.zky.jyb.fileprovider", file);
+//                                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                                } else {
+//                                    uri = Uri.fromFile(file);
+//                                }
+//                                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//                                fragment.startActivityForResult(intent, requestcode);
+//                            }
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        ToastUtil.showToast("无法启动拍照程序");
+//                    }
+//                } else {
+//                    ToastUtil.showToast("无摄像头权限,无法进行拍照!");
+//                }
+//            }
+//        });
     }
 
 
@@ -181,20 +291,19 @@ public class MultiMediaUtil {
     }
 
     @SuppressLint("CheckResult")
-    private static void takeVideo(final FragmentActivity activity, final Fragment fragment, final String path, final int requestcode) {
+    private static void takeVideo(FragmentActivity activity, final Fragment fragment, final String path, final int requestcode) {
         if (activity == null && fragment == null) {
             return;
         }
-        RxPermissions rxPermissions = null;
-        if (activity != null) {
-            rxPermissions = new RxPermissions(activity);
-        } else if (fragment != null) {
-            rxPermissions = new RxPermissions(fragment);
+
+        if (activity == null) {
+            activity = fragment.getActivity();
         }
-        rxPermissions.request(Manifest.permission.CAMERA).subscribe(new Consumer<Boolean>() {
+        final Activity finalActivity = activity;
+        XXPermissions.with(finalActivity).permission(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE).request(new OnPermission() {
             @Override
-            public void accept(Boolean aBoolean) throws Exception {
-                if (aBoolean) {
+            public void hasPermission(List<String> granted, boolean all) {
+                if (all) {
                     File file = new File(path);
                     try {
                         if (file.createNewFile()) {
@@ -202,9 +311,9 @@ public class MultiMediaUtil {
                             intent.setAction(MediaStore.ACTION_VIDEO_CAPTURE);
                             intent.addCategory(Intent.CATEGORY_DEFAULT);
                             //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                            if (activity != null) {
-                                intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity, "com.zky.jyb.fileprovider", file));
-                                activity.startActivityForResult(intent, requestcode);
+                            if (finalActivity != null) {
+                                intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(finalActivity, "com.zky.jyb.fileprovider", file));
+                                finalActivity.startActivityForResult(intent, requestcode);
                             } else if (fragment != null) {
                                 intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(fragment.getContext(), "com.zky.jyb.fileprovider", file));
                                 fragment.startActivityForResult(intent, requestcode);
@@ -215,11 +324,59 @@ public class MultiMediaUtil {
                         e.printStackTrace();
                         ToastUtil.showToast("无法启动拍视频程序");
                     }
+                }
+
+            }
+
+            @Override
+            public void noPermission(List<String> denied, boolean never) {
+                if (never) {
+                    ToastUtil.showToast("被永久拒绝授权，请手动授予存储和拍照权限");
+                    // 如果是被永久拒绝就跳转到应用权限系统设置页面
+                    XXPermissions.startPermissionActivity(finalActivity, denied);
                 } else {
                     ToastUtil.showToast("无摄像头权限,无法进行拍视频!");
                 }
+
             }
         });
+
+
+//        RxPermissions rxPermissions = null;
+//        if (activity != null) {
+//            rxPermissions = new RxPermissions(activity);
+//        } else if (fragment != null) {
+//            rxPermissions = new RxPermissions(fragment);
+//        }
+//        rxPermissions.request(Manifest.permission.CAMERA).subscribe(new Consumer<Boolean>() {
+//            @Override
+//            public void accept(Boolean aBoolean) throws Exception {
+//                if (aBoolean) {
+//                    File file = new File(path);
+//                    try {
+//                        if (file.createNewFile()) {
+//                            Intent intent = new Intent();
+//                            intent.setAction(MediaStore.ACTION_VIDEO_CAPTURE);
+//                            intent.addCategory(Intent.CATEGORY_DEFAULT);
+//                            //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+//                            if (activity != null) {
+//                                intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity, "com.zky.jyb.fileprovider", file));
+//                                activity.startActivityForResult(intent, requestcode);
+//                            } else if (fragment != null) {
+//                                intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(fragment.getContext(), "com.zky.jyb.fileprovider", file));
+//                                fragment.startActivityForResult(intent, requestcode);
+//                            }
+//
+//                        }
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                        ToastUtil.showToast("无法启动拍视频程序");
+//                    }
+//                } else {
+//                    ToastUtil.showToast("无摄像头权限,无法进行拍视频!");
+//                }
+//            }
+//        });
     }
 
     //获取图片路径

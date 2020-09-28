@@ -43,7 +43,8 @@ ext {
             //rxbinding
             "rxbinding"               : "com.jakewharton.rxbinding4:rxbinding:4.0.0",
             //rx 6.0权限请求
-            "rxpermissions"           : "com.github.tbruyelle:rxpermissions:0.10.2",
+//            "rxpermissions"           : "com.github.tbruyelle:rxpermissions:0.10.2",
+            "xxpermissions"            : "com.hjq:xxpermissions:8.6",
             //network
             "okhttp"                  : "com.squareup.okhttp3:okhttp:3.10.0",
             "retrofit"                : "com.squareup.retrofit2:retrofit:2.9.0",
@@ -55,7 +56,7 @@ ext {
             "glide"                   : "com.github.bumptech.glide:glide:4.11.0",
             "glide-compiler"          : "com.github.bumptech.glide:compiler:4.11.0",
             //json解析
-            "gson"                    : "com.google.code.gson:gson:2.8.5",
+            "gson"                    : "com.google.code.gson:gson:2.8.6",
             //Google AAC
             "lifecycle-extensions"    : "androidx.lifecycle:lifecycle-extensions:2.2.0",
             "lifecycle-compiler"      : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0",
