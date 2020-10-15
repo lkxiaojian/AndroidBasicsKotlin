@@ -7,8 +7,12 @@ package com.zky.basics.common.util.reflec
  * Detail:
  */
 
-// 获得T.class
+/**
+ * 获得T.class
+ */
 inline fun <reified T> classOf() = T::class.java
 
-//获得 T object 对象
-inline fun <reified T> instanceOf() = T::class.java.newInstance()
+/**
+ * 获得 T object 对象
+ */
+inline fun <reified T> instanceOf(): T = T::class.java.newInstance()
