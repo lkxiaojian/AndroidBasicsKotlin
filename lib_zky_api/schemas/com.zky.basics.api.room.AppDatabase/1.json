@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0df7d35483c30ad6df79165883f9d1c8",
+    "identityHash": "b948c09bef744ce274e1ad3dab0c9a3b",
     "entities": [
       {
         "tableName": "test",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`u_id` INTEGER NOT NULL, `user_name` TEXT, `age` INTEGER, `sex` TEXT, `type` TEXT, PRIMARY KEY(`u_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`u_id` INTEGER NOT NULL, `user_name` TEXT, `age` INTEGER, `sex` TEXT, `type` TEXT, `pub_year` INTEGER NOT NULL, `pub_year1` INTEGER NOT NULL, `pub_year2` INTEGER NOT NULL, PRIMARY KEY(`u_id`))",
         "fields": [
           {
             "fieldPath": "u_id",
@@ -37,6 +37,24 @@
             "columnName": "type",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "pub_year",
+            "columnName": "pub_year",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pub_year1",
+            "columnName": "pub_year1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pub_year2",
+            "columnName": "pub_year2",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -47,11 +65,38 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Fruit",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `name` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
+    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0df7d35483c30ad6df79165883f9d1c8\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b948c09bef744ce274e1ad3dab0c9a3b')"
     ]
   }
 }
