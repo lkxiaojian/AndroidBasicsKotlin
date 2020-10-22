@@ -347,7 +347,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                     }
                 }
             )
-        } else if (i == R.id.register_get_image) {
+        } else if (i == R.id.register_get_image||i==R.id.forget_get_image) {
             captcha()
         } else if (i == R.id.register_province) {
             initPicker(view.context)
