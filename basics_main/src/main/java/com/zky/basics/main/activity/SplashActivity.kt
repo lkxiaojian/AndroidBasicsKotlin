@@ -1,5 +1,6 @@
 package com.zky.basics.main.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Message
@@ -9,8 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.Postcard
 import com.alibaba.android.arouter.facade.callback.NavigationCallback
 import com.alibaba.android.arouter.launcher.ARouter
+import com.hjq.permissions.OnPermission
+import com.hjq.permissions.XXPermissions
 import com.zky.basics.ArouterPath.ARouterPath
+import com.zky.basics.api.room.AppDatabase
+import com.zky.basics.api.room.Dao.TestRoomDbDao
 import com.zky.basics.common.mvvm.BaseMvvmActivity
+import com.zky.basics.common.util.PermissionToSetting
 import com.zky.basics.main.R
 import com.zky.basics.main.mvvm.factory.MainViewModelFactory
 import com.zky.basics.main.mvvm.viewmodel.SplashViewModel
@@ -19,27 +25,35 @@ import java.lang.ref.WeakReference
 class SplashActivity : BaseMvvmActivity<ViewDataBinding, SplashViewModel>() {
     override fun onBindLayout() = R.layout.activity_splash
     private var handler: CustomHandler? = null
-//    lateinit var testRoomDbDao: TestRoomDbDao
+    lateinit var testRoomDbDao: TestRoomDbDao
 
     @SuppressLint("CheckResult")
     override fun initView() {
         handler = WeakReference(CustomHandler()).get()
-        handler?.sendEmptyMessageDelayed(1, 800)
-//        RxPermissions(this).request(
-//            Manifest.permission.READ_EXTERNAL_STORAGE,
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE
-//        ).subscribe { permission: Boolean ->
-//            if (permission) {
-//                handler!!.sendEmptyMessageDelayed(1, 2000)
-//                //同意sd 权限后创建room 数据库
-//                testRoomDbDao =
-//                    AppDatabase.getDatabase(this)?.testRoomDbDao()!!
-//                val roomData = getRoomData()
-//                Log.e("tag", "roomData--->$roomData")
-//            } else {
-//                ToastUtil.showToast("读取sd卡权限被拒绝")
-//            }
-//        }
+//        handler?.sendEmptyMessageDelayed(1, 800)
+        XXPermissions.with(this).permission(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ).request(object :
+            OnPermission {
+            override fun hasPermission(granted: MutableList<String>?, all: Boolean) {
+                if (all) {
+                testRoomDbDao =
+                    AppDatabase.getDatabase(this@SplashActivity)?.testRoomDbDao()!!
+                    handler?.sendEmptyMessageDelayed(1, 800)
+                }
+
+            }
+
+            override fun noPermission(denied: MutableList<String>?, never: Boolean) {
+                PermissionToSetting( this@SplashActivity, denied!!, never, "获取存储权限失败")
+            }
+
+        })
+
+
+
+
     }
 
 

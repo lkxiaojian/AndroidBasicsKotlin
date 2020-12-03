@@ -41,6 +41,7 @@ open class BaseViewModel<M : BaseModel?>(
             } catch (e: Exception) {
                 err.let { it[0]?.getError(e) }
             } finally {
+
             }
         }
 

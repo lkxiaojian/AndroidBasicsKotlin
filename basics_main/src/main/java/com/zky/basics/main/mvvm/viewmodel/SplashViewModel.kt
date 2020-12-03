@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import androidx.databinding.ObservableField
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
 import com.zky.basics.api.RetrofitManager
+import com.zky.basics.api.room.AppDatabase
+import com.zky.basics.api.room.bean.TestRoomDb
 import com.zky.basics.api.splash.entity.SplashViewBean
 import com.zky.basics.common.event.SingleLiveEvent
 import com.zky.basics.common.mvvm.viewmodel.BaseViewModel
@@ -136,6 +139,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
 
         launchUI({
+
             val loginDTORespDTO = mModel!!.login(sName, sPaw)
             loginDTORespDTO?.let {
                 RetrofitManager.TOKEN = it.token
@@ -545,7 +549,16 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
     fun captcha() {
         launchUI({
-            val captcha = mModel!!.captcha()
+//          var  testRoomDbDao =
+//                AppDatabase.getDatabase(getApplication())?.testRoomDbDao()!!
+//            val testRoomDb = TestRoomDb(2231, "name", 3, "1", "3")
+//            val list= arrayListOf<TestRoomDb>()
+//            list.add(testRoomDb)
+//            testRoomDbDao.insertOrUpdate(list)
+//            val users = testRoomDbDao.users()
+//            Log.e("","")
+
+            val captcha = mModel?.captcha()
             captcha?.let {
                 data.get()?.rgImageUrl =
                     it.getBitmap()
@@ -754,12 +767,12 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             subscribe!!.dispose()
         }
         if (handler != null) {
-            handler!!.removeMessages(1)
+            handler?.removeMessages(1)
             handler = null
         }
         if (timer != null) {
-            timer!!.cancel()
-            timerTask!!.cancel()
+            timer?.cancel()
+            timerTask?.cancel()
             timerTask = null
             timer = null
         }

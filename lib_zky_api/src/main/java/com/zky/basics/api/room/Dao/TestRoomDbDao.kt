@@ -30,17 +30,24 @@ interface TestRoomDbDao {
         deleteNoSuspend(*users)
         insertNoSuspend(*users)
     }
-
+    suspend fun insertOrUpdate( users: ArrayList<TestRoomDb>) {
+        deleteNoSuspend(users)
+        insertNoSuspend(users)
+    }
 
     @Insert
     suspend fun insertNoSuspend(vararg users: TestRoomDb?)
 
-
+    @Insert
+    suspend fun insertNoSuspend( users: List<TestRoomDb>)
     @Delete
     suspend fun delete(user: TestRoomDb?)
 
     @Delete
     suspend fun deleteNoSuspend(vararg users: TestRoomDb?)
+
+    @Delete
+    suspend fun deleteNoSuspend( users: List<TestRoomDb>)
 
 
     @Query("delete from test where u_id = :userID")

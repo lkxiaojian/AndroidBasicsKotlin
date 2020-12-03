@@ -21,8 +21,8 @@ import java.io.File
  */
 @Database(entities = [TestRoomDb::class,Fruit::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun testRoomDbDao(): TestRoomDbDao?
-    abstract fun fruitDao(): FruitDao?
+    abstract fun testRoomDbDao(): TestRoomDbDao
+    abstract fun fruitDao(): FruitDao
     companion object {
         private var INSTANCE //创建单例
                 : AppDatabase? = null
