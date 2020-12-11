@@ -25,8 +25,8 @@ abstract class BaseModel(protected var mApplication: Application?) : IBaseModel 
         return withContext(Dispatchers.IO) { call.invoke() }.run {
             when {
                 ExceptionHandler.SYSTEM_ERROR.LONG_TIME_NO_ACTION == code -> {
-                    ARouter.getInstance().build(ARouterPath.LOGIN).navigation()
                     ToastUtil.showToast(R.string.long_time)
+                    ARouter.getInstance().build(ARouterPath.LOGIN).navigation()
                     null
                 }
                 ExceptionHandler.SYSTEM_ERROR.INTERNAL_SERVER_ERROR == code -> {
@@ -34,7 +34,7 @@ abstract class BaseModel(protected var mApplication: Application?) : IBaseModel 
                     throw Exception(msg)
                 }
                 code != ExceptionHandler.APP_ERROR.SUCC -> {
-                    if (msg.isNullOrEmpty()) {
+                    if (!msg.isNullOrEmpty()) {
                         ToastUtil.showToast(msg)
                     }
                     throw Exception(msg)
