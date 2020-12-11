@@ -136,6 +136,7 @@ open class BaseViewModel<M : BaseModel?>(
         try {
             viewModelScope.cancel()
         } catch (e: Exception) {
+            e.printStackTrace()
         }
 
     }
@@ -144,6 +145,7 @@ open class BaseViewModel<M : BaseModel?>(
     override fun onStop() {}
     override fun onResume() {}
     override fun onPause() {}
+
     //    @Throws(Exception::class)
     override fun accept(disposable: Disposable?) {
         mModel?.addSubscribe(disposable)

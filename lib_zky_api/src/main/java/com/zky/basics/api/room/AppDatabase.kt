@@ -31,7 +31,7 @@ abstract class AppDatabase : RoomDatabase() {
                 synchronized(AppDatabase::class.java) {
                     if (INSTANCE == null) {
                         val path = (
-                                "${File.separator}mnt${File.separator}sdcard${File.separator}db${File.separator}test.db")
+                                "${File.separator}mnt${File.separator}sdcard${File.separator}database${File.separator}test.db")
                         INSTANCE = Room.databaseBuilder(context!!, AppDatabase::class.java, path)
                             .addCallback(sOnOpenCallback)
 //                            .addMigrations(MIGRATION_1_2,MIGRATION_2_3)
