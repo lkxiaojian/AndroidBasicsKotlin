@@ -3,10 +3,7 @@ package com.zky.basics.common.util;
 import androidx.databinding.ObservableList;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * Description: <ObservableListUtil><br>
 
- */
 public class ObservableListUtil {
     public static ObservableList.OnListChangedCallback getListChangedCallback(final RecyclerView.Adapter adapter) {
         return new ObservableList.OnListChangedCallback() {
