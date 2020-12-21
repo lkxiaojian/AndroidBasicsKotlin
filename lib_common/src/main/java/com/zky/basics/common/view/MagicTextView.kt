@@ -29,7 +29,7 @@ class MagicTextView : TextView {
     private var strokeColor: Int? = null
     private var strokeJoin: Join? = null
     private var strokeMiter = 0f
-    private var lockedCompoundPadding: IntArray
+    private lateinit var lockedCompoundPadding: IntArray
     private var frozen = false
 
     constructor(context: Context?) : super(context) {
@@ -183,8 +183,8 @@ class MagicTextView : TextView {
             super.onDraw(tempCanvas)
             val paint = (foregroundDrawable as BitmapDrawable?)!!.paint
             paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP)
-            foregroundDrawable.setBounds(canvas.clipBounds)
-            foregroundDrawable.draw(tempCanvas)
+            foregroundDrawable?.bounds = canvas.clipBounds
+            foregroundDrawable?.draw(tempCanvas)
             canvas.drawBitmap(tempBitmap, 0f, 0f, null)
             tempCanvas!!.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         }

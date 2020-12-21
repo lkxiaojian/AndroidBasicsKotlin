@@ -14,11 +14,14 @@ class RespDTO<Any> : Serializable {
                 '}'
     }
 
-    fun setCode(code: Int) {
-        this.code = code
-    }
+//    fun setCode(code: Int) {
+//        this.code = code
+//    }
+//
+//    fun setError(error: String) {
+//        msg = error
+//    }
 
-    fun setError(error: String) {
-        msg = error
-    }
+
+
 }

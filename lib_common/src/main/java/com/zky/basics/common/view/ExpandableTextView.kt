@@ -198,7 +198,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         clearAnimation()
         mCollapsed = isCollapsed
         mExpandIndicatorController!!.changeState(mCollapsed)
-        text = text
+        this@ExpandableTextView.text = text
     }
 
     var text: CharSequence?
@@ -256,7 +256,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         mToggleView = findViewById(mExpandCollapseToggleId)
         mExpandIndicatorController!!.setView(mToggleView)
         mExpandIndicatorController!!.changeState(mCollapsed)
-        mToggleView.setOnClickListener(this)
+        mToggleView?.setOnClickListener(this)
     }
 
     private fun setupExpandToggleController(

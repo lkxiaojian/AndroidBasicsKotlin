@@ -48,6 +48,7 @@ object ImageUtlils {
      * @param placeDrawableId
      * @param errorDrawableId
      */
+    @JvmStatic
     @SuppressLint("CheckResult")
     @BindingAdapter(value = ["Bitmap", "placeDrawableId", "errorDrawableId"], requireAll = false)
     fun Bitmap(imageView: ImageView, bitmap: Bitmap?, placeDrawableId: Int, errorDrawableId: Int) {

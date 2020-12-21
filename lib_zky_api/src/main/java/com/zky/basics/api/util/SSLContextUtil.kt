@@ -52,7 +52,7 @@ object SSLContextUtil {
         override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
         }
 
-        override fun getAcceptedIssuers(): Array<X509Certificate> {
+        override fun getAcceptedIssuers(): Array<X509Certificate?> {
             return arrayOfNulls(0)
         }
     }

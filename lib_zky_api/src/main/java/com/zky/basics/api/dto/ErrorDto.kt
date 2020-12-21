@@ -6,7 +6,7 @@ package com.zky.basics.api.dto
  * Time 16:31
  * Detail:
  */
-class ErrorDto {
-    var code = 0
-    var msg = ""
-}
+class ErrorDto(
+    var code: Int = 0,
+    var msg: String = ""
+)

@@ -59,9 +59,9 @@ class RetrofitManager  {
         if (is_debug) {
             okHttpBuilder!!.interceptors().add(logging)
         }
-        val sslContext = SSLContextUtil.getDefaultSLLContext()
+        val sslContext = SSLContextUtil.defaultSLLContext
         sslContext.let {
-            okHttpBuilder?.sslSocketFactory(it.socketFactory)
+            okHttpBuilder?.sslSocketFactory(it?.socketFactory)
         }
         okHttpBuilder!!.hostnameVerifier(SSLContextUtil.HOSTNAME_VERIFIER)
         mRetrofit = Retrofit.Builder()

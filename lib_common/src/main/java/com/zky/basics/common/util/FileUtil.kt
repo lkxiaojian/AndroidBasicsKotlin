@@ -32,7 +32,7 @@ object FileUtil {
             return false
         }
         val reg = "(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]"
-        return url.matches(reg)
+        return url.matches(reg.toRegex())
     }
 
     fun getFileByte(filename: String?): ByteArray? {
