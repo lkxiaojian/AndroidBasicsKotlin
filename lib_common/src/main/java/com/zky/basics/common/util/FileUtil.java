@@ -10,13 +10,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Description: <FileUtil><br>
- *
- * Date:        2018/7/13<br>
- * Version:     V1.0.0<br>
- * Update:     <br>
- */
+
 public class FileUtil {
     public static boolean isImageFile(String url){
         if(TextUtils.isEmpty(url)){

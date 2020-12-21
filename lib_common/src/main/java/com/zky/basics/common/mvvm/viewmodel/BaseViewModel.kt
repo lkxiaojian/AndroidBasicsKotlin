@@ -39,7 +39,10 @@ open class BaseViewModel<M : BaseModel?>(
             try {
                 block()
             } catch (e: Exception) {
-                err.let { it[0]?.getError(e) }
+                if(err.isNotEmpty()){
+                    err.let { it[0]?.getError(e) }
+                }
+
             } finally {
 
             }

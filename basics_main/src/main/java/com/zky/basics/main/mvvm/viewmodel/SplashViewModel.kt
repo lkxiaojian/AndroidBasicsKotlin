@@ -142,7 +142,10 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
             val loginDTORespDTO = mModel!!.login(sName, sPaw)
             loginDTORespDTO?.let {
-                RetrofitManager.TOKEN = it.token
+               it.token?.let {
+                   RetrofitManager.TOKEN=it
+               }
+
                 SPUtils.put(
                     getApplication(),
                     "phone",
