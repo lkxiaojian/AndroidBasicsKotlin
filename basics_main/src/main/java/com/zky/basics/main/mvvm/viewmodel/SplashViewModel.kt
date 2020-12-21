@@ -146,76 +146,102 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                    RetrofitManager.TOKEN=it
                }
 
-                SPUtils.put(
-                    getApplication(),
-                    "phone",
-                    name.get()
-                )
-                SPUtils.put(
-                    getApplication(),
-                    name.get(),
-                    paw.get()
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "headImg",
-                    if (it.headImg == null) "" else it.headImg
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "userName",
-                    if (it.userName == null) "" else it.userName
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "code",
-                    if (it.code == null) "" else it.code
-                )
+                name.get()?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "phone",
+                        it1
+                    )
+                }
+                paw.get()?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        name.get(),
+                        it1
+                    )
+                }
+                if (it.headImg == null) "" else it.headImg?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "headImg",
+                        it1
+                    )
+                }
+                if (it.userName == null) "" else it.userName?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "userName",
+                        it1
+                    )
+                }
+                if (it.code == null) "" else it.code?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "code",
+                        it1
+                    )
+                }
                 SPUtils.put(
                     getApplication(),
                     name.get().toString() + "accountLevel",
                     it.accountLevel
                 )
-                SPUtils.put(
-                    getApplication(),
-                    "province",
-                    if (it.province == null) "" else it.province
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "city",
-                    if (it.city == null) "" else it.city
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "county",
-                    if (it.county == null) "" else it.county
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "provinceName",
-                    if (it.provinceName == null) "" else it.provinceName
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "cityName",
-                    if (it.cityName == null) "" else it.cityName
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "countyName",
-                    if (it.countyName == null) "" else it.countyName
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "schoolName",
-                    if (it.schoolName == null) "" else it.schoolName
-                )
-                SPUtils.put(
-                    getApplication(),
-                    "college",
-                    if (it.college == null) "" else it.college
-                )
+                if (it.province == null) "" else it.province?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "province",
+                        it1
+                    )
+                }
+                if (it.city == null) "" else it.city?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "city",
+                        it1
+                    )
+                }
+                if (it.county == null) "" else it.county?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "county",
+                        it1
+                    )
+                }
+                if (it.provinceName == null) "" else it.provinceName?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "provinceName",
+                        it1
+                    )
+                }
+                if (it.cityName == null) "" else it.cityName?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "cityName",
+                        it1
+                    )
+                }
+                if (it.countyName == null) "" else it.countyName?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "countyName",
+                        it1
+                    )
+                }
+                if (it.schoolName == null) "" else it.schoolName?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "schoolName",
+                        it1
+                    )
+                }
+                if (it.college == null) "" else it.college?.let { it1 ->
+                    SPUtils.put(
+                        getApplication(),
+                        "college",
+                        it1
+                    )
+                }
                 getmVoidSingleLiveEvent().value = "login"
                 getmVoidSingleLiveEvent().call()
             }
@@ -725,7 +751,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                 college, smsCode, phone
             )
             showToast(R.string.register_success)
-            SPUtils.put(getApplication(), "phone", data.get()!!.rgPhone)
+            data.get()!!.rgPhone?.let { SPUtils.put(getApplication(), "phone", it) }
             getmVoidSingleLiveEvent().call()
         }, object : NetError {
             override fun getError(e: Exception) {

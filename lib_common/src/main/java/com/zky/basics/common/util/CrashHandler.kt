@@ -172,7 +172,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
             val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
             val fileName = "crash-" + timestamp + CRASH_REPORTER_EXTENSION
             // 保存文件
-            val directory = File(EnvironmentUtil.Storage.getExternalCacheDir(mContext), "logs")
+            val directory = File(mContext?.let { EnvironmentUtil.Storage.getExternalCacheDir(it) }, "logs")
             if (!directory.exists()) {
                 directory.mkdirs()
             }
