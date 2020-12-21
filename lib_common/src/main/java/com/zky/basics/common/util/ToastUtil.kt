@@ -5,14 +5,16 @@ import com.zky.basics.common.BaseApplication
 
 object ToastUtil {
     @JvmStatic
-    fun showToast(message: String?) {
-        Toast.makeText(BaseApplication.instance, message, Toast.LENGTH_SHORT).show()
+    fun showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(BaseApplication.instance, message, duration).show()
     }
+
     @JvmStatic
-    fun showToast(resid: Int) {
-        Toast.makeText(BaseApplication.instance,
-            BaseApplication.instance.getString(resid),
-            Toast.LENGTH_SHORT
+    fun showToast(resId: Int, duration: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(
+            BaseApplication.instance,
+            BaseApplication.instance.getString(resId),
+            duration
         )
             .show()
     }

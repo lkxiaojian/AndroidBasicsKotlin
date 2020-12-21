@@ -14,5 +14,5 @@ import com.zky.basics.common.BaseApplication
  * 资源resID  toast
  * @param duration toast 时间 ，默认 Toast.LENGTH_SHORT  可以传参数 Toast.LENGTH_LONG
  */
-fun Int.showToast(duration:Int)= Toast.makeText(BaseApplication.instance, this, duration).show()
+fun Int.showToast(duration:Int=Toast.LENGTH_SHORT)= Toast.makeText(BaseApplication.instance, this, duration).show()
 
