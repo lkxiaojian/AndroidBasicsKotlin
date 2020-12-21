@@ -24,4 +24,5 @@ object ARouterPath {
      */
     const val MINE_MAIN = "/app/mine"
     const val LIVE_MAIN = "/live/main"
+
 }
