@@ -3,17 +3,20 @@ package com.zky.basics.main
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Autowired
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.zky.basics.ArouterPath.ARouterPath
 import com.zky.basics.common.mvvm.BaseActivity
 import com.zky.basics.common.provider.ILiveProvider
 import com.zky.basics.common.provider.IMineProvider
 import com.zky.basics.main.entity.MainChannel
+import kotlinx.android.synthetic.main.commot_activity_main.*
 
 class MainActivity : BaseActivity() {
     @JvmField
-    @Autowired(name =ARouterPath.LIVE_MAIN)
+    @Autowired(name = ARouterPath.LIVE_MAIN)
     var iLiveProvider: ILiveProvider? = null
+
     @JvmField
     @Autowired(name = ARouterPath.MINE_MAIN)
     var mMineProvider: IMineProvider? = null
@@ -25,7 +28,7 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         val navigation =
             findViewById<BottomNavigationView>(R.id.common_navigation)
-            navigation.setOnNavigationItemSelectedListener { menuItem ->
+        navigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_trip -> {
                     switchContent(mCurrFragment, mFlayFragment, MainChannel.NEWS.name)
@@ -53,7 +56,17 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun initData() {}
+    override fun initData() {
+        try {
+            val menuView = common_navigation.getChildAt(0) as BottomNavigationMenuView
+            for (i in 0 until menuView.childCount) {
+                menuView.getChildAt(i).setOnLongClickListener { true }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     fun switchContent(from: Fragment?, to: Fragment?, tag: String?) {
         if (from == null || to == null) {
             return
@@ -78,6 +91,7 @@ class MainActivity : BaseActivity() {
             System.currentTimeMillis()
         }
     }
+
     companion object {
         private const val TIME_EXIT = 2000
     }

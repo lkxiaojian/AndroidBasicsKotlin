@@ -19,6 +19,7 @@ import javax.crypto.spec.SecretKeySpec
  */
 class EncryptUtil private constructor(context: Context) {
     private val key: String
+    private val MKEY="AES/ECB/PKCS5Padding"
 
     /**
      * Gets the hardware serial number of this device.
@@ -84,7 +85,7 @@ class EncryptUtil private constructor(context: Context) {
      */
     fun encrypt(plainText: String): String? {
         return try {
-            @SuppressLint("GetInstance") val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+            @SuppressLint("GetInstance") val cipher = Cipher.getInstance(MKEY)
             val keyspec = SecretKeySpec(key.toByteArray(), "AES")
             cipher.init(Cipher.ENCRYPT_MODE, keyspec)
             val encrypted = cipher.doFinal(plainText.toByteArray())
@@ -103,7 +104,7 @@ class EncryptUtil private constructor(context: Context) {
     fun decrypt(cipherText: String?): String? {
         return try {
             val encrypted1 = Base64.decode(cipherText, Base64.NO_WRAP)
-            @SuppressLint("GetInstance") val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
+            @SuppressLint("GetInstance") val cipher = Cipher.getInstance(MKEY)
             val keyspec = SecretKeySpec(key.toByteArray(), "AES")
             cipher.init(Cipher.DECRYPT_MODE, keyspec)
             val original = cipher.doFinal(encrypted1)

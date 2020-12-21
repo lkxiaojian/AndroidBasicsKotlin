@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener
 import com.bigkoo.pickerview.view.OptionsPickerView
+import com.tencent.mmkv.MMKV
 import com.zky.basics.api.RetrofitManager
 import com.zky.basics.api.room.AppDatabase
 import com.zky.basics.api.room.bean.TestRoomDb
@@ -27,6 +28,8 @@ import com.zky.basics.common.util.MD5
 import com.zky.basics.common.util.NetUtil.checkNet
 import com.zky.basics.common.util.SPUtils
 import com.zky.basics.common.util.ToastUtil.showToast
+import com.zky.basics.common.util.security.MMKVUtil
+import com.zky.basics.common.util.security.SM3
 import com.zky.basics.common.view.showFullPopupWindow
 import com.zky.basics.main.R
 import com.zky.basics.main.activity.FrogetActivity
@@ -98,6 +101,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
     fun login() {
         val sName = name.get()
         val sTmpPaw = paw.get()
+
         if (sName!!.isEmpty()) {
             showToast("用户名为空")
             return
@@ -106,11 +110,12 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             showToast("密码为空")
             return
         }
-        val sPaw = MD5(sTmpPaw!!)
+        val sPaw = SM3.encrypt(sTmpPaw!!)
         if (sPaw.isEmpty()) {
             showToast("密码为空")
             return
         }
+        MMKVUtil.put("","","wwwww")
         //离线登入
         if (!checkNet()) {
             val accountLevel = SPUtils.get(

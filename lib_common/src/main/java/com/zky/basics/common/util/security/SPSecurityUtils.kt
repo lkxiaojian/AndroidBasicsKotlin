@@ -24,22 +24,29 @@ object SPSecurityUtils {
      * @param key
      * @param object
      */
-    fun put(context: Context?, key: String?, `object`: Any) {
+    fun put(context: Context?, key: String?, obj: Any) {
         val sp: SharedPreferences =
             SecuritySharedPreference(context!!, FILE_NAME, Context.MODE_PRIVATE)
         val editor = sp.edit()
-        if (`object` is String) {
-            editor.putString(key, `object`)
-        } else if (`object` is Int) {
-            editor.putInt(key, `object`)
-        } else if (`object` is Boolean) {
-            editor.putBoolean(key, `object`)
-        } else if (`object` is Float) {
-            editor.putFloat(key, `object`)
-        } else if (`object` is Long) {
-            editor.putLong(key, `object`)
-        } else {
-            editor.putString(key, `object`.toString())
+        when (obj) {
+            is String -> {
+                editor.putString(key, obj)
+            }
+            is Int -> {
+                editor.putInt(key, obj)
+            }
+            is Boolean -> {
+                editor.putBoolean(key, obj)
+            }
+            is Float -> {
+                editor.putFloat(key, obj)
+            }
+            is Long -> {
+                editor.putLong(key, obj)
+            }
+            else -> {
+                editor.putString(key, obj.toString())
+            }
         }
         editor.apply()
     }

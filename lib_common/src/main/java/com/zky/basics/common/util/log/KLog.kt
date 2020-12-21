@@ -254,12 +254,12 @@ object KLog {
         return arrayOf(tag, msg, headString)
     }
 
-    private fun getObjectsString(vararg objects: Any?): String {
-        return if (objects.size > 1) {
+    private fun getObjectsString(vararg obj: Any?): String {
+        return if (obj.size > 1) {
             val stringBuilder = StringBuilder()
             stringBuilder.append("\n")
-            for (i in objects.indices) {
-                val `object` = objects[i]
+            for (i in obj.indices) {
+                val `object` = obj[i]
                 if (`object` == null) {
                     stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ")
                         .append(NULL).append("\n")
@@ -270,8 +270,8 @@ object KLog {
             }
             stringBuilder.toString()
         } else {
-            val `object` = objects[0]
-            `object`?.toString() ?: NULL
+            val objectTmp = obj[0]
+            objectTmp?.toString() ?: NULL
         }
     }
 }

@@ -184,6 +184,8 @@ android {
         api(rootProject.ext.dependencies["okhttputils"])
         api(rootProject.ext.dependencies["gsyVideoPlayer-java"])
         api(rootProject.ext.dependencies["Player-exo"])
+        api(rootProject.ext.dependencies["mmkv"])
+
         //根据你的需求ijk模式的so
         implementation 'com.shuyu:gsyVideoPlayer-armv5:6.0.2'
         implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.2'

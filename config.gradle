@@ -104,8 +104,11 @@ ext {
             //视频
             "gsyVideoPlayer-java"   : "com.shuyu:gsyVideoPlayer-java:6.0.2",
             //是否需要ExoPlayer模式
-            "Player-exo"            : "com.shuyu:GSYVideoPlayer-exo2:6.0.2"
+            "Player-exo"            : "com.shuyu:GSYVideoPlayer-exo2:6.0.2",
 //            "android-recovery"        : "com.zxy.android:recovery:1.0.0"
+            "mmkv"                  : "com.tencent:mmkv-static:1.2.6"
+
+
 
     ]
 
