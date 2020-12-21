@@ -20,7 +20,7 @@ public class ReflecInstaceJava {
         }
         T instance = null;
         try {
-            instance = (T) tClass.getClass().newInstance();
+            instance =  tClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
