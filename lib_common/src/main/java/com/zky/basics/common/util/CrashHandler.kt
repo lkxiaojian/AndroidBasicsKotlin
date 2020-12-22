@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Looper
 import android.os.Process
 import android.util.Log
-import androidx.annotation.RequiresApi
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -204,7 +203,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
             sortedFiles.addAll(listOf(*crFiles))
             for (fileName in sortedFiles) {
                 val cr = File(ctx!!.filesDir, fileName)
-                postReport(cr)
+                postReport()
                 cr.delete() // 删除已发送的报告
             }
         }
@@ -229,7 +228,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
         return filesDir.list(filter)
     }
 
-    private fun postReport(file: File) {
+    private fun postReport() {
         // 使用HTTP Post 发送错误报告到服务器
         // 这里不再详述,开发者可以根据OPhoneSDN上的其他网络操作
     }

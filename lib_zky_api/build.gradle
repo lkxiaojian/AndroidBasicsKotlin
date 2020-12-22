@@ -69,13 +69,13 @@ android {
     allOpen{
         annotation("com.zky.basics.annotation.AllowNoArg")
     }
-    kotlin {
-        experimental {
-            coroutines 'enable'
-        }
-    }
-}
 
+}
+//kotlin {
+//    experimental {
+//        coroutines 'enable'
+//    }
+//}
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')

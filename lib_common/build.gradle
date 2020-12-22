@@ -42,11 +42,11 @@ android {
 //        generateStubs = true
 //    }
 
-    kotlin {
-        experimental {
-            coroutines "enable"
-        }
-    }
+//    kotlin {
+//        experimental {
+//            coroutines "enable"
+//        }
+//    }
 
     //jdk1.8
     compileOptions {

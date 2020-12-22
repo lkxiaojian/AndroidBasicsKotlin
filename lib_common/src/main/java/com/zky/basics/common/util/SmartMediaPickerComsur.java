@@ -166,7 +166,7 @@ public class SmartMediaPickerComsur {
         private MediaPickerEnum mediaPickerType;
 
         private Builder(RxAppCompatActivity fragmentActivity) {
-            this.fragmentActivity = new WeakReference(fragmentActivity);
+            this.fragmentActivity = new WeakReference<FragmentActivity>(fragmentActivity);
             this.manager = fragmentActivity.getSupportFragmentManager();
             setDefault();
         }
