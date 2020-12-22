@@ -149,6 +149,7 @@ android {
         api(rootProject.ext.dependencies.autosize)
         api(rootProject.ext.dependencies["oss"])
 //        api(rootProject.ext.dependencies["arcgis"])
+        api(rootProject.ext.dependencies.arcgis)
         api(rootProject.ext.dependencies["multidex"])
         api(rootProject.ext.dependencies.rxbinding) {
             exclude group: 'com.android.support'
