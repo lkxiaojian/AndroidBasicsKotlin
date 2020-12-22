@@ -24,7 +24,7 @@ class RotateProgressDialog : DialogFragment() {
         super.onStart()
         val dialog = dialog
         if (dialog != null) {
-            dialog.window.setLayout(dip2px(100f), dip2px(100f))
+            dialog.window?.setLayout(dip2px(100f), dip2px(100f))
             dialog.setCancelable(false)
             dialog.setCanceledOnTouchOutside(false)
         }

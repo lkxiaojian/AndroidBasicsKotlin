@@ -67,8 +67,8 @@ object ImageUtlils {
      * @param url
      */
     @BindingAdapter("loadimage")
-    fun loadimage(imageView: ImageView, url: String?) {
-        var url = url
+    fun loadimage(imageView: ImageView, _url: String?) {
+        var url = _url
         if (url != null && !url.startsWith("/storage/emulated/0") && !url.startsWith("http")) {
             url = API.ImageFolderPath + url
         }

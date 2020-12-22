@@ -60,5 +60,5 @@ object SSLContextUtil {
     /**
      * 域名验证
      */
-    val HOSTNAME_VERIFIER = HostnameVerifier { hostname, session -> true }
+    val HOSTNAME_VERIFIER = HostnameVerifier { _, _ -> true }
 }

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.zky.basics.common.util
 
 import android.app.Activity
@@ -61,7 +63,7 @@ object ScreenUtils {
         val bmp = view.drawingCache
         val width = getScreenWidth(activity)
         val height = getScreenHeight(activity)
-        var bp: Bitmap? = null
+        var bp: Bitmap?
         bp = Bitmap.createBitmap(bmp, 0, 0, width, height)
         view.destroyDrawingCache()
         return bp
@@ -81,7 +83,7 @@ object ScreenUtils {
         val statusBarHeight = frame.top
         val width = getScreenWidth(activity)
         val height = getScreenHeight(activity)
-        var bp: Bitmap? = null
+        var bp: Bitmap?
         bp = Bitmap.createBitmap(
             bmp, 0, statusBarHeight, width, height
                     - statusBarHeight

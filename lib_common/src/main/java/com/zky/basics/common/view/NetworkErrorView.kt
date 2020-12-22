@@ -11,9 +11,9 @@ class NetworkErrorView : RelativeLayout {
         init()
     }
 
-    constructor(context: Context?, layoutID: Int) : super(context) {
-        init()
-    }
+//    constructor(context: Context?, _layoutID: Int) : super(context) {
+//        init()
+//    }
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         init()

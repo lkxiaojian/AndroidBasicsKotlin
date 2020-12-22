@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import com.zky.basics.common.R
 
 class NetErrorView(context: Context?, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
@@ -15,7 +16,9 @@ class NetErrorView(context: Context?, attrs: AttributeSet?) : RelativeLayout(con
     }
 
     fun setNetErrorBackground(@ColorRes colorResId: Int) {
-        mRlNetWorkError.setBackgroundColor(resources.getColor(colorResId))
+
+//        mRlNetWorkError.setBackgroundColor(resources.getColor(colorResId))
+        mRlNetWorkError.setBackgroundColor(ContextCompat.getColor(context,colorResId))
     }
 
     init {

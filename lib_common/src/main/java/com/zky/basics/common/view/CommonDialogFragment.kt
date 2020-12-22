@@ -45,11 +45,11 @@ class CommonDialogFragment : DialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        dialog!!.window.setLayout(
+        dialog?.window?.setLayout(
             resources.displayMetrics.widthPixels - dip2px(40f) * 2,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-        dialog!!.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
     override fun onCreateView(
@@ -98,15 +98,15 @@ class CommonDialogFragment : DialogFragment() {
         if (rightBtnTextColor != 0) {
             btnRight.setTextColor(rightBtnTextColor)
         }
-        btnLeft.setOnClickListener { view ->
+        btnLeft.setOnClickListener { _view ->
             if (mOnDialogClickListener != null) {
-                mOnDialogClickListener!!.onLeftBtnClick(view)
+                mOnDialogClickListener!!.onLeftBtnClick(_view)
             }
             dismiss()
         }
-        btnRight.setOnClickListener { view ->
+        btnRight.setOnClickListener { _view ->
             if (mOnDialogClickListener != null) {
-                mOnDialogClickListener!!.onRightBtnClick(view)
+                mOnDialogClickListener!!.onRightBtnClick(_view)
             }
             dismiss()
         }

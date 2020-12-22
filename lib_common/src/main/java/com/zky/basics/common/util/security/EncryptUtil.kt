@@ -52,7 +52,7 @@ class EncryptUtil private constructor(context: Context) {
         // 返回值
         var strResult: String? = null
         // 是否是有效字符串
-        if (strText != null && strText.length > 0) {
+        if (strText != null && strText.isNotEmpty()) {
             try {
                 // SHA 加密开始
                 val messageDigest = MessageDigest.getInstance("SHA-256")
@@ -92,7 +92,7 @@ class EncryptUtil private constructor(context: Context) {
             Base64.encodeToString(encrypted, Base64.NO_WRAP)
         } catch (e: Exception) {
             e.printStackTrace()
-            null
+            "null"
         }
     }
 

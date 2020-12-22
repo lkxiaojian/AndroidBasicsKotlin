@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
+import androidx.annotation.RequiresApi
 
 /**
  * 版本相关
@@ -83,10 +84,11 @@ object SdkVersionUtil {
         return Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     fun getAppVersion(context: Context): Int {
         var version = 0
         try {
-            version = context.packageManager.getPackageInfo(context.packageName, 0).versionCode
+            version = context.packageManager.getPackageInfo(context.packageName, 0).longVersionCode.toInt()
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }

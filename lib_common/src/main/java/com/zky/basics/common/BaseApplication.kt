@@ -1,6 +1,7 @@
 package com.zky.basics.common
 
 import android.content.Context
+import android.util.Log
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.alibaba.android.arouter.launcher.ARouter
@@ -38,7 +39,9 @@ open class BaseApplication : MultiDexApplication() {
         initOKHttpUtils()
         initUpdate()
         //MMKV
-        initialize("${filesDir.absolutePath} ")
+        val initialize = initialize(this)
+//        val initialize = initialize("${filesDir.absolutePath} ")
+        Log.e("tag","------>$initialize")
     }
 
     //app 更新

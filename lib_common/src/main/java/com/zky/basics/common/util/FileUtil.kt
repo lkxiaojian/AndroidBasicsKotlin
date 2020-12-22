@@ -43,16 +43,16 @@ object FileUtil {
         val bos = ByteArrayOutputStream(
             f.length().toInt()
         )
-        var `in`: BufferedInputStream? = null
+        var inbs: BufferedInputStream?
         try {
-            `in` = BufferedInputStream(FileInputStream(f))
+            inbs = BufferedInputStream(FileInputStream(f))
             val buf_size = 1024
             val buffer = ByteArray(buf_size)
-            var len = 0
-            while (-1 != `in`.read(buffer, 0, buf_size).also { len = it }) {
+            var len :Int
+            while (-1 != inbs.read(buffer, 0, buf_size).also { len = it }) {
                 bos.write(buffer, 0, len)
             }
-            `in`.close()
+            inbs.close()
             return bos.toByteArray()
         } catch (e: IOException) {
             e.printStackTrace()

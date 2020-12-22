@@ -13,8 +13,8 @@ import javax.xml.transform.stream.StreamSource
 
 object XmlLog {
     @JvmStatic
-    fun printXml(tag: String?, xml: String?, headString: String) {
-        var xml = xml
+    fun printXml(tag: String?, _xml: String?, headString: String) {
+        var xml = _xml
         if (xml != null) {
             xml = formatXML(xml)
             xml = """

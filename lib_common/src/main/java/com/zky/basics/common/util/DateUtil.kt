@@ -121,9 +121,9 @@ object DateUtil {
      * 计算两个日期之间相差的天数
      */
     @Throws(ParseException::class)
-    fun daysBetween(smdate: Date?, bdate: Date?): Int {
-        var smdate = smdate
-        var bdate = bdate
+    fun daysBetween(_smdate: Date?, _bdate: Date?): Int {
+        var smdate = _smdate
+        var bdate = _bdate
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         smdate = sdf.parse(sdf.format(smdate))
         bdate = sdf.parse(sdf.format(bdate))
@@ -140,9 +140,9 @@ object DateUtil {
      * 比较日期大小
      */
     @Throws(ParseException::class)
-    fun compareDate(smdate: Date?, bdate: Date?): Int {
-        var smdate = smdate
-        var bdate = bdate
+    fun compareDate(_smdate: Date?, _bdate: Date?): Int {
+        var smdate = _smdate
+        var bdate = _bdate
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         smdate = sdf.parse(sdf.format(smdate))
         bdate = sdf.parse(sdf.format(bdate))

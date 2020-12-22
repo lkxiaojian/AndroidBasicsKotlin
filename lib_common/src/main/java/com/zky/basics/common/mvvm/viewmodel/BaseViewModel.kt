@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-open class BaseViewModel<M : BaseModel?>(
+open class BaseViewModel<M : BaseModel>(
     application: Application,
     model: M
 ) : AndroidViewModel(application), IBaseViewModel,
@@ -151,13 +151,13 @@ open class BaseViewModel<M : BaseModel?>(
 
     //    @Throws(Exception::class)
     override fun accept(disposable: Disposable?) {
-        mModel?.addSubscribe(disposable)
+        mModel.addSubscribe(disposable)
 
     }
 
     override fun onCleared() {
         super.onCleared()
-        mModel?.onCleared()
+        mModel.onCleared()
 
     }
 

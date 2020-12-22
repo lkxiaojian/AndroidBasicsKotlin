@@ -17,6 +17,7 @@ import java.util.*
 /**
  * Description: <描边效果的TextView><br></br>
 </描边效果的TextView> */
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "DEPRECATION")
 @SuppressLint("AppCompatCustomView")
 class MagicTextView : TextView {
     private var outerShadows: ArrayList<Shadow>? = null
@@ -133,16 +134,16 @@ class MagicTextView : TextView {
         setStroke(width, color, Join.MITER, 10f)
     }
 
-    fun addOuterShadow(r: Float, dx: Float, dy: Float, color: Int) {
-        var r = r
+    fun addOuterShadow(_r: Float, dx: Float, dy: Float, color: Int) {
+        var r = _r
         if (r == 0f) {
             r = 0.0001f
         }
         outerShadows!!.add(Shadow(r, dx, dy, color))
     }
 
-    fun addInnerShadow(r: Float, dx: Float, dy: Float, color: Int) {
-        var r = r
+    fun addInnerShadow(_r: Float, dx: Float, dy: Float, color: Int) {
+        var r = _r
         if (r == 0f) {
             r = 0.0001f
         }
@@ -208,10 +209,10 @@ class MagicTextView : TextView {
                 this.setTextColor(-0x1000000)
                 paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
                 paint.maskFilter = BlurMaskFilter(shadow.r, BlurMaskFilter.Blur.NORMAL)
-                tempCanvas!!.save()
-                tempCanvas!!.translate(shadow.dx, shadow.dy)
+                tempCanvas?.save()
+                tempCanvas?.translate(shadow.dx, shadow.dy)
                 super.onDraw(tempCanvas)
-                tempCanvas!!.restore()
+                tempCanvas?.restore()
                 canvas.drawBitmap(tempBitmap, 0f, 0f, null)
                 tempCanvas!!.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
                 paint.xfermode = null
@@ -220,12 +221,10 @@ class MagicTextView : TextView {
                 setShadowLayer(0f, 0f, 0f, 0)
             }
         }
-        if (restoreDrawables != null) {
-            this.setCompoundDrawablesWithIntrinsicBounds(
-                restoreDrawables[0], restoreDrawables[1],
-                restoreDrawables[2], restoreDrawables[3]
-            )
-        }
+        this.setCompoundDrawablesWithIntrinsicBounds(
+            restoreDrawables[0], restoreDrawables[1],
+            restoreDrawables[2], restoreDrawables[3]
+        )
         setBackgroundDrawable(restoreBackground)
         this.setTextColor(restoreColor)
         unfreeze()

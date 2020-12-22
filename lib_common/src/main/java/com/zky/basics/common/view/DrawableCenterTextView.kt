@@ -22,17 +22,15 @@ class DrawableCenterTextView : TextView {
 
     override fun onDraw(canvas: Canvas) {
         val drawables = compoundDrawables
-        if (drawables != null) {
-            val drawableLeft = drawables[0]
-            if (drawableLeft != null) {
-                val textWidth = paint.measureText(text.toString())
-                val drawablePadding = compoundDrawablePadding
-                var drawableWidth = 0
-                drawableWidth = drawableLeft.intrinsicWidth
-                val bodyWidth = textWidth + drawableWidth + drawablePadding
-                val v = width - bodyWidth
-                if (v > 0) canvas.translate(v / 2, 0f) else canvas.translate(0f, 0f)
-            }
+        val drawableLeft = drawables[0]
+        if (drawableLeft != null) {
+            val textWidth = paint.measureText(text.toString())
+            val drawablePadding = compoundDrawablePadding
+
+            var  drawableWidth = drawableLeft.intrinsicWidth
+            val bodyWidth = textWidth + drawableWidth + drawablePadding
+            val v = width - bodyWidth
+            if (v > 0) canvas.translate(v / 2, 0f) else canvas.translate(0f, 0f)
         }
         super.onDraw(canvas)
     }

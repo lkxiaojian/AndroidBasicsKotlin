@@ -9,7 +9,7 @@ import com.zky.basics.common.event.SingleLiveEvent
 import com.zky.basics.common.mvvm.model.BaseModel
 
 
-abstract class BaseRefreshViewModel<T, M : BaseModel?>(
+abstract class BaseRefreshViewModel<T, M : BaseModel>(
     application: Application,
     model: M
 ) : BaseViewModel<M>(application, model) {

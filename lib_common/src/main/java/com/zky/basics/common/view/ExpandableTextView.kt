@@ -33,12 +33,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
+import androidx.core.content.ContextCompat
 import com.zky.basics.common.R
 import com.zky.basics.common.view.ExpandableTextView
 
 /**
  * 默认展开状态： ExpandableTextView.expandView(); ExpandableTextView.showToogleView(false);
  */
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class ExpandableTextView : LinearLayout, View.OnClickListener {
     protected var mTv: TextView? = null
     protected var mToggleView // View to expand/collapse
@@ -407,9 +409,9 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         /* The default alpha value when the animation starts */
         private const val DEFAULT_ANIM_ALPHA_START = 0.7f
         private val isPostHoneycomb: Boolean
-            private get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
+            get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
         private val isPostLolipop: Boolean
-            private get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+            get() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
 
         @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         private fun applyAlphaAnimation(view: View?, alpha: Float) {
@@ -425,13 +427,15 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         }
 
         @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-        private fun getDrawable(context: Context, @DrawableRes resId: Int): Drawable {
-            val resources = context.resources
-            return if (isPostLolipop) {
-                resources.getDrawable(resId, context.theme)
-            } else {
-                resources.getDrawable(resId)
-            }
+        private fun getDrawable(context: Context, @DrawableRes resId: Int): Drawable? {
+            return ContextCompat.getDrawable(context,resId)
+//            val resources = context.resources
+//            return if (isPostLolipop) {
+//                resources.getDrawable(resId, context.theme)
+//            } else {
+//
+//                resources.getDrawable(resId)
+//            }
         }
 
         private fun getRealTextViewHeight(textView: TextView): Int {

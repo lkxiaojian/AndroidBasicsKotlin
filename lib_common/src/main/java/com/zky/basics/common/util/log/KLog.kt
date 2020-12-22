@@ -249,7 +249,7 @@ object KLog {
         } else if (!mIsGlobalTagEmpty) {
             tag = mGlobalTag
         }
-        val msg = if (objects == null) NULL_TIPS else getObjectsString(*objects)
+        val msg = getObjectsString(*objects)
         val headString = "[ ($className:$lineNumber)#$methodName ] "
         return arrayOf(tag, msg, headString)
     }

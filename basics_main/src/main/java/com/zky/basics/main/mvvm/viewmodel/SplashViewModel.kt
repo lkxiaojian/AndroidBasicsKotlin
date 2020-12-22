@@ -20,6 +20,7 @@ import com.zky.basics.api.RetrofitManager
 import com.zky.basics.api.room.AppDatabase
 import com.zky.basics.api.room.bean.TestRoomDb
 import com.zky.basics.api.splash.entity.SplashViewBean
+import com.zky.basics.api.splash.entity.Userinfo
 import com.zky.basics.common.event.SingleLiveEvent
 import com.zky.basics.common.mvvm.viewmodel.BaseViewModel
 import com.zky.basics.common.util.DisplayUtil.dip2px
@@ -30,6 +31,10 @@ import com.zky.basics.common.util.SPUtils
 import com.zky.basics.common.util.ToastUtil.showToast
 import com.zky.basics.common.util.security.MMKVUtil
 import com.zky.basics.common.util.security.SM3
+import com.zky.basics.common.util.spread.decode
+import com.zky.basics.common.util.spread.decodeParcelable
+import com.zky.basics.common.util.spread.encode
+import com.zky.basics.common.util.spread.showToast
 import com.zky.basics.common.view.showFullPopupWindow
 import com.zky.basics.main.R
 import com.zky.basics.main.activity.FrogetActivity
@@ -40,24 +45,31 @@ import views.ViewOption.OptionsPickerBuilder
 import java.lang.ref.WeakReference
 import java.util.*
 
-class SplashViewModel(application: Application, model: SplashModel?) :
-    BaseViewModel<SplashModel?>(application, model) {
+class SplashViewModel(application: Application, model: SplashModel) :
+    BaseViewModel<SplashModel>(application, model) {
     private var mVoidSingleLiveEvent: SingleLiveEvent<String>? = null
     private var pickerBuilder: OptionsPickerBuilder? = null
+
     @JvmField
     var name = ObservableField<String>()
+
     @JvmField
     var paw = ObservableField<String>()
+
     @JvmField
     var rgProvinceV = ObservableField<Boolean>()
+
     @JvmField
     var rgCityV = ObservableField<Boolean>()
+
     @JvmField
     var rgTwonV = ObservableField<Boolean>()
+
     @JvmField
     var rgSchoolV = ObservableField<Boolean>()
+
     @JvmField
-    var data = ObservableField<SplashViewBean?>()
+    var data = ObservableField<SplashViewBean>()
     private var timer: Timer? = null
     private var timerTask: TimerTask? = null
     private var rgitstView: View? = null
@@ -71,6 +83,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
     private var subscribe: Disposable? = null
     private var pickerView: OptionsPickerView<Any?>? = null
     private var handler = WeakReference(CustomHandle()).get()
+
     //账号级别，可选值【0-中央、2-省（自治区）、3-市（自治州）、4-县（区）、5-学校】
     private val levelList: List<Any?> =
         object : ArrayList<Any?>() {
@@ -115,7 +128,6 @@ class SplashViewModel(application: Application, model: SplashModel?) :
             showToast("密码为空")
             return
         }
-        MMKVUtil.put("","","wwwww")
         //离线登入
         if (!checkNet()) {
             val accountLevel = SPUtils.get(
@@ -145,108 +157,17 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
         launchUI({
 
-            val loginDTORespDTO = mModel!!.login(sName, sPaw)
-            loginDTORespDTO?.let {
-               it.token?.let {
-                   RetrofitManager.TOKEN=it
-               }
+            val loginDTORespDTO = mModel.login(sName, sPaw)
+            loginDTORespDTO?.let { it ->
+                it.token?.let {
+                    RetrofitManager.TOKEN = it
+                }
 
-                name.get()?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "phone",
-                        it1
-                    )
-                }
-                paw.get()?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        name.get(),
-                        it1
-                    )
-                }
-                if (it.headImg == null) "" else it.headImg?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "headImg",
-                        it1
-                    )
-                }
-                if (it.userName == null) "" else it.userName?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "userName",
-                        it1
-                    )
-                }
-                if (it.code == null) "" else it.code?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "code",
-                        it1
-                    )
-                }
-                SPUtils.put(
-                    getApplication(),
-                    name.get().toString() + "accountLevel",
-                    it.accountLevel
-                )
-                if (it.province == null) "" else it.province?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "province",
-                        it1
-                    )
-                }
-                if (it.city == null) "" else it.city?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "city",
-                        it1
-                    )
-                }
-                if (it.county == null) "" else it.county?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "county",
-                        it1
-                    )
-                }
-                if (it.provinceName == null) "" else it.provinceName?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "provinceName",
-                        it1
-                    )
-                }
-                if (it.cityName == null) "" else it.cityName?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "cityName",
-                        it1
-                    )
-                }
-                if (it.countyName == null) "" else it.countyName?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "countyName",
-                        it1
-                    )
-                }
-                if (it.schoolName == null) "" else it.schoolName?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "schoolName",
-                        it1
-                    )
-                }
-                if (it.college == null) "" else it.college?.let { it1 ->
-                    SPUtils.put(
-                        getApplication(),
-                        "college",
-                        it1
-                    )
-                }
+                //存储 user 对象
+                loginDTORespDTO.encode("user")
+//                val decodeParcelable = decodeParcelable<Userinfo>("user")
+
+
                 getmVoidSingleLiveEvent().value = "login"
                 getmVoidSingleLiveEvent().call()
             }
@@ -385,7 +306,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
                     }
                 }
             )
-        } else if (i == R.id.register_get_image||i==R.id.forget_get_image) {
+        } else if (i == R.id.register_get_image || i == R.id.forget_get_image) {
             captcha()
         } else if (i == R.id.register_province) {
             initPicker(view.context)
@@ -552,7 +473,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
      */
     private fun foggerPas() {
         launchUI({
-            val updateUserPassword = mModel?.updateUserPassword(
+            val updateUserPassword = mModel.updateUserPassword(
                 "forget",
                 data.get()!!.rgPhone,
                 "",
@@ -592,7 +513,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 //            val users = testRoomDbDao.users()
 //            Log.e("","")
 
-            val captcha = mModel?.captcha()
+            val captcha = mModel.captcha()
             captcha?.let {
                 data.get()?.rgImageUrl =
                     it.getBitmap()
@@ -630,7 +551,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
 
         launchUI({
 
-            val result = mModel?.getRegionOrSchool(regLevel, regCode)
+            val result = mModel.getRegionOrSchool(regLevel, regCode)
             if (result == null || result.isEmpty()) {
                 return@launchUI
             }
@@ -717,7 +638,7 @@ class SplashViewModel(application: Application, model: SplashModel?) :
     private fun sendSms(type: String) {
 
         launchUI({
-            mModel?.sendSms(
+            mModel.sendSms(
                 token,
                 data.get()!!.rgImageCode,
                 data.get()!!.rgPhone,
@@ -743,10 +664,10 @@ class SplashViewModel(application: Application, model: SplashModel?) :
         college: String?,
         smsCode: String?
     ) {
-       val passwordMD = MD5(password!!)
+        val passwordMD = MD5(password!!)
         val phone = data.get()!!.rgPhone
         launchUI({
-            mModel?.regist(
+            mModel.regist(
                 userName,
                 passwordMD,
                 accountLevel,

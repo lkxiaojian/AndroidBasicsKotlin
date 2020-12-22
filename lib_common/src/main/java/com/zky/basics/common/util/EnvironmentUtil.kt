@@ -46,6 +46,7 @@ import java.io.InputStreamReader
  * Version: V1.0.0<br></br>
  * Update: <br></br>
 </单位转换工具类> */
+@Suppress("DEPRECATION")
 class EnvironmentUtil {
     /**
      * 当前app的是否在运行
@@ -69,7 +70,7 @@ class EnvironmentUtil {
     protected fun isTopActivity(context: Context, clazz: Class<*>): Boolean {
         val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val runningTaskInfos = manager.getRunningTasks(1)
-        return (runningTaskInfos != null && !runningTaskInfos.isEmpty()
+        return (runningTaskInfos != null && runningTaskInfos.isNotEmpty()
                 && clazz.name == runningTaskInfos[0].topActivity.className)
     }
 
@@ -239,7 +240,7 @@ class EnvironmentUtil {
          */
         fun getApplicationName(context: Context): String {
             var packageManager: PackageManager? = null
-            var applicationInfo: ApplicationInfo? = null
+            var applicationInfo: ApplicationInfo?
             try {
                 packageManager = context.packageManager
                 applicationInfo = packageManager.getApplicationInfo(getPackageName(context), 0)
@@ -258,7 +259,7 @@ class EnvironmentUtil {
          * @param fileName
          * @return
          */
-        fun getAssetsString(context: Context, fileName: String?): String {
+        fun getAssetsString(context: Context, fileName: String): String {
             val stringBuilder = StringBuilder()
             try {
                 val assetManager = context.assets
@@ -335,7 +336,7 @@ class EnvironmentUtil {
          * @param context
          * @param className
          */
-        fun openApp(context: Context, className: String?) {
+        fun openApp(context: Context, className: String) {
             val intent = Intent(Intent.ACTION_MAIN)
             intent.addCategory(Intent.CATEGORY_LAUNCHER)
             val cn = ComponentName(context.packageName, className)

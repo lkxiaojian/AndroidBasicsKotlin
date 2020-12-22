@@ -1,6 +1,6 @@
 apply from: "../module.build.gradle"
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-allopen'
 apply plugin: 'kotlin-noarg'
@@ -19,7 +19,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kapt {
-        generateStubs = true
+//        generateStubs = true
         arguments {
             arg("AROUTER_MODULE_NAME", project.getName())
             arg("AROUTER_GENERATE_DOC", "enable")

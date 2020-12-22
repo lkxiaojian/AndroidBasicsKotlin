@@ -26,7 +26,7 @@ android {
 
     }
     kapt {
-        generateStubs = true
+//        generateStubs = true
         arguments {
             arg("AROUTER_MODULE_NAME", project.getName())
             arg("AROUTER_GENERATE_DOC", "enable")
@@ -55,10 +55,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-
-    dataBinding {
-        enabled true
+    buildFeatures{
+        dataBinding true
     }
+//    dataBinding {
+//        enabled true
+//    }
 
     noArg{
         annotation("com.zky.basics.annotation.AllowNoArg")

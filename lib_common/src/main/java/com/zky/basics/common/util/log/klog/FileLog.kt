@@ -7,15 +7,16 @@ import java.util.*
 object FileLog {
     private const val FILE_PREFIX = "KLog_"
     private const val FILE_FORMAT = ".log"
+
     @JvmStatic
     fun printFile(
         tag: String?,
         targetDirectory: File,
-        fileName: String?,
+        _fileName: String?,
         headString: String,
         msg: String
     ) {
-        var fileName = fileName
+        var fileName = _fileName
         fileName = fileName ?: FileLog.fileName
         if (save(targetDirectory, fileName, msg)) {
             Log.d(
@@ -52,7 +53,7 @@ object FileLog {
     }
 
     private val fileName: String
-        private get() {
+        get() {
             val random = Random()
             return FILE_PREFIX + java.lang.Long.toString(
                 System.currentTimeMillis() + random.nextInt(

@@ -6,13 +6,15 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import com.zky.basics.common.R
 
 class NoDataView(context: Context?, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
     private val mRlNoDataRoot: RelativeLayout
     private val mImgNoDataView: ImageView
     fun setNoDataBackground(@ColorRes colorResId: Int) {
-        mRlNoDataRoot.setBackgroundColor(resources.getColor(colorResId))
+
+        mRlNoDataRoot.setBackgroundColor(ContextCompat.getColor(context,colorResId))
     }
 
     fun setNoDataView(@DrawableRes imgResId: Int) {

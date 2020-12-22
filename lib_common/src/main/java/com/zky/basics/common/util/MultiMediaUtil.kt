@@ -1,3 +1,5 @@
+@file:Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package com.zky.basics.common.util
 
 import android.Manifest
@@ -147,12 +149,12 @@ object MultiMediaUtil {
 
     @SuppressLint("CheckResult")
     private fun takePhoto(
-        activity: FragmentActivity?,
+        _activity: FragmentActivity?,
         fragment: Fragment?,
         path: String,
         requestcode: Int
     ) {
-        var activity = activity
+        var activity = _activity
         if (activity == null && fragment == null) {
             return
         }
@@ -174,7 +176,7 @@ object MultiMediaUtil {
                             intent.action = MediaStore.ACTION_IMAGE_CAPTURE
                             intent.addCategory(Intent.CATEGORY_DEFAULT)
                             if (finalActivity != null) {
-                                var uri: Uri? = null
+                                var uri: Uri
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                     uri = FileProvider.getUriForFile(
                                         fragment!!.context!!,
@@ -188,7 +190,7 @@ object MultiMediaUtil {
                                 intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
                                 finalActivity.startActivityForResult(intent, requestcode)
                             } else if (fragment != null) {
-                                var uri: Uri? = null
+                                var uri: Uri
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                     uri = FileProvider.getUriForFile(
                                         fragment.context!!,
@@ -293,12 +295,12 @@ object MultiMediaUtil {
 
     @SuppressLint("CheckResult")
     private fun takeVideo(
-        activity: FragmentActivity?,
+        _activity: FragmentActivity?,
         fragment: Fragment?,
         path: String,
         requestcode: Int
     ) {
-        var activity = activity
+        var activity = _activity
         if (activity == null && fragment == null) {
             return
         }
@@ -394,7 +396,8 @@ object MultiMediaUtil {
     }
 
     //获取图片路径
-    fun getPhotoPath(activity: Activity?): String {
+    @SuppressLint("SimpleDateFormat")
+    fun getPhotoPath(): String {
         val filename = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date()) + ".jpg"
         //        String filepath = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + File.separator + filename;
         val s = Environment.getExternalStorageDirectory().toString() + File.separator + "jyb/image/"
@@ -406,6 +409,7 @@ object MultiMediaUtil {
     }
 
     //获取视频的路径
+    @SuppressLint("SimpleDateFormat")
     fun getVideoPath(activity: Activity): String {
         val filename = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date()) + ".3gp"
         return activity.getExternalFilesDir(Environment.DIRECTORY_MOVIES).absolutePath + File.separator + filename

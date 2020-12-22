@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Looper
 import android.os.Process
 import android.util.Log
+import androidx.annotation.RequiresApi
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,6 +19,7 @@ import java.util.*
  *
  * UncaughtException处理类,当程序发生Uncaught异常的时候,由该类来接管程序,并记录发送错误报告.
  */
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS", "DEPRECATION")
 class CrashHandler
 /**
  * 保证只有一个CrashHandler实例
@@ -68,11 +70,11 @@ private constructor() : Thread.UncaughtExceptionHandler {
             // intent.setComponent(cn);
             // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             // mContext.postStartActivityEvent(intent);
-            val packageName = mContext!!.packageName
+            val packageName = mContext?.packageName
             // Log.v("TEST","packageName:"+packageName);
-            val intent = mContext!!.packageManager.getLaunchIntentForPackage(packageName)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            mContext!!.startActivity(intent)
+            val intent = mContext?.packageManager?.getLaunchIntentForPackage(packageName)
+            intent?.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            mContext?.startActivity(intent)
             Process.killProcess(Process.myPid())
         }
     }
@@ -170,7 +172,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
         mDeviceCrashInfo[STACK_TRACE] = result
         try {
             val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
-            val fileName = "crash-" + timestamp + CRASH_REPORTER_EXTENSION
+            val fileName = "crash-$timestamp$CRASH_REPORTER_EXTENSION"
             // 保存文件
             val directory = File(mContext?.let { EnvironmentUtil.Storage.getExternalCacheDir(it) }, "logs")
             if (!directory.exists()) {
@@ -197,9 +199,9 @@ private constructor() : Thread.UncaughtExceptionHandler {
      */
     private fun sendCrashReportsToServer(ctx: Context?) {
         val crFiles = getCrashReportFiles(ctx)
-        if (crFiles != null && crFiles.size > 0) {
+        if (!crFiles.isNullOrEmpty()) {
             val sortedFiles = TreeSet<String>()
-            sortedFiles.addAll(Arrays.asList(*crFiles))
+            sortedFiles.addAll(listOf(*crFiles))
             for (fileName in sortedFiles) {
                 val cr = File(ctx!!.filesDir, fileName)
                 postReport(cr)
@@ -217,7 +219,7 @@ private constructor() : Thread.UncaughtExceptionHandler {
     private fun getCrashReportFiles(ctx: Context?): Array<String> {
         val filesDir = ctx!!.filesDir
         // 实现FilenameFilter接口的类实例可用于过滤器文件名
-        val filter = FilenameFilter { dir, name ->
+        val filter = FilenameFilter { _, name ->
             // accept(File dir, String name)
             // 测试指定文件是否应该包含在某一文件列表中。
             name.endsWith(CRASH_REPORTER_EXTENSION)
