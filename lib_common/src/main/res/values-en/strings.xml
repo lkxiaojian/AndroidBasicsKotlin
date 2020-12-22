@@ -5,4 +5,6 @@
     <string name="server_error">Server internal exception</string>
     <string name="register_success">Registration Successful</string>
     <string name="register_fail">registration failed</string>
+    <string name="acountorpaw">Sorry, the account with this keycode was not found</string>
+    <string name="net_error">The network is not connected. Please check the network</string>
 </resources>

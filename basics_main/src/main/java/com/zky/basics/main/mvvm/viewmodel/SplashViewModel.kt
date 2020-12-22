@@ -111,7 +111,7 @@ class SplashViewModel(application: Application, model: SplashModel) :
         pickerView = pickerBuilder!!.build()
     }
 
-    fun login() {
+  private  fun login() {
         val sName = name.get()
         val sTmpPaw = paw.get()
 
@@ -130,24 +130,18 @@ class SplashViewModel(application: Application, model: SplashModel) :
         }
         //离线登入
         if (!checkNet()) {
-            val accountLevel = SPUtils.get(
-                getApplication(),
-                name.get().toString() + "accountLevel",
-                -1
-            ) as Int
-            if (accountLevel == 5) {
-                val phone =
-                    SPUtils.get(getApplication(), "phone", "")
-                val pwd =
-                    SPUtils.get(getApplication(), phone.toString(), "")
-                if (phone.toString() != name.get() || pwd.toString() != paw.get()) {
-                    showToast("账号密码错误")
+            val userinfo = decodeParcelable<Userinfo>("user")
+            if (userinfo?.accountLevel == 5) {
+                val phone =userinfo.phone
+                val pwd =userinfo.password
+                if (phone != name.get() || pwd != paw.get()) {
+                    R.string.acountorpaw.showToast()
                     return
                 }
                 getmVoidSingleLiveEvent().value = "noNet"
                 mVoidSingleLiveEvent!!.call()
             } else {
-                showToast("网络未连接，请检查网络")
+                R.string.net_error.showToast()
             }
             return
         }
@@ -165,9 +159,6 @@ class SplashViewModel(application: Application, model: SplashModel) :
 
                 //存储 user 对象
                 loginDTORespDTO.encode("user")
-//                val decodeParcelable = decodeParcelable<Userinfo>("user")
-
-
                 getmVoidSingleLiveEvent().value = "login"
                 getmVoidSingleLiveEvent().call()
             }
@@ -504,6 +495,7 @@ class SplashViewModel(application: Application, model: SplashModel) :
 
     fun captcha() {
         launchUI({
+            //数据库使用 用例
 //          var  testRoomDbDao =
 //                AppDatabase.getDatabase(getApplication())?.testRoomDbDao()!!
 //            val testRoomDb = TestRoomDb(2231, "name", 3, "1", "3")
@@ -511,7 +503,6 @@ class SplashViewModel(application: Application, model: SplashModel) :
 //            list.add(testRoomDb)
 //            testRoomDbDao.insertOrUpdate(list)
 //            val users = testRoomDbDao.users()
-//            Log.e("","")
 
             val captcha = mModel.captcha()
             captcha?.let {
@@ -535,17 +526,17 @@ class SplashViewModel(application: Application, model: SplashModel) :
         type: String
     ) {
         if ("1" == type && regCode!!.isEmpty()) {
-            showToast("省还未选择!!!")
+            "省还未选择!!!".showToast()
             return
         }
         if ("2" == type && (regLevel.isEmpty() || regCode!!.isEmpty())) {
             if (regLevel.isEmpty() || regCode!!.isEmpty()) {
-                showToast("省市未选择!!!")
+                "省市未选择!!!".showToast()
                 return
             }
         }
         if ("3" == type && regCode!!.isEmpty()) {
-            showToast("省市县有未选择!!!")
+            "省市县有未选择!!!".showToast()
             return
         }
 
@@ -569,66 +560,64 @@ class SplashViewModel(application: Application, model: SplashModel) :
             }
             pickerView!!.setPicker(dalist)
             pickerView!!.show()
-            pickerBuilder!!.setOnOptionsSelectListener(
-                OnOptionsSelectListener { options1: Int, _: Int, _: Int, _: View? ->
-                    when (type) {
-                        "0" -> {
-                            data.get()?.let {
-                                it.rgProvince = dalist[options1].toString()
-                                it.rgTwon = "县"
-                                it.rgCity = "市"
-                                it.rgSchool = "学校"
-                                it.writeProvince = true
-                                it.writeCity = false
-                                it.writeTwon = false
-                                it.writeSchool = false
-                            }
+            pickerBuilder!!.setOnOptionsSelectListener { options1: Int, _: Int, _: Int, _: View? ->
+                when (type) {
+                    "0" -> {
+                        data.get()?.let {
+                            it.rgProvince = dalist[options1].toString()
+                            it.rgTwon = "县"
+                            it.rgCity = "市"
+                            it.rgSchool = "学校"
+                            it.writeProvince = true
+                            it.writeCity = false
+                            it.writeTwon = false
+                            it.writeSchool = false
+                        }
 
-                            provinceIndexl = options1
-                            provinceCode = result[options1].code
-                            cityCode = ""
-                            twonCode = ""
-                            schoolCode = ""
+                        provinceIndexl = options1
+                        provinceCode = result[options1].code
+                        cityCode = ""
+                        twonCode = ""
+                        schoolCode = ""
+                    }
+                    "1" -> {
+                        data.get()?.let {
+                            it.rgCity = dalist[options1].toString()
+                            it.rgTwon = "县"
+                            it.rgSchool = "学校"
+                            it.writeProvince = true
+                            it.writeCity = true
+                            it.writeTwon = false
+                            it.writeSchool = false
                         }
-                        "1" -> {
-                            data.get()?.let {
-                                it.rgCity = dalist[options1].toString()
-                                it.rgTwon = "县"
-                                it.rgSchool = "学校"
-                                it.writeProvince = true
-                                it.writeCity = true
-                                it.writeTwon = false
-                                it.writeSchool = false
-                            }
-                            cityCode = result[options1].code
-                            twonCode = ""
-                            schoolCode = ""
+                        cityCode = result[options1].code
+                        twonCode = ""
+                        schoolCode = ""
+                    }
+                    "2" -> {
+                        data.get()?.let {
+                            it.rgTwon = dalist[options1].toString()
+                            it.rgSchool = "学校"
+                            it.writeProvince = true
+                            it.writeCity = true
+                            it.writeTwon = true
+                            it.writeSchool = false
                         }
-                        "2" -> {
-                            data.get()?.let {
-                                it.rgTwon = dalist[options1].toString()
-                                it.rgSchool = "学校"
-                                it.writeProvince = true
-                                it.writeCity = true
-                                it.writeTwon = true
-                                it.writeSchool = false
-                            }
-                            twonCode = result[options1].code
-                            schoolCode = ""
+                        twonCode = result[options1].code
+                        schoolCode = ""
+                    }
+                    "3" -> {
+                        data.get()?.let {
+                            it.rgSchool = dalist[options1].toString()
+                            it.writeProvince = true
+                            it.writeCity = true
+                            it.writeTwon = true
+                            it.writeSchool = true
                         }
-                        "3" -> {
-                            data.get()?.let {
-                                it.rgSchool = dalist[options1].toString()
-                                it.writeProvince = true
-                                it.writeCity = true
-                                it.writeTwon = true
-                                it.writeSchool = true
-                            }
-                            schoolCode = result[options1].SCHOOL_ID
-                        }
+                        schoolCode = result[options1].SCHOOL_ID
                     }
                 }
-            )
+            }
         })
     }
 

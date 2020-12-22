@@ -56,6 +56,13 @@ fun ByteArray.decode(key: String, security: Boolean = false) = MMKVUtil.get(key,
 fun Boolean.decode(key: String, security: Boolean = false) = MMKVUtil.get(key, this, security)
 fun Set<String>.decode(key: String, security: Boolean = false) = MMKVUtil.get(key, this, security)
 
+/**
+ * TODO mmkv 存储的对象
+ *
+ * @param T 对应的class
+ * @param key
+ * @return
+ */
 inline fun <reified T : Parcelable> decodeParcelable(key: String): T? = MMKVUtil.get(key)
 
 
