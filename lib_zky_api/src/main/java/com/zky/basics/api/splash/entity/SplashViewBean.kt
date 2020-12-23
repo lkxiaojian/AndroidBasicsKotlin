@@ -16,29 +16,30 @@ import com.zky.basics.api.BR
 class SplashViewBean : BaseObservable {
 
     var name: String? = null
-    var paw: String? = null
-    var _timeMeesage: String? = null
-    var _rgPhone: String? = null
-    var _rgName: String? = null
-    var _rgImageCode: String? = null
-    var _rgCode: String? = null
-    var _rgLevel: String? = null
-    var _rgProvince: String? = null
-    var _rgCity: String? = null
-    var _rgTwon: String? = null
-    var _rgSchool: String? = null
-    var _rgPaw: String? = null
-    var _rgqrPaw: String? = null
-    var _rgImageUrl: Bitmap? = null
+    private var paw: String? = null
+    private var _timeMeesage: String? = null
+    private var _rgPhone: String? = null
+    private var _rgName: String? = null
+    private var _rgImageCode: String? = null
+    private var _rgCode: String? = null
+    private var _rgLevel: String? = null
+    private var _rgProvince: String? = null
+    private var _rgCity: String? = null
+    private var _rgTwon: String? = null
+    private var _rgSchool: String? = null
+    private var _rgPaw: String? = null
+    private var _rgqrPaw: String? = null
+    private var _rgImageUrl: Bitmap? = null
     var rgErrorImageUrl: Int = -1
-    var _levelIndel: Int = -1
-    var _writeLevel: Boolean = false
-    var _writeProvince: Boolean = false
-    var _writeCity: Boolean = false
-    var _writeTwon: Boolean = false
-    var _writeSchool: Boolean = false
+    private var _levelIndel: Int = -1
+    private var _writeLevel: Boolean = false
+    private var _writeProvince: Boolean = false
+    private var _writeCity: Boolean = false
+    private var _writeTwon: Boolean = false
+    private var _writeSchool: Boolean = false
 
     constructor()
+
     var timeMeesage: String?
         @Bindable get() = _timeMeesage
         set(value) {

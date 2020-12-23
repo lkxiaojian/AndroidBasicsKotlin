@@ -50,25 +50,18 @@ class SplashViewModel(application: Application, model: SplashModel) :
     private var mVoidSingleLiveEvent: SingleLiveEvent<String>? = null
     private var pickerBuilder: OptionsPickerBuilder? = null
 
-    @JvmField
     var name = ObservableField<String>()
 
-    @JvmField
     var paw = ObservableField<String>()
 
-    @JvmField
     var rgProvinceV = ObservableField<Boolean>()
 
-    @JvmField
     var rgCityV = ObservableField<Boolean>()
 
-    @JvmField
     var rgTwonV = ObservableField<Boolean>()
 
-    @JvmField
     var rgSchoolV = ObservableField<Boolean>()
 
-    @JvmField
     var data = ObservableField<SplashViewBean>()
     private var timer: Timer? = null
     private var timerTask: TimerTask? = null
@@ -111,7 +104,7 @@ class SplashViewModel(application: Application, model: SplashModel) :
         pickerView = pickerBuilder!!.build()
     }
 
-  private  fun login() {
+    private fun login() {
         val sName = name.get()
         val sTmpPaw = paw.get()
 
@@ -124,16 +117,12 @@ class SplashViewModel(application: Application, model: SplashModel) :
             return
         }
         val sPaw = SM3.encrypt(sTmpPaw!!)
-        if (sPaw.isEmpty()) {
-            showToast("密码为空")
-            return
-        }
         //离线登入
         if (!checkNet()) {
             val userinfo = decodeParcelable<Userinfo>("user")
             if (userinfo?.accountLevel == 5) {
-                val phone =userinfo.phone
-                val pwd =userinfo.password
+                val phone = userinfo.phone
+                val pwd = userinfo.password
                 if (phone != name.get() || pwd != paw.get()) {
                     R.string.acountorpaw.showToast()
                     return
@@ -556,11 +545,11 @@ class SplashViewModel(application: Application, model: SplashModel) :
                 }
             }
             if ("0" == type) {
-                pickerView!!.setSelectOptions(provinceIndexl)
+                pickerView?.setSelectOptions(provinceIndexl)
             }
-            pickerView!!.setPicker(dalist)
-            pickerView!!.show()
-            pickerBuilder!!.setOnOptionsSelectListener { options1: Int, _: Int, _: Int, _: View? ->
+            pickerView?.setPicker(dalist)
+            pickerView?.show()
+            pickerBuilder?.setOnOptionsSelectListener { options1: Int, _: Int, _: Int, _: View? ->
                 when (type) {
                     "0" -> {
                         data.get()?.let {
@@ -665,12 +654,12 @@ class SplashViewModel(application: Application, model: SplashModel) :
                 county,
                 college, smsCode, phone
             )
-            showToast(R.string.register_success)
-            data.get()!!.rgPhone?.let { SPUtils.put(getApplication(), "phone", it) }
+            R.string.register_success.showToast()
+            data.get()?.rgPhone?.let { SPUtils.put(getApplication(), "phone", it) }
             getmVoidSingleLiveEvent().call()
         }, object : NetError {
             override fun getError(e: Exception) {
-                showToast(R.string.register_fail)
+                R.string.register_fail.showToast()
                 getmVoidSingleLiveEvent().call()
             }
 
@@ -685,7 +674,7 @@ class SplashViewModel(application: Application, model: SplashModel) :
             super.handleMessage(msg)
             if (msg?.what == 1) {
                 time -= 1
-                data.get()!!.timeMeesage = time.toString() + "秒"
+                data.get()?.timeMeesage = time.toString() + "秒"
                 if (time == 1) {
                     resume()
                 }
