@@ -5,6 +5,7 @@ package com.zky.basics.common.util.security
 import android.os.Parcelable
 import com.tencent.mmkv.MMKV
 import com.zky.basics.common.BaseApplication
+import com.zky.basics.common.util.log.KLog
 
 /**
  *create_time : 20-12-21 下午5:14
@@ -128,6 +129,61 @@ object MMKVUtil {
     private fun <T : Parcelable> encode(key: String, t: T) = mmkv.encode(key, t)
 
     private fun encode(key: String, sets: Set<String>) = mmkv.encode(key, sets)
+
+    /**
+     * TODO 清除mmkv 所有存储的值
+     *
+     */
+    fun clearAll() {
+        mmkv.clearMemoryCache()
+        mmkv.clearAll()
+    }
+
+    /**
+     * TODO 移除某个key 的value
+     *
+     * @param key
+     */
+    fun removeValueForKey(key: String) {
+        mmkv.removeValueForKey(key)
+    }
+
+    /**
+     * TODO 移除多个key 的value
+     *
+     * @param keys
+     */
+    fun removeValueForKey(keys: Array<String>) {
+        mmkv.removeValuesForKeys(keys)
+    }
+
+    /**
+     * TODO 判断mmkv 是否包含某个key
+     *
+     * @param key
+     * @return true 包含  false 不包含
+     */
+    fun containsKey(key: String): Boolean {
+        return mmkv.containsKey(key)
+    }
+
+    /**
+     * TODO 获取 mmkv 所有的键值对
+     *
+     * @return
+     */
+    fun getMMKV(): MutableMap<String, *>? {
+        return mmkv.all
+    }
+
+    /**
+     * TODO 获取 mmkv 的所有key
+     *
+     * @return
+     */
+    fun getMMKVAllKey(): Array<out String>? {
+        return mmkv.allKeys()
+    }
 
 
 }

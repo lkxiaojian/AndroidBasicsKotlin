@@ -39,9 +39,7 @@ open class BaseApplication : MultiDexApplication() {
         initOKHttpUtils()
         initUpdate()
         //MMKV
-        val initialize = initialize(this)
-//        val initialize = initialize("${filesDir.absolutePath} ")
-        Log.e("tag","------>$initialize")
+        initialize(this)
     }
 
     //app 更新

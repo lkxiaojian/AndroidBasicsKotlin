@@ -259,19 +259,23 @@ object KLog {
             val stringBuilder = StringBuilder()
             stringBuilder.append("\n")
             for (i in obj.indices) {
-                val `object` = obj[i]
-                if (`object` == null) {
+                val objectTmp = obj[i]
+                if (objectTmp == null) {
                     stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ")
                         .append(NULL).append("\n")
                 } else {
                     stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ")
-                        .append(`object`.toString()).append("\n")
+                        .append(objectTmp.toString()).append("\n")
                 }
             }
             stringBuilder.toString()
         } else {
-            val objectTmp = obj[0]
-            objectTmp?.toString() ?: NULL
+            if (obj.isNotEmpty()) {
+                obj[0]?.toString() ?: NULL
+            } else {
+                NULL
+            }
+
         }
     }
 }
