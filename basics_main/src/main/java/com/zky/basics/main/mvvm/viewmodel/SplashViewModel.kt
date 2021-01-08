@@ -232,60 +232,58 @@ class SplashViewModel(application: Application, model: SplashModel) :
             pickerView!!.setPicker(levelList)
             pickerView!!.setSelectOptions(data.get()!!.levelIndel)
             pickerView!!.show()
-            pickerBuilder!!.setOnOptionsSelectListener(
-                OnOptionsSelectListener { options1: Int, _: Int, _: Int, _: View? ->
-                    if (options1 != data.get()!!.levelIndel) { //清空省市县的选择
-                        data.get()!!.rgProvince = "省"
-                        data.get()!!.rgTwon = "县"
-                        data.get()!!.rgCity = "市"
-                        data.get()!!.rgSchool = "学校"
-                        provinceCode = ""
-                        cityCode = ""
-                        twonCode = ""
-                        schoolCode = ""
-                        provinceIndexl = 0
-                        data.get()!!.writeSchool = false
-                        data.get()!!.writeTwon = false
-                        data.get()!!.writeCity = false
-                        data.get()!!.writeProvince = false
+            pickerBuilder!!.setOnOptionsSelectListener { options1: Int, _: Int, _: Int, _: View? ->
+                if (options1 != data.get()!!.levelIndel) { //清空省市县的选择
+                    data.get()!!.rgProvince = "省"
+                    data.get()!!.rgTwon = "县"
+                    data.get()!!.rgCity = "市"
+                    data.get()!!.rgSchool = "学校"
+                    provinceCode = ""
+                    cityCode = ""
+                    twonCode = ""
+                    schoolCode = ""
+                    provinceIndexl = 0
+                    data.get()?.writeSchool = false
+                    data.get()?.writeTwon = false
+                    data.get()?.writeCity = false
+                    data.get()?.writeProvince = false
+                }
+                data.get()?.levelIndel = options1
+                data.get()?.rgLevel = levelList[options1].toString()
+                data.get()?.writeLevel = true
+                when (options1) {
+                    0 -> {
+                        rgProvinceV.set(false)
+                        rgCityV.set(false)
+                        rgTwonV.set(false)
+                        rgSchoolV.set(false)
                     }
-                    data.get()!!.levelIndel = options1
-                    data.get()!!.rgLevel = levelList[options1].toString()
-                    data.get()!!.writeLevel = true
-                    when (options1) {
-                        0 -> {
-                            rgProvinceV.set(false)
-                            rgCityV.set(false)
-                            rgTwonV.set(false)
-                            rgSchoolV.set(false)
-                        }
-                        1 -> {
-                            rgProvinceV.set(true)
-                            rgCityV.set(false)
-                            rgTwonV.set(false)
-                            rgSchoolV.set(false)
-                        }
-                        2 -> {
-                            rgProvinceV.set(true)
-                            rgCityV.set(true)
-                            rgTwonV.set(false)
-                            rgSchoolV.set(false)
-                        }
-                        3 -> {
-                            rgProvinceV.set(true)
-                            rgCityV.set(true)
-                            rgTwonV.set(true)
-                            rgSchoolV.set(false)
-                        }
-                        else -> {
-                            rgProvinceV.set(true)
-                            rgCityV.set(true)
-                            rgTwonV.set(true)
-                            rgSchoolV.set(true)
-                        }
+                    1 -> {
+                        rgProvinceV.set(true)
+                        rgCityV.set(false)
+                        rgTwonV.set(false)
+                        rgSchoolV.set(false)
+                    }
+                    2 -> {
+                        rgProvinceV.set(true)
+                        rgCityV.set(true)
+                        rgTwonV.set(false)
+                        rgSchoolV.set(false)
+                    }
+                    3 -> {
+                        rgProvinceV.set(true)
+                        rgCityV.set(true)
+                        rgTwonV.set(true)
+                        rgSchoolV.set(false)
+                    }
+                    else -> {
+                        rgProvinceV.set(true)
+                        rgCityV.set(true)
+                        rgTwonV.set(true)
+                        rgSchoolV.set(true)
                     }
                 }
-            )
+            }
         } else if (i == R.id.register_get_image || i == R.id.forget_get_image) {
             captcha()
         } else if (i == R.id.register_province) {
@@ -340,14 +338,14 @@ class SplashViewModel(application: Application, model: SplashModel) :
                 "中央" -> {
                     numLevel = "0"
                     startRigst(
-                        data.get()!!.rgName,
-                        data.get()!!.rgPaw,
+                        data.get()?.rgName,
+                        data.get()?.rgPaw,
                         numLevel,
                         "",
                         "",
                         "",
                         "",
-                        data.get()!!.rgCode
+                        data.get()?.rgCode
                     )
                 }
                 "省（自治区)" -> {
@@ -357,14 +355,14 @@ class SplashViewModel(application: Application, model: SplashModel) :
                         return
                     }
                     startRigst(
-                        data.get()!!.rgName,
-                        data.get()!!.rgPaw,
+                        data.get()?.rgName,
+                        data.get()?.rgPaw,
                         numLevel,
                         provinceCode,
                         "",
                         "",
                         "",
-                        data.get()!!.rgCode
+                        data.get()?.rgCode
                     )
                 }
                 "市（自治州)" -> {
@@ -378,14 +376,14 @@ class SplashViewModel(application: Application, model: SplashModel) :
                         return
                     }
                     startRigst(
-                        data.get()!!.rgName,
-                        data.get()!!.rgPaw,
+                        data.get()?.rgName,
+                        data.get()?.rgPaw,
                         numLevel,
                         provinceCode,
                         cityCode,
                         "",
                         "",
-                        data.get()!!.rgCode
+                        data.get()?.rgCode
                     )
                 }
                 "县（区)" -> {

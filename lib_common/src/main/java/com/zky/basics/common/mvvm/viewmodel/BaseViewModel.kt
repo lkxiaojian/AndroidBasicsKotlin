@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.zky.basics.common.event.SingleLiveEvent
 import com.zky.basics.common.mvvm.model.BaseModel
+import com.zky.basics.common.util.log.KLog
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.functions.Consumer
 import kotlinx.coroutines.CoroutineScope
@@ -39,7 +40,7 @@ open class BaseViewModel<M : BaseModel>(
             try {
                 block()
             } catch (e: Exception) {
-                if(err.isNotEmpty()){
+                if (err.isNotEmpty()) {
                     err.let { it[0]?.getError(e) }
                 }
 
@@ -139,6 +140,7 @@ open class BaseViewModel<M : BaseModel>(
         try {
             viewModelScope.cancel()
         } catch (e: Exception) {
+            KLog.d("viewModelScope.cancel() fail ${e.message}")
             e.printStackTrace()
         }
 

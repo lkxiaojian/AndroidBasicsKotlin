@@ -50,9 +50,9 @@ class RetrofitManager  {
 
     private constructor(){
         val logging =
-            HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { message: String? ->
+            HttpLoggingInterceptor { message: String? ->
                 Log.e("OKHttp----->", message)
-            })
+            }
         logging.level = HttpLoggingInterceptor.Level.BODY
         okHttpBuilder = OkHttpClient.Builder()
         addToken()

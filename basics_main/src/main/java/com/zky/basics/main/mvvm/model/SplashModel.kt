@@ -10,8 +10,8 @@ import com.zky.basics.api.splash.service.SplashService
 import com.zky.basics.common.mvvm.model.BaseModel
 
 class SplashModel(application: Application?) : BaseModel(application) {
-    private val mCommonService: CommonService = instance.commonService
-    private val splashService: SplashService = instance.splashService
+    private val mCommonService = instance.commonService
+    private val splashService = instance.splashService
 
 
     suspend fun login(username: String?, password: String?): Userinfo? = request {
