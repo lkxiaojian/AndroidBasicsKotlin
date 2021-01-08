@@ -3,7 +3,6 @@ package com.zky.live.mvvm.viewmodle
 import android.app.Application
 import com.zky.basics.common.mvvm.viewmodel.BaseRefreshViewModel
 import com.zky.live.mvvm.model.LiveModel
-import java.util.*
 
 /**
  * Created by lk
@@ -18,6 +17,7 @@ class LiveListViewModle(application: Application, liveModel: LiveModel) :
         postStopRefreshEvent()
     }
 
+
     override fun loadMore() {
 //        setData()
         postStopLoadMoreEvent()
@@ -25,7 +25,7 @@ class LiveListViewModle(application: Application, liveModel: LiveModel) :
 
 
     private fun setData() {
-        for (i in 1..10){
+        for (i in 1..10) {
             mList.add("$i")
         }
 

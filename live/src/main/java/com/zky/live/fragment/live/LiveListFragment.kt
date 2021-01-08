@@ -20,7 +20,7 @@ import java.util.*
  * Detail:
  */
 class LiveListFragment :
-    BaseMvvmRefreshFragment<Objects, LiveListFragemnetBinding, LiveListViewModle>() {
+    BaseMvvmRefreshFragment<Objects, LiveListFragemnetBinding, LiveListViewModle>(),BaseBindAdapter.OnItemClickListener<Any> {
     override fun onBindViewModelFactory() = LiveViewModelFactory.getInstance(activity!!.application)
     override fun refreshLayout() = mBinding?.drlLive
     override fun onBindViewModel() = LiveListViewModle::class.java
@@ -32,13 +32,6 @@ class LiveListFragment :
             )
         )
         mBinding?.recview?.adapter = testAdapter
-
-        testAdapter.setItemClickListener(object : BaseBindAdapter.OnItemClickListener<Any> {
-            override fun onItemClick(e: Any, position: Int) {
-                e.toString().showToast()
-            }
-
-        })
     }
 
     override fun onBindLayout(): Int = R.layout.live_list_fragemnet
@@ -51,5 +44,10 @@ class LiveListFragment :
 
     override fun initData() {
         mViewModel?.mList?.add("212")
+    }
+
+
+    override fun onItemClick(e: Any, position: Int) {
+        e.toString().showToast()
     }
 }

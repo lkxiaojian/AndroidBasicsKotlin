@@ -43,7 +43,7 @@ abstract class BaseBindAdapter<T, B : ViewDataBinding?>(
     protected abstract fun getLayoutItemId(viewType: Int): Int
 
     protected abstract fun onBindItem(binding: B?, item: T, position: Int)
-    fun setItemClickListener(itemClickListener: OnItemClickListener<Any>) {
+    fun setItemClickListener(itemClickListener: OnItemClickListener<Any>?) {
         mItemClickListener = itemClickListener
     }
 

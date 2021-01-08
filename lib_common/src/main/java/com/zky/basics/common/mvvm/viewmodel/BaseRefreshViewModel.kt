@@ -19,11 +19,22 @@ abstract class BaseRefreshViewModel<T, M : BaseModel>(
     var orientation: ObservableField<Boolean?> = ObservableField()
     var enableLoadMore: ObservableField<Boolean?> = ObservableField()
     var enableRefresh: ObservableField<Boolean?> = ObservableField()
-    fun enableLoadMore(): Boolean {
+
+    /**
+     * TODO 是否允许加载更多
+     *
+     * @return true 允许 false 不允许
+     */
+    open fun enableLoadMore(): Boolean {
         return true
     }
 
-    fun enableRefresh(): Boolean {
+    /**
+     * TODO 是否允许刷新
+     *
+     * @return true 允许 false 不允许
+     */
+    open fun enableRefresh(): Boolean {
         return true
     }
 
