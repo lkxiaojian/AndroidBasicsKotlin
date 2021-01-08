@@ -14,10 +14,8 @@ abstract class BaseBindAdapter<T, B : ViewDataBinding?>(
     protected var context: Context,
     private var items: ObservableArrayList<T>?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var mItemClickListener: OnItemClickListener<*>? =
-        null
-    private var mOnItemLongClickListener: OnItemLongClickListener<*>? =
-        null
+    var mItemClickListener: OnItemClickListener<Any>? = null
+    var mOnItemLongClickListener: OnItemLongClickListener<Any>? = null
 
     override fun getItemCount(): Int {
         return if (items != null && items!!.size > 0) items!!.size else 0
@@ -38,17 +36,18 @@ abstract class BaseBindAdapter<T, B : ViewDataBinding?>(
         val binding: B = DataBindingUtil.getBinding<B>(holder.itemView)!!
         onBindItem(binding, items!![position], position)
     }
+
     open class BaseBindingViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 
     @LayoutRes
     protected abstract fun getLayoutItemId(viewType: Int): Int
 
     protected abstract fun onBindItem(binding: B?, item: T, position: Int)
-    fun setItemClickListener(itemClickListener: OnItemClickListener<*>?) {
+    fun setItemClickListener(itemClickListener: OnItemClickListener<Any>) {
         mItemClickListener = itemClickListener
     }
 
-    fun setOnItemLongClickListener(onItemLongClickListener: OnItemLongClickListener<*>?) {
+    fun setOnItemLongClickListener(onItemLongClickListener: OnItemLongClickListener<Any>?) {
         mOnItemLongClickListener = onItemLongClickListener
     }
 

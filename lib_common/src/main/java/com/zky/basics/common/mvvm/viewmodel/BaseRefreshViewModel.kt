@@ -13,8 +13,8 @@ abstract class BaseRefreshViewModel<T, M : BaseModel>(
     application: Application,
     model: M
 ) : BaseViewModel<M>(application, model) {
-    var list = ObservableArrayList<T>()
-        protected set
+    var mList = ObservableArrayList<T>()
+
     @JvmField
     var orientation: ObservableField<Boolean?> = ObservableField()
     var enableLoadMore: ObservableField<Boolean?> = ObservableField()
@@ -27,9 +27,9 @@ abstract class BaseRefreshViewModel<T, M : BaseModel>(
         return true
     }
 
-     var mUIChangeRefreshLiveData: UIChangeRefreshLiveData?=null
+    var mUIChangeRefreshLiveData: UIChangeRefreshLiveData? = null
 
-    fun uCRefresh(): UIChangeRefreshLiveData{
+    fun uCRefresh(): UIChangeRefreshLiveData {
         if (mUIChangeRefreshLiveData == null) {
             mUIChangeRefreshLiveData = UIChangeRefreshLiveData()
         }
@@ -38,17 +38,17 @@ abstract class BaseRefreshViewModel<T, M : BaseModel>(
     }
 
     inner class UIChangeRefreshLiveData : SingleLiveEvent<Any?>() {
-         var mStopRefresLiveEvent: SingleLiveEvent<Any>? = null
-         var mAutoRefresLiveEvent: SingleLiveEvent<Any>? = null
-       var mStopLoadMoreLiveEvent: SingleLiveEvent<Any>? = null
-        val stopRefresLiveEvent: SingleLiveEvent<Any>
-            get() = createLiveData(mStopRefresLiveEvent).also { mStopRefresLiveEvent = it }
+        var mStopRefresLiveEvent: SingleLiveEvent<Any>? = null
+        var mAutoRefresLiveEvent: SingleLiveEvent<Any>? = null
+        var mStopLoadMoreLiveEvent: SingleLiveEvent<Any>? = null
+        val stopRefresLiveEvent: SingleLiveEvent<Any> =
+            createLiveData(mStopRefresLiveEvent).also { mStopRefresLiveEvent = it }
 
-        val autoRefresLiveEvent: SingleLiveEvent<Any>
-            get() = createLiveData(mAutoRefresLiveEvent).also { mAutoRefresLiveEvent = it }
+        val autoRefresLiveEvent: SingleLiveEvent<Any> =
+            createLiveData(mAutoRefresLiveEvent).also { mAutoRefresLiveEvent = it }
 
-        val stopLoadMoreLiveEvent: SingleLiveEvent<Any>
-            get() = createLiveData(mStopLoadMoreLiveEvent).also { mStopLoadMoreLiveEvent = it }
+        val stopLoadMoreLiveEvent: SingleLiveEvent<Any> =
+            createLiveData(mStopLoadMoreLiveEvent).also { mStopLoadMoreLiveEvent = it }
     }
 
     fun postStopRefreshEvent() {
@@ -70,12 +70,14 @@ abstract class BaseRefreshViewModel<T, M : BaseModel>(
             refreshData()
         }
     })
+
     @JvmField
     var onLoadMoreCommand: BindingCommand<*> = BindingCommand<Any?>(object : BindingAction {
         override fun call() {
             loadMore()
         }
     })
+
     @JvmField
     var onAutoRefreshCommand: BindingCommand<*> =
         BindingCommand<Any?>(object : BindingAction {

@@ -11,11 +11,23 @@ import java.util.*
  * Time 17:07
  * Detail:
  */
-class LiveListViewModle(application: Application,liveModel: LiveModel)
-    : BaseRefreshViewModel<Objects, LiveModel>(application,liveModel) {
+class LiveListViewModle(application: Application, liveModel: LiveModel) :
+    BaseRefreshViewModel<String, LiveModel>(application, liveModel) {
     override fun refreshData() {
+        setData()
+        postStopRefreshEvent()
     }
 
     override fun loadMore() {
+//        setData()
+        postStopLoadMoreEvent()
+    }
+
+
+    private fun setData() {
+        for (i in 1..10){
+            mList.add("$i")
+        }
+
     }
 }

@@ -21,16 +21,16 @@ abstract class BaseMvvmRefreshActivity<V : ViewDataBinding?, VM : BaseRefreshVie
 
     private fun initBaseViewRefreshObservable() {
         mViewModel?.uCRefresh()?.autoRefresLiveEvent
-            ?.observe(this, Observer<Any?> { autoLoadData() })
+            ?.observe(this, { autoLoadData() })
         mViewModel?.uCRefresh()?.stopRefresLiveEvent
-            ?.observe(this, Observer<Any?> { stopRefresh() })
+            ?.observe(this, { stopRefresh() })
         mViewModel?.uCRefresh()?.stopLoadMoreLiveEvent
-            ?.observe(this, Observer<Any?> { stopLoadMore() })
+            ?.observe(this, { stopLoadMore() })
     }
 
-    abstract val refreshLayout: DaisyRefreshLayout?
+    abstract fun refreshLayout(): DaisyRefreshLayout?
     fun initRefreshView() {
-        mRefreshLayout = refreshLayout
+        mRefreshLayout = refreshLayout()
     }
 
     fun stopRefresh() {

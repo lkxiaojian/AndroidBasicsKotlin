@@ -12,12 +12,13 @@ import com.zky.basics.common.util.log.KLog
 abstract class BaseMvvmRefreshFragment<T, V : ViewDataBinding?, VM : BaseRefreshViewModel<*, *>?> :
     BaseMvvmFragment<V, VM>() {
     private var mRefreshLayout: DaisyRefreshLayout? = null
-    private var mItemClickListener: BaseAdapter.OnItemClickListener<*>? =null
-    private var mOnItemLongClickListener: BaseAdapter.OnItemLongClickListener<*>? =null
+    private var mItemClickListener: BaseAdapter.OnItemClickListener<*>? = null
+    private var mOnItemLongClickListener: BaseAdapter.OnItemLongClickListener<*>? = null
     override fun initCommonView(view: View?) {
         super.initCommonView(view)
         initRefreshView()
     }
+
     override fun initBaseViewObservable() {
         super.initBaseViewObservable()
         initBaseViewRefreshObservable()
@@ -25,16 +26,18 @@ abstract class BaseMvvmRefreshFragment<T, V : ViewDataBinding?, VM : BaseRefresh
 
     private fun initBaseViewRefreshObservable() {
         mViewModel?.uCRefresh()?.autoRefresLiveEvent
-            ?.observe(this, Observer<Any?> { autoLoadData() })
+            ?.observe(this, { autoLoadData() })
         mViewModel?.uCRefresh()?.stopRefresLiveEvent
-            ?.observe(this, Observer<Any?> { stopRefresh() })
+            ?.observe(this, {
+                stopRefresh()
+            })
         mViewModel?.uCRefresh()?.stopLoadMoreLiveEvent
-            ?.observe(this, Observer<Any?> { stopLoadMore() })
+            ?.observe(this, { stopLoadMore() })
     }
 
-    abstract val refreshLayout: DaisyRefreshLayout?
+    abstract fun refreshLayout(): DaisyRefreshLayout?
     fun initRefreshView() {
-        mRefreshLayout = refreshLayout
+        mRefreshLayout = refreshLayout()
     }
 
     fun stopRefresh() {

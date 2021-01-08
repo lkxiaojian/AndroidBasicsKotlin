@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frame_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android">
-    <FrameLayout
-            android:id="@+id/frame_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="0dp"
-            android:layout_above="@id/common_navigation"
-    />
+        android:layout_marginBottom="?attr/actionBarSize"
+     />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/common_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/menu_navigation"
-            app:labelVisibilityMode="labeled"
-            app:itemTextColor="@color/color_state_menu_navi"
-            app:itemIconTint="@color/color_state_menu_navi"
-            android:layout_alignParentBottom="true"
-    />
+        android:id="@+id/common_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/color_state_menu_navi"
+        app:itemTextColor="@color/color_state_menu_navi"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_navigation" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
