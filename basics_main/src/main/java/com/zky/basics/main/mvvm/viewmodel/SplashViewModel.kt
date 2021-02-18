@@ -139,7 +139,6 @@ class SplashViewModel(application: Application, model: SplashModel) :
 
 
         launchUI({
-
             val loginDTORespDTO = mModel.login(sName, sPaw)
             loginDTORespDTO?.let { it ->
                 it.token?.let {
@@ -169,23 +168,23 @@ class SplashViewModel(application: Application, model: SplashModel) :
         } else if (i == R.id.forgetPassword) {
             view.context.startActivity(Intent(view.context, FrogetActivity::class.java))
         } else if (i == R.id.forget) { //重置密码
-            if (InfoVerify.isEmpty(data.get()!!.rgPhone)) {
+            if (InfoVerify.isEmpty(data.get()?.rgPhone)) {
                 showToast("请填写正确的手机号")
                 return
             }
-            if (InfoVerify.isEmpty(data.get()!!.rgImageCode)) {
+            if (InfoVerify.isEmpty(data.get()?.rgImageCode)) {
                 showToast("请填写验证码")
                 return
             }
-            if (InfoVerify.isEmpty(data.get()!!.rgPaw)) {
+            if (InfoVerify.isEmpty(data.get()?.rgPaw)) {
                 showToast("账号密码为空")
                 return
             }
-            if (!InfoVerify.isPwd(data.get()!!.rgPaw)) {
+            if (!InfoVerify.isPwd(data.get()?.rgPaw)) {
                 showToast("请输入6-20位字母和数字组合，必须同时含有字母和数字")
                 return
             }
-            if (data.get()!!.rgPaw != data.get()!!.rgqrPaw) {
+            if (data.get()!!.rgPaw != data.get()?.rgqrPaw) {
                 showToast("密码和确认密码不一致")
                 return
             }
@@ -196,7 +195,7 @@ class SplashViewModel(application: Application, model: SplashModel) :
                 showToast("请填写正确的手机号")
                 return
             }
-            if (data.get()!!.rgImageCode == null || data.get()!!.rgImageCode!!.isEmpty()) {
+            if (data.get()!!.rgImageCode == null || data.get()?.rgImageCode!!.isEmpty()) {
                 showToast("请填写验证码")
                 return
             }
@@ -315,7 +314,7 @@ class SplashViewModel(application: Application, model: SplashModel) :
                 showToast("短信验证码为空")
                 return
             }
-            val rgLevel = data.get()!!.rgLevel
+            val rgLevel = data.get()?.rgLevel
             if (InfoVerify.isEmpty(rgLevel) || "账号级别" == rgLevel) {
                 showToast("账号级别为空")
                 return
@@ -641,7 +640,7 @@ class SplashViewModel(application: Application, model: SplashModel) :
         smsCode: String?
     ) {
         val passwordMD = MD5(password!!)
-        val phone = data.get()!!.rgPhone
+        val phone = data.get()?.rgPhone
         launchUI({
             mModel.regist(
                 userName,

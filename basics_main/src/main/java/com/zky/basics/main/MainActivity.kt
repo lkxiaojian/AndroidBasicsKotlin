@@ -1,6 +1,5 @@
 package com.zky.basics.main
 
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
@@ -9,6 +8,7 @@ import com.zky.basics.ArouterPath.ARouterPath
 import com.zky.basics.common.mvvm.BaseActivity
 import com.zky.basics.common.provider.ILiveProvider
 import com.zky.basics.common.provider.IMineProvider
+import com.zky.basics.common.util.spread.showToast
 import com.zky.basics.main.entity.MainChannel
 import kotlinx.android.synthetic.main.commot_activity_main.*
 
@@ -67,7 +67,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun switchContent(from: Fragment?, to: Fragment?, tag: String?) {
+   private fun switchContent(from: Fragment?, to: Fragment?, tag: String?) {
         if (from == null || to == null) {
             return
         }
@@ -87,7 +87,7 @@ class MainActivity : BaseActivity() {
             super.onBackPressed()
             return
         } else {
-            Toast.makeText(this, "再点击一次返回退出程序", Toast.LENGTH_SHORT).show()
+            "再点击一次返回退出程序".showToast()
             System.currentTimeMillis()
         }
     }

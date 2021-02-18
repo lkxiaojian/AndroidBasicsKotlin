@@ -57,15 +57,15 @@ class RetrofitManager  {
         okHttpBuilder = OkHttpClient.Builder()
         addToken()
         if (is_debug) {
-            okHttpBuilder!!.interceptors().add(logging)
+            okHttpBuilder?.interceptors()?.add(logging)
         }
         val sslContext = SSLContextUtil.defaultSLLContext
         sslContext.let {
             okHttpBuilder?.sslSocketFactory(it?.socketFactory)
         }
-        okHttpBuilder!!.hostnameVerifier(SSLContextUtil.HOSTNAME_VERIFIER)
+        okHttpBuilder?.hostnameVerifier(SSLContextUtil.HOSTNAME_VERIFIER)
         mRetrofit = Retrofit.Builder()
-            .client(okHttpBuilder!!.build())
+            .client(okHttpBuilder?.build())
             .baseUrl(API.URL_HOST)
 //            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
