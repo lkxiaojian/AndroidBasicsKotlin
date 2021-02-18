@@ -68,7 +68,7 @@ object InfoVerify {
      * @return
      */
     fun isChinese(strName: String?): Boolean {
-        if(strName.isNullOrEmpty()){
+        if (strName.isNullOrEmpty()) {
             return false
         }
         val ch = strName.toCharArray()
@@ -123,7 +123,7 @@ object InfoVerify {
         return m.matches()
     }
 
-     fun isChinese(c: Char): Boolean {
+    private fun isChinese(c: Char): Boolean {
         val ub = Character.UnicodeBlock.of(c)
         return ub === Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS || ub === Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS || ub === Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A || ub === Character.UnicodeBlock.GENERAL_PUNCTUATION || ub === Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION || ub === Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
     }
