@@ -56,7 +56,7 @@ class RetrofitManager  {
         logging.level = HttpLoggingInterceptor.Level.BODY
         okHttpBuilder = OkHttpClient.Builder()
         addToken()
-        if (is_debug) {
+        if (BuildConfig.DEBUG) {
             okHttpBuilder?.interceptors()?.add(logging)
         }
         val sslContext = SSLContextUtil.defaultSLLContext
@@ -79,7 +79,6 @@ class RetrofitManager  {
         var mContext: Context? = null
         @JvmField
         var TOKEN = ""
-        var is_debug = true
         val instance = SingletonHolder.instance
         @JvmStatic
         fun init(application: Application?) {
